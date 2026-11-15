@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Subaybayan ang mood ng iyong 3D ChibiPet, aktibong streak, at pang-araw-araw na gawi mismo sa iyong home screen.</string>
+    <string name="splash_mascot_cd">ChibiPet mascot</string>
+    <string name="splash_subtitle">3D Pocket Buddy at Habit Quests</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Alaga</string>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_friends">Kaibigan</string>
+    <string name="tab_shop">Tindahan</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Cloud Mint</string>
+    <string name="color_peach_label">Peach Mochi</string>
+    <string name="color_lavender_label">Starlight Lilac</string>
+    <string name="color_lemon_label">Honey Yuzu</string>
+    <string name="color_berry_label">Sky Berry</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Klasikong Komportable</string>
+    <string name="outfit_none_desc">Natural na malambot na alindog</string>
+    <string name="outfit_bow_label">Laso ng Strawberry</string>
+    <string name="outfit_bow_desc">Cute na laso sa ibabaw ng ulo</string>
+    <string name="outfit_crown_label">Korona ng Hari</string>
+    <string name="outfit_crown_desc">Gintong korona para sa kampeon ng gawi</string>
+    <string name="outfit_headphones_label">Lo-Fi Beats</string>
+    <string name="outfit_headphones_desc">Pastel na studio headphones</string>
+    <string name="outfit_wizard_label">Sombrero ng Bituin</string>
+    <string name="outfit_wizard_desc">Mahiwagang sombrero para sa matinding pokus</string>
+    <string name="outfit_shades_label">Astig na Salamin</string>
+    <string name="outfit_shades_desc">Makintab na neon-rimmed sunglasses</string>
+    <string name="outfit_cape_label">Kapa ng Bayani</string>
+    <string name="outfit_cape_desc">Umaalon na pulang kapa ng tagumpay</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Streak Freeze</string>
+    <string name="consumable_freeze_desc">Awtomatikong pinoprotektahan ang nalaktawang araw para hindi maputol ang iyong streak</string>
+    <string name="consumable_elixir_label">Gintong Mood Elixir</string>
+    <string name="consumable_elixir_desc">Agad na ibinabalik sa 100% ang Mood at Enerhiya na may kumikinang na sayaw</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Pag-inom ng Tubig</string>
+    <string name="cat_hydration_hint">Bote ng tubig, baso, o mug</string>
+    <string name="cat_study_label">Pag-aaral at Pokus</string>
+    <string name="cat_study_hint">Libro, kuwaderno, o mesa sa pag-aaral</string>
+    <string name="cat_fitness_label">Ehersisyo</string>
+    <string name="cat_fitness_hint">Rubber shoes, yoga mat, o gamit pang-workout</string>
+    <string name="cat_mindfulness_label">Mindfulness</string>
+    <string name="cat_mindfulness_hint">Journal, tsaa, o tahimik na lugar</string>
+    <string name="cat_creative_label">Pagkamalikhain</string>
+    <string name="cat_creative_hint">Sketchbook, instrumento, o gawang-kamay</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Uminom ng Tubig (500ml)</string>
+    <string name="starter_quest_study">Pokus na Sesyon sa Pag-aaral</string>
+    <string name="starter_quest_fitness">Kumilos at Mag-inat</string>
+    <string name="starter_quest_mindful">5-Minutong Payapang Paghinga</string>
+    <string name="starter_quest_creative">Gumuhit o Magsulat ng 1 Pahina</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">Komportableng lumulutang na desk diorama ng ChibiPet</string>
+    <string name="auth_ready_to_adopt">Handa nang ampunin si %1$s</string>
+    <string name="auth_title">Kilalanin si ChibiPet</string>
+    <string name="auth_subtitle">Ang iyong interactive na 3D pocket companion na tumataas ang level kapag tinatapos mo ang mga tunay na gawi.</string>
+    <string name="auth_feature_vision_title">Kunan ng Patunay, Kumita ng XP</string>
+    <string name="auth_feature_vision_sub">Sinusuri ng Gemini Vision ang iyong bote ng tubig, mesa, o gamit sa ehersisyo.</string>
+    <string name="auth_feature_chat_title">Kaibigang May Alaala</string>
+    <string name="auth_feature_chat_sub">Makipag-chat anumang oras—naaalala ng alaga mo ang iyong streaks at pinalalakas ang loob mo.</string>
+    <string name="auth_feature_studio_title">3D Kasuotan at Art Studio</string>
+    <string name="auth_feature_studio_sub">Paikutin, kalabitin, bihisan sa 3D, at gumawa ng custom AI stickers.</string>
+    <string name="auth_checking_session">Sinusuri ang session…</string>
+    <string name="auth_signing_in">Nag-sa-sign in…</string>
+    <string name="auth_sign_in_google">Mag-sign in gamit ang Google</string>
+    <string name="auth_customize_tour">I-customize ang Starter Buddy at Interactive Tour</string>
+    <string name="auth_error_missing_client_id">Nawawala ang configuration ng Google Sign-In: hindi nahanap ang default_web_client_id</string>
+    <string name="auth_error_unexpected_credential">Hindi inaasahang uri ng kredensyal ang naibalik.</string>
+    <string name="auth_error_generic">Nabigo ang pag-sign in. Pakisubukang muli.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Hakbang %1$d ng %2$d</string>
+    <string name="onboarding_skip">Laktawan</string>
+    <string name="onboarding_back">Bumalik</string>
+    <string name="onboarding_prev_step_cd">Nakaraang hakbang</string>
+    <string name="onboarding_next">Susunod</string>
+    <string name="onboarding_adopt_start">Ampunin si %1$s at Magsimula!</string>
+    <string name="onboarding_p1_title">Kilalanin ang Iyong Buhay na 3D Buddy</string>
+    <string name="onboarding_p1_sub">Subukang paikutin at i-tap si %1$s ngayon! Ang iyong alaga ay humihinga, tumatalon, at tumutugon sa iyong mga gawi sa real-time 3D.</string>
+    <string name="onboarding_p1_stage_hint">Interactive 3D Stage • I-drag para umikot • I-tap para tumalon!</string>
+    <string name="onboarding_p1_coat_label">Kulay:</string>
+    <string name="onboarding_p2_banner_cd">Pastulan ng habit quests ng ChibiPet</string>
+    <string name="onboarding_p2_badge">Pagpapatunay ng Gawi sa Gemini Vision</string>
+    <string name="onboarding_p2_title">Kunan ng Tunay na Patunay, Mag-Level Up!</string>
+    <string name="onboarding_p2_sub">Gawing isang RPG adventure ang pang-araw-araw na pangangalaga sa sarili upang lumaking masigla ang iyong alaga.</string>
+    <string name="onboarding_p2_step1_title">1. Kunan ng Larawan ang Iyong Gawi</string>
+    <string name="onboarding_p2_step1_sub">Kunan ng litrato ang iyong bote ng tubig, kuwaderno, o sapatos sa pagtakbo gamit ang live Camera o Gallery.</string>
+    <string name="onboarding_p2_step2_title">2. Agarang AI Verification at Gantimpala</string>
+    <string name="onboarding_p2_step2_sub">Sinusuri ng Gemini Vision ang iyong larawan, pumapalakpak sa iyo, at nagbibigay ng XP + Star Coins.</string>
+    <string name="onboarding_p2_step3_title">3. Pang-araw-araw na All-Quests Sweep Chest</string>
+    <string name="onboarding_p2_step3_sub">Kumpletuhin ang bawat quest sa listahan sa isang araw para mabuksan ang Sweep Chest (+30 Bonus XP at +25 Star Coins)!</string>
+    <string name="onboarding_p3_title">Memory Chat, Studio at Matalinong Free-Tier Guard</string>
+    <string name="onboarding_p3_sub">Dinisenyo upang manatiling tuloy-tuloy ang iyong habit streaks at companion features sa Gemini Free Tier.</string>
+    <string name="onboarding_p3_step1_title">Companion Chat at Sticker Studio</string>
+    <string name="onboarding_p3_step1_sub">Naaalala ng alaga mo ang mga nakaraang usapan, ipinagdiriwang ang iyong streaks, at gumagawa ng custom stickers sa Studio.</string>
+    <string name="onboarding_p3_step2_title">Auto Model Cascade (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">Kapag abala ang Gemini Flash, awtomatikong lumilipat ang ChibiPet sa mabilis na Flash-Lite at nag-aalok ng Eco Lite Mode para pahabain nang 3× ang libreng quota.</string>
+    <string name="onboarding_p3_step3_title">Proteksyon sa Streak na Walang Parusa</string>
+    <string name="onboarding_p3_step3_sub">Kung nagpapahinga ang cloud AI quota sa hatinggabi, tinitiyak ng Honor Pledge Check-In at Streak Freezes na hindi mawawala ang iyong streak.</string>
+    <string name="onboarding_p3_step4_title">Buddy Codes at Pagbati ng Kaibigan</string>
+    <string name="onboarding_p3_step4_sub">Kumonekta sa mga kaibigan gamit ang 8-character Buddy Code para magpadala ng pang-araw-araw na cheers (+5 Mood) at ikumpara ang top streaks.</string>
+    <string name="onboarding_p4_title">Ampunin at I-customize ang Iyong Starter Kit</string>
+    <string name="onboarding_p4_sub">Pangalanan ang iyong buddy, pumili ng kulay ng balahibo, at piliin ang iyong mga unang habit quests.</string>
+    <string name="onboarding_p4_name_label">Pangalan ng Iyong ChibiPet</string>
+    <string name="onboarding_p4_coat_title">Panimulang Kulay ng Balahibo</string>
+    <string name="onboarding_p4_quests_title">Pumili ng Starter Quests (%1$d napili)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Napili</string>
+    <string name="onboarding_not_selected_cd">Hindi napili</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Tinanggihan ang pahintulot sa camera. Maaari ka pa ring pumili ng larawan mula sa Gallery o System Camera.</string>
+    <string name="home_load_pet_error">Hindi ma-load ang alaga: %1$s</string>
+    <string name="home_cheer_from">Playdate Cheer mula kay %1$s!</string>
+    <string name="home_claim_cheer">Kunin +5</string>
+    <string name="home_sweep_chest_cd">Daily Sweep Chest</string>
+    <string name="home_sweep_unlocked_title">Nabuksan ang Daily Sweep Chest!</string>
+    <string name="home_sweep_locked_title">Daily All-Quests Sweep Chest</string>
+    <string name="home_sweep_unlocked_sub">Nakuha na ang +30 Bonus XP at +25 Star Coins ngayong araw!</string>
+    <string name="home_sweep_locked_sub">Tapusin ang lahat ng %1$d gawi ngayon para sa +30 XP at +25 Coins</string>
+    <string name="home_habits_title">Pang-araw-araw na Habit Quests</string>
+    <string name="home_habits_progress">%1$d sa %2$d ang napatunayan gamit ang larawan ngayon</string>
+    <string name="home_add_habit_cd">Magdagdag ng gawi</string>
+    <string name="home_new_quest">Bagong Quest</string>
+    <string name="home_filter_all">Lahat (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Wala pang mga gawi!</string>
+    <string name="home_empty_habits_sub">I-tap ang Bagong Quest para magdagdag ng gawi tulad ng Uminom ng Tubig o Mag-aral, at kumuha ng larawan para mag-level up ang iyong alaga.</string>
+    <string name="home_level_badge">Lv.%1$d</string>
+    <string name="home_edit_pet_cd">I-customize ang pangalan at kulay ng alaga</string>
+    <string name="home_streak_freezes_cd">Streak Freezes</string>
+    <string name="home_give_treat_cd">Bigyan ng miryenda</string>
+    <string name="home_treat_button">Miryenda • 5★</string>
+    <string name="home_star_coins_cd">Star coins</string>
+    <string name="home_stage_hint">I-drag para umikot sa 3D • I-tap para batiin!</string>
+    <string name="home_experience_label">Karanasan</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Mood</string>
+    <string name="home_stat_energy">Enerhiya</string>
+    <string name="home_stat_verified">Napatunayan</string>
+    <string name="home_streak_cd">Streak</string>
+    <string name="home_streak_days">%1$da</string>
+    <string name="home_delete_habit_cd">Burahin ang gawi</string>
+    <string name="home_last_proof">Huling patunay: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Coins</string>
+    <string name="home_verified_today">Napatunayan Ngayon</string>
+    <string name="home_verify_proof">Patunayan</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Patunayan ang \"%1$s\"</string>
+    <string name="dialog_verify_body">Ipakita kay %1$s ang larawan ng patunay (%2$s) para masuri ito ng Gemini Vision!</string>
+    <string name="dialog_verify_camerax">Live CameraX Frame</string>
+    <string name="dialog_verify_gallery">Gallery</string>
+    <string name="dialog_verify_syscam">System Cam</string>
+    <string name="common_cancel">Kanselahin</string>
+    <string name="common_close">Isara</string>
+    <string name="common_save">I-save</string>
+    <string name="common_create">Gawin</string>
+    <string name="common_delete">Burahin</string>
+    <string name="dialog_delete_habit_title">Burahin ang Habit Quest?</string>
+    <string name="dialog_delete_habit_body">Alisin ang \"%1$s\"? Mabubura ang iyong %2$d-araw na streak sa quest na ito.</string>
+    <string name="dialog_keep_quest">Panatilihin</string>
+    <string name="dialog_proof_analyzing_title">Sinusuri ni %1$s…</string>
+    <string name="dialog_proof_levelup_title">Level Up! Tapos na ang Quest!</string>
+    <string name="dialog_proof_verified_title">Napatunayan ang Quest!</string>
+    <string name="dialog_proof_rejected_title">Hmm, subukan sa ibang anggulo!</string>
+    <string name="dialog_proof_quota_title">Nagpapahinga ang Libreng Scanner</string>
+    <string name="dialog_proof_error_title">Error sa Pagpapatunay</string>
+    <string name="dialog_proof_submitted_cd">Isinumiteng patunay ng gawi</string>
+    <string name="dialog_proof_checking_body">Sinusuri ng Gemini Vision ang iyong larawan para sa \"%1$s\"…</string>
+    <string name="dialog_proof_detected">Nakita: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Gantimpala: +%1$d XP • +%2$d Star Coins (Nabuksan ang Daily Sweep Chest!)</string>
+    <string name="dialog_proof_reward_normal">Gantimpala: +%1$d XP • +%2$d Star Coins</string>
+    <string name="dialog_proof_saw">Nakita: %1$s</string>
+    <string name="dialog_proof_protection_title">Mga Opsyon sa Proteksyon ng Streak</string>
+    <string name="dialog_proof_protection_body">Huwag mawalan ng streak kapag abala ang cloud AI quota! Subukang muli gamit ang Gemini Flash-Lite o mag-log ng Honor Pledge check-in.</string>
+    <string name="dialog_proof_retry_lite">Subukan sa Lite</string>
+    <string name="dialog_proof_honor_checkin">Honor Check-In</string>
+    <string name="dialog_proof_yay">Yehey!</string>
+    <string name="dialog_add_habit_title">Gumawa ng Habit Quest</string>
+    <string name="dialog_add_habit_name_label">Pangalan ng gawi</string>
+    <string name="dialog_add_habit_name_hint">hal., Magbasa ng 20 pahina, Uminom ng tubig</string>
+    <string name="dialog_add_habit_category_label">Kategorya</string>
+    <string name="dialog_add_habit_effort_label">Hirap at Gantimpala</string>
+    <string name="effort_quick">Mabilis</string>
+    <string name="effort_daily">Araw-araw</string>
+    <string name="effort_deep">Malalim</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">I-customize ang Buddy</string>
+    <string name="dialog_edit_pet_name_label">Pangalan ng Alaga</string>
+    <string name="dialog_edit_pet_coat_label">Kulay ng Balahibo</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Hindi available ang preview ng camera sa device na ito. Subukan ang Gallery o System Camera.</string>
+    <string name="camerax_close_cd">Isara ang camera</string>
+    <string name="camerax_flash_cd">I-toggle ang flash</string>
+    <string name="camerax_switch_cd">Palitan ang camera</string>
+    <string name="camerax_looking_for">Hinahanap ni %1$s: %2$s</string>
+    <string name="camerax_center_hint">Igitna ang iyong patunay sa loob ng frame</string>
+    <string name="camerax_read_error">Hindi mabasa ang nakuhang larawan.</string>
+    <string name="camerax_capture_failed">Nabigo ang pagkuha ng larawan.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Kausapin si %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Lv.%1$d • Mood %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Nilo-load ang buddy…</string>
+    <string name="chat_eco_on">Eco BUKAS</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">Burahin ang kasaysayan ng chat</string>
+    <string name="chat_dismiss_error_cd">Isara ang error</string>
+    <string name="chat_quick_reflex">Mabilis na Tugon ng Alaga (0 Quota)</string>
+    <string name="chat_empty_greeting">Batiin si %1$s! Naaalala niya ang inyong mga nakaraang usapan at ipinagdiriwang ang iyong mga natapos na gawi.</string>
+    <string name="chat_prompt_1">Kumusta ang ginagawa ko ngayong araw?</string>
+    <string name="chat_prompt_2">Bigyan mo ako ng pampalakas ng loob!</string>
+    <string name="chat_prompt_3">Aling gawi ang dapat kong isunod?</string>
+    <string name="chat_input_placeholder">Mensahe kay %1$s…</string>
+    <string name="chat_send_cd">Ipadala ang mensahe</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Pet Playdates</string>
+    <string name="friends_subtitle">Magbahagi ng streaks, bumisita sa 3D rooms ng kaibigan, at magpadala ng cheers</string>
+    <string name="friends_refresh_cd">I-refresh ang mga kaibigan</string>
+    <string name="friends_your_code">Ang Iyong Buddy Code</string>
+    <string name="friends_copied_code">Nakopya ang Buddy Code %1$s</string>
+    <string name="friends_copy_code_cd">Kopyahin ang Buddy Code</string>
+    <string name="friends_share_text">Idagdag ang aking ChibiPet na si %1$s para sa habit playdates! Buddy Code: %2$s</string>
+    <string name="friends_share_chooser">Ibahagi ang Buddy Code</string>
+    <string name="friends_share_code_cd">Ibahagi ang Buddy Code</string>
+    <string name="friends_add_title">Magdagdag ng Accountability Buddy</string>
+    <string name="friends_code_label">Buddy Code ng Kaibigan</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Idagdag</string>
+    <string name="friends_empty_title">Wala Pang Playdate Buddies</string>
+    <string name="friends_empty_sub">Ibahagi ang iyong Buddy Code sa itaas o ilagay ang code ng kaibigan para bisitahin ang kanilang 3D pet.</string>
+    <string name="friends_default_cheer_msg">Nagpadala si %1$s ng masiglang boop para sa iyong habit streak!</string>
+    <string name="friends_visit_cheer_msg">Dumaan si %1$s para sabihing ituloy mo lang iyan!</string>
+    <string name="friends_top_streak_cd">Pinakamataas na streak</string>
+    <string name="friends_best_streak">%1$da pinakamahusay</string>
+    <string name="friends_remove_cd">Alisin ang kaibigan</string>
+    <string name="friends_visit_3d">Bisitahin sa 3D</string>
+    <string name="friends_send_cheer">Magpadala ng Cheer</string>
+    <string name="friends_room_title">Kuwarto ni %1$s (Lv.%2$d)</string>
+    <string name="friends_room_sub">Pinakamataas na streak: %1$d araw • I-tap si %2$s para batiin!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Nakaupo sa maaliwalas na study desk na may kumikinang na mga bituin</string>
+    <string name="studio_notif_perm_denied">Tinanggihan ang pahintulot sa notification — buksan ito sa settings ng system para sa mga paalala.</string>
+    <string name="studio_header_title">Tindahan, Aparador at Studio</string>
+    <string name="studio_header_sub">Gamitin ang Star Coins sa 3D outfits, proteksyon sa streak, at AI art</string>
+    <string name="studio_coins_cd">Coins</string>
+    <string name="studio_live_preview_badge">Live 3D Preview • %1$s</string>
+    <string name="studio_powerup_shop_title">Tindahan ng Power-Up</string>
+    <string name="studio_freeze_held">Hawak: %1$d/10</string>
+    <string name="studio_outfits_title">3D Kasuotan</string>
+    <string name="studio_outfit_equipped">Suot na</string>
+    <string name="studio_outfit_equip">Isuot</string>
+    <string name="studio_art_header_title">AI Sticker at Poster Studio</string>
+    <string name="studio_art_header_sub">Gumawa o mag-remix ng custom ChibiPet artwork gamit ang Gemini Nano Banana</string>
+    <string name="studio_preset_1">Cozy café study sticker na may matcha latte</string>
+    <string name="studio_preset_1_short">Cozy café study sticker</string>
+    <string name="studio_preset_2">Cyberpunk neon gaming room poster</string>
+    <string name="studio_preset_2_short">Cyberpunk neon gaming room</string>
+    <string name="studio_preset_3">Watercolor spring picnic portrait</string>
+    <string name="studio_preset_3_short">Watercolor spring picnic</string>
+    <string name="studio_prompt_label">Ideya sa kasuotan o eksena</string>
+    <string name="studio_remix_photo">Remix Larawan</string>
+    <string name="studio_photo_ready">Handa na ang Larawan</string>
+    <string name="studio_clear_photo_cd">Alisin ang reference na larawan</string>
+    <string name="studio_generate_button">Gumawa</string>
+    <string name="studio_crafting_status">Ginagawa ang sining (30–60s)…</string>
+    <string name="studio_generated_cd">Ginawang ChibiPet artwork</string>
+    <string name="studio_saved_vault_note">Awtomatikong na-save sa My Sticker Vault sa ibaba!</string>
+    <string name="studio_clear_preview">Linisin ang Preview</string>
+    <string name="studio_craft_offline_emblem">Gumawa ng Chibi Emblem Sticker (0 Cloud Quota)</string>
+    <string name="studio_instant_emblem_button">Instant Collector Emblem Card (0 Quota)</string>
+    <string name="studio_vault_title">My Sticker Vault (%1$d)</string>
+    <string name="studio_quota_card_title">AI Free-Tier Quota at Eco Guard</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite BUKAS • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Auto-cascade sa 429 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Naabot na ang pang-araw-araw na limitasyon — awtomatikong inilipat sa Lite mode at zero-quota fallbacks (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">80%%+ na ng daily AI budget ang nagamit — inirerekomenda ang Eco Lite mode para mapahaba nang 3× ang natitirang gamit!</string>
+    <string name="studio_quota_pill_vision">Vision</string>
+    <string name="studio_quota_pill_chat">Chat</string>
+    <string name="studio_quota_pill_studio">Studio</string>
+    <string name="studio_quota_reset_countdown">Magre-reset sa %1$dh %2$dm</string>
+    <string name="studio_quota_value_receipt">AI Value Receipt Ngayon: %1$d patunay ng gawi • %2$d chat • %3$d likha sa studio</string>
+    <string name="studio_quota_failover_saves">Auto-failover saves: %1$d</string>
+    <string name="studio_quota_need_boost">Kailangan ng dagdag na boost?</string>
+    <string name="studio_quota_grace_claimed">Nakuha na ang Grace Ngayon</string>
+    <string name="studio_quota_claim_grace">+3 Libreng Grace Credits</string>
+    <string name="studio_reminders_title">Araw-araw na Paalala ng Alaga</string>
+    <string name="studio_reminders_active_sub">Aktibo araw-araw tuwing %1$s</string>
+    <string name="studio_reminders_inactive_sub">Makatanggap ng magiliw na paalala kapag may natitirang gawi</string>
+    <string name="studio_send_test_notif">Magpadala ng Test Notification</string>
+    <string name="studio_signed_in_account">Naka-sign in na account</string>
+    <string name="studio_google_account_fallback">Google Account</string>
+    <string name="studio_sign_out">Mag-sign Out</string>
+    <string name="studio_replay_onboarding">Ulitin ang Interactive Onboarding at Starter Kit</string>
+    <string name="studio_app_language_title">Wika ng App</string>
+    <string name="studio_app_language_system">Default ng System</string>
+    <string name="studio_saved_sticker_title">Na-save na Sticker</string>
+    <string name="studio_share_sticker_chooser">Ibahagi ang ChibiPet Sticker</string>
+    <string name="studio_share_button">Ibahagi</string>
+    <string name="studio_loaded_remix_msg">Na-load ang sticker bilang Remix Photo!</string>
+    <string name="studio_remix_button">I-remix</string>
+    <string name="studio_delete_sticker_cd">Burahin ang sticker</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">Mga Paalala sa Gawi ng ChibiPet</string>
+    <string name="notif_channel_desc">Pang-araw-araw na nakaka-inspire na paalala mula sa iyong ChibiPet</string>
+    <string name="notif_title">%1$s • Check-In sa Gawi</string>
+    <string name="notif_body_pending">Chini-cheer ka ni %1$s! May %2$d habit quest(s) pang natitira ngayong araw.</string>
+    <string name="notif_body_all_done">Kumusta raw sabi ni %1$s! I-tap para haplusin ang iyong 3D buddy at panatilihing maningning ang iyong streak.</string>
+    <string name="widget_pet_level">%1$s • Lv.%2$d</string>
+    <string name="widget_mood_streak">Mood %1$d%% • Streak %2$da</string>
+    <string name="widget_habits_today">%1$d / %2$d gawi ngayon</string>
+    <string name="widget_tap_open">I-tap para buksan ang ChibiPet</string>
+    <string name="widget_snap_button">Larawan</string>
+    <string name="widget_fallback_text">ChibiPet Widget — I-tap para buksan</string>
+    <string name="coach_section_title">AI Smart Quest Coach</string>
+    <string name="coach_goal_hint">Layunin mo (hal. Mas mahimbing na tulog, Pag-aaral)</string>
+    <string name="coach_goal_preset_energy">Sigla sa Umaga</string>
+    <string name="coach_goal_preset_study">Pokus sa Aral</string>
+    <string name="coach_goal_preset_calm">Payapang Gabi</string>
+    <string name="coach_ask_ai_button">Tanungin ang AI Coach</string>
+    <string name="coach_local_plan_button">Local Plan (0 Quota)</string>
+    <string name="coach_add_all_button">Idagdag ang 3 Quest</string>
+    <string name="coach_use_quest">Gamitin</string>
+    <string name="chat_voice_on">Boses ON</string>
+    <string name="chat_voice_off">Boses</string>
+    <string name="chat_speak_cd">Basahin nang malakas</string>
+</resources>

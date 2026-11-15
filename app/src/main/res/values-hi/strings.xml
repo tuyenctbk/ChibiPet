@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">अपनी होम स्क्रीन पर सीधे अपने 3D ChibiPet का मूड, सक्रिय स्ट्रीक और दैनिक आदतों को ट्रैक करें।</string>
+    <string name="splash_mascot_cd">ChibiPet शुभंकर</string>
+    <string name="splash_subtitle">3D पॉकेट साथी और आदत मिशन</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">पालतू</string>
+    <string name="tab_chat">चैट</string>
+    <string name="tab_friends">दोस्त</string>
+    <string name="tab_shop">दुकान</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">क्लाउड मिंट</string>
+    <string name="color_peach_label">पीच मोची</string>
+    <string name="color_lavender_label">स्टारलाइट लीलैक</string>
+    <string name="color_lemon_label">हनी युज़ू</string>
+    <string name="color_berry_label">स्काई बेरी</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">क्लासिक कोज़ी</string>
+    <string name="outfit_none_desc">प्राकृतिक प्यारा आकर्षण</string>
+    <string name="outfit_bow_label">स्ट्रॉबेरी बो</string>
+    <string name="outfit_bow_desc">सिर पर प्यारा रिबन बो</string>
+    <string name="outfit_crown_label">शाही ताज</string>
+    <string name="outfit_crown_desc">आदत चैंपियंस के लिए सुनहरा ताज</string>
+    <string name="outfit_headphones_label">लो-फाई बीट्स</string>
+    <string name="outfit_headphones_desc">पेस्टल स्टूडियो हेडफ़ोन</string>
+    <string name="outfit_wizard_label">सितारों वाली टोपी</string>
+    <string name="outfit_wizard_desc">ध्यान केंद्रित करने के लिए जादुई टोपी</string>
+    <string name="outfit_shades_label">कूल चश्मा</string>
+    <string name="outfit_shades_desc">नियॉन फ्रेम वाले स्टाइलिश धूप के चश्मे</string>
+    <string name="outfit_cape_label">हीरो केप</string>
+    <string name="outfit_cape_desc">लहराता हुआ गहरा लाल विजय केप</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">स्ट्रीक फ़्रीज़</string>
+    <string name="consumable_freeze_desc">छूटे हुए दिन को अपने आप सुरक्षित रखता है ताकि आपकी स्ट्रीक न टूटे</string>
+    <string name="consumable_elixir_label">गोल्डन मूड एलिक्सिर</string>
+    <string name="consumable_elixir_desc">चमकदार नृत्य के साथ मूड और ऊर्जा को तुरंत 100% तक बहाल करता है</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">हाइड्रेशन</string>
+    <string name="cat_hydration_hint">पानी की बोतल, गिलास या मग</string>
+    <string name="cat_study_label">पढ़ाई और फ़ोकस</string>
+    <string name="cat_study_hint">किताब, नोटबुक या स्टडी डेस्क</string>
+    <string name="cat_fitness_label">फ़िटनेस</string>
+    <string name="cat_fitness_hint">जूते, योगा मैट या कसरत उपकरण</string>
+    <string name="cat_mindfulness_label">माइंडफुलनेस</string>
+    <string name="cat_mindfulness_hint">डायरी, चाय या शांत स्थान</string>
+    <string name="cat_creative_label">क्रिएटिव</string>
+    <string name="cat_creative_hint">स्केचबुक, वाद्ययंत्र या क्राफ्ट</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">पानी पिएं (500ml)</string>
+    <string name="starter_quest_study">फ़ोकस पढ़ाई सत्र</string>
+    <string name="starter_quest_fitness">व्यायाम और स्ट्रेचिंग</string>
+    <string name="starter_quest_mindful">5 मिनट शांत श्वास</string>
+    <string name="starter_quest_creative">1 पेज स्केच या जर्नल लिखें</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">ChibiPet आरामदायक फ्लोटिंग डेस्क डायोरामा</string>
+    <string name="auth_ready_to_adopt">%1$s को अपनाने के लिए तैयार</string>
+    <string name="auth_title">ChibiPet से मिलें</string>
+    <string name="auth_subtitle">आपका इंटरैक्टिव 3D पॉकेट साथी जो वास्तविक जीवन की आदतें पूरी करने पर लेवल अप करता है।</string>
+    <string name="auth_feature_vision_title">प्रूफ फोटो लें, XP कमाएं</string>
+    <string name="auth_feature_vision_sub">Gemini Vision आपकी पानी की बोतल, डेस्क या वर्कआउट गियर की जांच करता है।</string>
+    <string name="auth_feature_chat_title">याददाश्त वाला साथी</string>
+    <string name="auth_feature_chat_sub">कभी भी बात करें—आपका पालतू आपकी स्ट्रीक याद रखता है और हौसला बढ़ाता है।</string>
+    <string name="auth_feature_studio_title">3D पोशाकें और आर्ट स्टूडियो</string>
+    <string name="auth_feature_studio_sub">3D में घुमाएं, थपथपाएं, सजाएं और कस्टम AI स्टिकर बनाएं।</string>
+    <string name="auth_checking_session">सत्र जांचा जा रहा है…</string>
+    <string name="auth_signing_in">साइन इन हो रहा है…</string>
+    <string name="auth_sign_in_google">Google से साइन इन करें</string>
+    <string name="auth_customize_tour">स्टार्टर साथी कस्टमाइज़ करें और इंटरैक्टिव टूर देखें</string>
+    <string name="auth_error_missing_client_id">Google साइन-इन कॉन्फ़िगरेशन अनुपस्थित: default_web_client_id नहीं मिला</string>
+    <string name="auth_error_unexpected_credential">अप्रत्याशित क्रेडेंशियल प्रकार प्राप्त हुआ।</string>
+    <string name="auth_error_generic">साइन-इन विफल रहा। कृपया पुनः प्रयास करें।</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">चरण %1$d / %2$d</string>
+    <string name="onboarding_skip">टूर छोड़ें</string>
+    <string name="onboarding_back">पीछे</string>
+    <string name="onboarding_prev_step_cd">पिछला चरण</string>
+    <string name="onboarding_next">आगे</string>
+    <string name="onboarding_adopt_start">%1$s को अपनाएं और शुरू करें!</string>
+    <string name="onboarding_p1_title">अपने जीवंत 3D साथी से मिलें</string>
+    <string name="onboarding_p1_sub">अभी %1$s को घुमाकर और छूकर देखें! आपका पालतू रियल-टाइम 3D में सांस लेता है, कूदता है और आपकी आदतों पर प्रतिक्रिया देता है।</string>
+    <string name="onboarding_p1_stage_hint">इंटरैक्टिव 3D स्टेज • घुमाने के लिए खींचें • कूदने के लिए टैप करें!</string>
+    <string name="onboarding_p1_coat_label">रंग:</string>
+    <string name="onboarding_p2_banner_cd">ChibiPet आदत मिशन मैदान</string>
+    <string name="onboarding_p2_badge">Gemini Vision आदत सत्यापन</string>
+    <string name="onboarding_p2_title">असली प्रूफ लें, लेवल बढ़ाएं!</string>
+    <string name="onboarding_p2_sub">रोज़मर्रा की सेल्फ-केयर को एक RPG रोमांच में बदलें जो आपके पालतू को खुशहाल रखता है।</string>
+    <string name="onboarding_p2_step1_title">1. अपनी आदत का फोटो प्रूफ लें</string>
+    <string name="onboarding_p2_step1_sub">लाइव कैमरा या गैलरी से अपनी पानी की बोतल, नोटबुक या दौड़ने के जूतों की फोटो लें।</string>
+    <string name="onboarding_p2_step2_title">2. तुरंत AI सत्यापन और इनाम</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision आपकी फोटो की जांच करता है, आपका उत्साह बढ़ाता है और XP + स्टार कॉइन देता है।</string>
+    <string name="onboarding_p2_step3_title">3. दैनिक ऑल-क्वेस्ट स्वीप चेस्ट</string>
+    <string name="onboarding_p2_step3_sub">स्वीप चेस्ट (+30 बोनस XP और +25 स्टार कॉइन) अनलॉक करने के लिए एक ही दिन में अपनी सूची के सभी मिशन पूरे करें!</string>
+    <string name="onboarding_p3_title">मेमोरी चैट, स्टूडियो और स्मार्ट फ़्री-टियर सुरक्षा</string>
+    <string name="onboarding_p3_sub">इस तरह डिज़ाइन किया गया है कि Gemini फ़्री टियर पर भी आपकी स्ट्रीक और साथी सुविधाएं बिना रुकावट चलती रहें।</string>
+    <string name="onboarding_p3_step1_title">साथी चैट और स्टिकर स्टूडियो</string>
+    <string name="onboarding_p3_step1_sub">आपका पालतू पुरानी बातचीत याद रखता है, आपकी स्ट्रीक का जश्न मनाता है और स्टूडियो में कस्टम स्टिकर बनाता है।</string>
+    <string name="onboarding_p3_step2_title">ऑटो मॉडल कैस्केड (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">यदि Gemini Flash व्यस्त है, तो ChibiPet अपने आप तेज़ Flash-Lite पर स्विच हो जाता है और फ़्री कोटा को 3 गुना बढ़ाने के लिए Eco Lite मोड देता है।</string>
+    <string name="onboarding_p3_step3_title">बिना दंड स्ट्रीक सुरक्षा</string>
+    <string name="onboarding_p3_step3_sub">यदि देर रात चेक-इन के समय क्लाउड AI कोटा आराम कर रहा हो, तो ऑनर प्लेज चेक-इन और स्ट्रीक फ़्रीज़ आपकी स्ट्रीक सुरक्षित रखते हैं।</string>
+    <string name="onboarding_p3_step4_title">बडी कोड और फ्रेंड चीयर्स</string>
+    <string name="onboarding_p3_step4_sub">8-अक्षरों के बडी कोड से दोस्तों से जुड़ें, रोज़ाना चीयर (+5 मूड) भेजें और टॉप स्ट्रीक की तुलना करें।</string>
+    <string name="onboarding_p4_title">अपनी स्टार्टर किट अपनाएं और सजाएं</string>
+    <string name="onboarding_p4_sub">अपने साथी को नाम दें, कोट का रंग चुनें और अपने शुरुआती आदत मिशन चुनें।</string>
+    <string name="onboarding_p4_name_label">आपके ChibiPet का नाम</string>
+    <string name="onboarding_p4_coat_title">शुरुआती कोट रंग</string>
+    <string name="onboarding_p4_quests_title">स्टार्टर मिशन चुनें (%1$d चुने गए)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">चयनित</string>
+    <string name="onboarding_not_selected_cd">अचयनित</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">कैमरा अनुमति अस्वीकृत। आप अभी भी गैलरी या सिस्टम कैमरे से फोटो चुन सकते हैं।</string>
+    <string name="home_load_pet_error">पालतू लोड नहीं हो सका: %1$s</string>
+    <string name="home_cheer_from">%1$s की ओर से प्लेडेट चीयर!</string>
+    <string name="home_claim_cheer">+5 प्राप्त करें</string>
+    <string name="home_sweep_chest_cd">दैनिक स्वीप चेस्ट</string>
+    <string name="home_sweep_unlocked_title">दैनिक स्वीप चेस्ट अनलॉक हो गया!</string>
+    <string name="home_sweep_locked_title">दैनिक ऑल-क्वेस्ट स्वीप चेस्ट</string>
+    <string name="home_sweep_unlocked_sub">आज +30 बोनस XP और +25 स्टार कॉइन प्राप्त किए!</string>
+    <string name="home_sweep_locked_sub">+30 XP और +25 कॉइन के लिए आज सभी %1$d आदतें पूरी करें</string>
+    <string name="home_habits_title">दैनिक आदत मिशन</string>
+    <string name="home_habits_progress">आज फोटो प्रूफ के साथ %2$d में से %1$d सत्यापित</string>
+    <string name="home_add_habit_cd">आदत जोड़ें</string>
+    <string name="home_new_quest">नया मिशन</string>
+    <string name="home_filter_all">सभी (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">अभी कोई आदत नहीं है!</string>
+    <string name="home_empty_habits_sub">पानी पीना या पढ़ाई जैसी आदत जोड़ने के लिए नया मिशन टैप करें, फिर लेवल बढ़ाने के लिए प्रूफ फोटो लें।</string>
+    <string name="home_level_badge">Lv.%1$d</string>
+    <string name="home_edit_pet_cd">पालतू का नाम और रंग बदलें</string>
+    <string name="home_streak_freezes_cd">स्ट्रीक फ़्रीज़</string>
+    <string name="home_give_treat_cd">ट्रीट दें</string>
+    <string name="home_treat_button">ट्रीट • 5★</string>
+    <string name="home_star_coins_cd">स्टार कॉइन</string>
+    <string name="home_stage_hint">3D घुमाने के लिए खींचें • दुलारने के लिए टैप करें!</string>
+    <string name="home_experience_label">अनुभव</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">मूड</string>
+    <string name="home_stat_energy">ऊर्जा</string>
+    <string name="home_stat_verified">सत्यापित</string>
+    <string name="home_streak_cd">स्ट्रीक</string>
+    <string name="home_streak_days">%1$dदि</string>
+    <string name="home_delete_habit_cd">आदत हटाएं</string>
+    <string name="home_last_proof">पिछला प्रूफ: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d कॉइन</string>
+    <string name="home_verified_today">आज सत्यापित</string>
+    <string name="home_verify_proof">प्रूफ सत्यापित करें</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">\"%1$s\" सत्यापित करें</string>
+    <string name="dialog_verify_body">%1$s को फोटो प्रूफ (%2$s) दिखाएं ताकि Gemini Vision इसकी पुष्टि कर सके!</string>
+    <string name="dialog_verify_camerax">लाइव CameraX फ़्रेम</string>
+    <string name="dialog_verify_gallery">गैलरी</string>
+    <string name="dialog_verify_syscam">सिस्टम कैमरा</string>
+    <string name="common_cancel">रद्द करें</string>
+    <string name="common_close">बंद करें</string>
+    <string name="common_save">सहेजें</string>
+    <string name="common_create">बनाएं</string>
+    <string name="common_delete">हटाएं</string>
+    <string name="dialog_delete_habit_title">आदत मिशन हटाएं?</string>
+    <string name="dialog_delete_habit_body">\"%1$s\" हटाएं? इस मिशन पर आपकी %2$d-दिन की स्ट्रीक मिट जाएगी।</string>
+    <string name="dialog_keep_quest">मिशन रखें</string>
+    <string name="dialog_proof_analyzing_title">%1$s जांच कर रहा है…</string>
+    <string name="dialog_proof_levelup_title">लेवल अप! मिशन पूरा हुआ!</string>
+    <string name="dialog_proof_verified_title">मिशन सत्यापित!</string>
+    <string name="dialog_proof_rejected_title">हम्म, किसी दूसरे कोण से प्रयास करें!</string>
+    <string name="dialog_proof_quota_title">फ़्री-टियर स्कैनर विश्राम पर है</string>
+    <string name="dialog_proof_error_title">सत्यापन त्रुटि</string>
+    <string name="dialog_proof_submitted_cd">प्रस्तुत आदत प्रूफ</string>
+    <string name="dialog_proof_checking_body">Gemini Vision \"%1$s\" के लिए आपकी फोटो जांच रहा है…</string>
+    <string name="dialog_proof_detected">पता चला: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">इनाम: +%1$d XP • +%2$d स्टार कॉइन (दैनिक स्वीप चेस्ट अनलॉक!)</string>
+    <string name="dialog_proof_reward_normal">इनाम: +%1$d XP • +%2$d स्टार कॉइन</string>
+    <string name="dialog_proof_saw">देखा गया: %1$s</string>
+    <string name="dialog_proof_protection_title">स्ट्रीक सुरक्षा विकल्प</string>
+    <string name="dialog_proof_protection_body">क्लाउड AI कोटा व्यस्त होने पर भी अपनी दैनिक स्ट्रीक कभी न खोएं! अल्ट्रा-लाइट Gemini Flash-Lite से पुनः प्रयास करें या ऑनर चेक-इन करें।</string>
+    <string name="dialog_proof_retry_lite">Lite से पुनः प्रयास</string>
+    <string name="dialog_proof_honor_checkin">ऑनर चेक-इन</string>
+    <string name="dialog_proof_yay">वाह!</string>
+    <string name="dialog_add_habit_title">आदत मिशन बनाएं</string>
+    <string name="dialog_add_habit_name_label">आदत का नाम</string>
+    <string name="dialog_add_habit_name_hint">उदा., 20 पन्ने पढ़ें, पानी पिएं</string>
+    <string name="dialog_add_habit_category_label">श्रेणी</string>
+    <string name="dialog_add_habit_effort_label">मेहनत और इनाम</string>
+    <string name="effort_quick">त्वरित</string>
+    <string name="effort_daily">दैनिक</string>
+    <string name="effort_deep">गहन</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">साथी को सजाएं</string>
+    <string name="dialog_edit_pet_name_label">पालतू का नाम</string>
+    <string name="dialog_edit_pet_coat_label">कोट का रंग</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">इस डिवाइस पर कैमरा प्रीव्यू उपलब्ध नहीं है। गैलरी या सिस्टम कैमरा आज़माएं।</string>
+    <string name="camerax_close_cd">कैमरा बंद करें</string>
+    <string name="camerax_flash_cd">फ़्लैश टॉगल करें</string>
+    <string name="camerax_switch_cd">कैमरा बदलें</string>
+    <string name="camerax_looking_for">%1$s ढूंढ रहा है: %2$s</string>
+    <string name="camerax_center_hint">अपने प्रूफ को फ़्रेम के बीच में रखें</string>
+    <string name="camerax_read_error">खींची गई फोटो पढ़ी नहीं जा सकी।</string>
+    <string name="camerax_capture_failed">फोटो लेने में विफल।</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">%1$s के साथ चैट करें</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Lv.%1$d • मूड %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">साथी लोड हो रहा है…</string>
+    <string name="chat_eco_on">Eco चालू</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">चैट इतिहास साफ़ करें</string>
+    <string name="chat_dismiss_error_cd">त्रुटि हटाएं</string>
+    <string name="chat_quick_reflex">त्वरित पालतू प्रतिक्रिया (0 कोटा)</string>
+    <string name="chat_empty_greeting">%1$s को नमस्ते कहें! वह आपकी पिछली बातचीत याद रखता है और आपकी सत्यापित आदतों का जश्न मनाता है।</string>
+    <string name="chat_prompt_1">आज मैं कैसा कर रहा हूँ?</string>
+    <string name="chat_prompt_2">मुझे थोड़ा हौसला दो!</string>
+    <string name="chat_prompt_3">मुझे अगली कौन सी आदत पूरी करनी चाहिए?</string>
+    <string name="chat_input_placeholder">%1$s को संदेश भेजें…</string>
+    <string name="chat_send_cd">संदेश भेजें</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">पेट प्लेडेट्स</string>
+    <string name="friends_subtitle">स्ट्रीक साझा करें, दोस्तों के 3D कमरों में जाएं और चीयर भेजें</string>
+    <string name="friends_refresh_cd">दोस्तों को रीफ़्रेश करें</string>
+    <string name="friends_your_code">आपका बडी कोड</string>
+    <string name="friends_copied_code">बडी कोड %1$s कॉपी किया गया</string>
+    <string name="friends_copy_code_cd">बडी कोड कॉपी करें</string>
+    <string name="friends_share_text">आदत प्लेडेट्स के लिए मेरे ChibiPet %1$s को जोड़ें! बडी कोड: %2$s</string>
+    <string name="friends_share_chooser">बडी कोड साझा करें</string>
+    <string name="friends_share_code_cd">बडी कोड साझा करें</string>
+    <string name="friends_add_title">आदत साथी जोड़ें</string>
+    <string name="friends_code_label">दोस्त का बडी कोड</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">जोड़ें</string>
+    <string name="friends_empty_title">अभी कोई प्लेडेट दोस्त नहीं</string>
+    <string name="friends_empty_sub">ऊपर अपना बडी कोड साझा करें या किसी दोस्त के 3D पालतू से मिलने के लिए उसका कोड दर्ज करें।</string>
+    <string name="friends_default_cheer_msg">%1$s ने आपकी आदत स्ट्रीक के लिए एक उत्साहजनक थपकी भेजी!</string>
+    <string name="friends_visit_cheer_msg">%1$s यह कहने आया है कि ऐसे ही आगे बढ़ते रहें!</string>
+    <string name="friends_top_streak_cd">शीर्ष स्ट्रीक</string>
+    <string name="friends_best_streak">%1$dदि सर्वश्रेष्ठ</string>
+    <string name="friends_remove_cd">दोस्त हटाएं</string>
+    <string name="friends_visit_3d">3D में मिलें</string>
+    <string name="friends_send_cheer">चीयर भेजें</string>
+    <string name="friends_room_title">%1$s का कमरा (Lv.%2$d)</string>
+    <string name="friends_room_sub">सर्वश्रेष्ठ स्ट्रीक: %1$d दिन • दुलारने के लिए %2$s को टैप करें!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">चमकते सितारों के साथ धूप वाली स्टडी डेस्क पर बैठा हुआ</string>
+    <string name="studio_notif_perm_denied">सूचना अनुमति अस्वीकृत — रिमाइंडर के लिए इसे सिस्टम सेटिंग्स में सक्षम करें।</string>
+    <string name="studio_header_title">दुकान, वार्डरोब और स्टूडियो</string>
+    <string name="studio_header_sub">3D पोशाक, स्ट्रीक सुरक्षा और AI कला पर स्टार कॉइन खर्च करें</string>
+    <string name="studio_coins_cd">कॉइन</string>
+    <string name="studio_live_preview_badge">लाइव 3D प्रीव्यू • %1$s</string>
+    <string name="studio_powerup_shop_title">पावर-अप कॉइन शॉप</string>
+    <string name="studio_freeze_held">उपलब्ध: %1$d/10</string>
+    <string name="studio_outfits_title">3D पोशाकें</string>
+    <string name="studio_outfit_equipped">पहना हुआ</string>
+    <string name="studio_outfit_equip">पहनें</string>
+    <string name="studio_art_header_title">AI स्टिकर और पोस्टर स्टूडियो</string>
+    <string name="studio_art_header_sub">Gemini Nano Banana द्वारा संचालित कस्टम ChibiPet कलाकृति बनाएं या रीमिक्स करें</string>
+    <string name="studio_preset_1">माचा लाते के साथ आरामदायक कैफ़े स्टडी स्टिकर</string>
+    <string name="studio_preset_1_short">आरामदायक कैफ़े स्टडी स्टिकर</string>
+    <string name="studio_preset_2">साइबरपंक नियॉन गेमिंग रूम पोस्टर</string>
+    <string name="studio_preset_2_short">साइबरपंक नियॉन गेमिंग रूम</string>
+    <string name="studio_preset_3">वॉटरकलर वसंत पिकनिक पोर्ट्रेट</string>
+    <string name="studio_preset_3_short">वॉटरकलर वसंत पिकनिक</string>
+    <string name="studio_prompt_label">पोशाक या दृश्य का विचार</string>
+    <string name="studio_remix_photo">रीमिक्स फोटो</string>
+    <string name="studio_photo_ready">फोटो तैयार</string>
+    <string name="studio_clear_photo_cd">संदर्भ फोटो हटाएं</string>
+    <string name="studio_generate_button">बनाएं</string>
+    <string name="studio_crafting_status">कलाकृति तैयार हो रही है (30–60 सेकंड)…</string>
+    <string name="studio_generated_cd">निर्मित ChibiPet कलाकृति</string>
+    <string name="studio_saved_vault_note">नीचे मेरे स्टिकर वॉल्ट में अपने आप सहेजा गया!</string>
+    <string name="studio_clear_preview">प्रीव्यू साफ़ करें</string>
+    <string name="studio_craft_offline_emblem">चिबी एम्बलम स्टिकर बनाएं (0 क्लाउड कोटा)</string>
+    <string name="studio_instant_emblem_button">इंस्टेंट कलेक्टर एम्बलम कार्ड (0 कोटा)</string>
+    <string name="studio_vault_title">मेरा स्टिकर वॉल्ट (%1$d)</string>
+    <string name="studio_quota_card_title">AI फ़्री-टियर कोटा और Eco गार्ड</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite चालू • %1$s</string>
+    <string name="studio_quota_eco_off_sub">429 पर ऑटो-कैस्केड • %1$s</string>
+    <string name="studio_quota_over_limit_banner">दैनिक सॉफ्ट सीमा पूरी हुई — Lite मोड और ज़ीरो-कोटा विकल्प सक्रिय (%1$s)।</string>
+    <string name="studio_quota_near_limit_banner">80%%+ दैनिक AI बजट उपयोग किया गया — शेष कॉल को 3 गुना बढ़ाने के लिए Eco Lite मोड अनुशंसित है!</string>
+    <string name="studio_quota_pill_vision">विज़न</string>
+    <string name="studio_quota_pill_chat">चैट</string>
+    <string name="studio_quota_pill_studio">स्टूडियो</string>
+    <string name="studio_quota_reset_countdown">%1$dघं %2$dमि में रीसेट</string>
+    <string name="studio_quota_value_receipt">आज की AI उपलब्धि: %1$d आदत प्रूफ • %2$d साथी चैट • %3$d स्टूडियो कला</string>
+    <string name="studio_quota_failover_saves">ऑटो-फ़ेलओवर बचत: %1$d</string>
+    <string name="studio_quota_need_boost">अतिरिक्त बूस्ट चाहिए?</string>
+    <string name="studio_quota_grace_claimed">आज ग्रेस प्राप्त किया गया</string>
+    <string name="studio_quota_claim_grace">+3 मुफ़्त ग्रेस क्रेडिट</string>
+    <string name="studio_reminders_title">दैनिक पालतू रिमाइंडर</string>
+    <string name="studio_reminders_active_sub">रोज़ाना %1$s बजे सक्रिय</string>
+    <string name="studio_reminders_inactive_sub">जब आदतें बाकी हों तो एक दोस्ताना रिमाइंडर पाएं</string>
+    <string name="studio_send_test_notif">टेस्ट नोटिफ़िकेशन भेजें</string>
+    <string name="studio_signed_in_account">साइन इन किया गया खाता</string>
+    <string name="studio_google_account_fallback">Google खाता</string>
+    <string name="studio_sign_out">साइन आउट</string>
+    <string name="studio_replay_onboarding">इंटरैक्टिव टूर और स्टार्टर किट फिर से देखें</string>
+    <string name="studio_app_language_title">ऐप की भाषा</string>
+    <string name="studio_app_language_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="studio_saved_sticker_title">सहेजा गया स्टिकर</string>
+    <string name="studio_share_sticker_chooser">ChibiPet स्टिकर साझा करें</string>
+    <string name="studio_share_button">साझा करें</string>
+    <string name="studio_loaded_remix_msg">स्टिकर को रीमिक्स फोटो के रूप में लोड किया गया!</string>
+    <string name="studio_remix_button">रीमिक्स</string>
+    <string name="studio_delete_sticker_cd">स्टिकर हटाएं</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">ChibiPet आदत रिमाइंडर</string>
+    <string name="notif_channel_desc">आपके ChibiPet की ओर से दैनिक उत्साहवर्धक रिमाइंडर</string>
+    <string name="notif_title">%1$s • आदत चेक-इन</string>
+    <string name="notif_body_pending">%1$s आपका उत्साह बढ़ा रहा है! आज सत्यापित करने के लिए %2$d आदत मिशन बाकी हैं।</string>
+    <string name="notif_body_all_done">%1$s हाय कह रहा है! अपने 3D साथी को सहलाने और अपनी स्ट्रीक चमकाने के लिए टैप करें।</string>
+    <string name="widget_pet_level">%1$s • Lv.%2$d</string>
+    <string name="widget_mood_streak">मूड %1$d%% • स्ट्रीक %2$dदि</string>
+    <string name="widget_habits_today">आज %1$d / %2$d आदतें</string>
+    <string name="widget_tap_open">ChibiPet खोलने के लिए टैप करें</string>
+    <string name="widget_snap_button">फोटो</string>
+    <string name="widget_fallback_text">ChibiPet विजेट — खोलने के लिए टैप करें</string>
+    <string name="coach_section_title">AI स्मार्ट क्वेस्ट कोच</string>
+    <string name="coach_goal_hint">आपका लक्ष्य (जैसे: अच्छी नींद, पढ़ाई में ध्यान)</string>
+    <string name="coach_goal_preset_energy">सुबह की ऊर्जा</string>
+    <string name="coach_goal_preset_study">पढ़ाई फोकस</string>
+    <string name="coach_goal_preset_calm">शाम की शांति</string>
+    <string name="coach_ask_ai_button">AI कोच से पूछें</string>
+    <string name="coach_local_plan_button">लोकल प्लान (0 कोटा)</string>
+    <string name="coach_add_all_button">तीनों क्वेस्ट जोड़ें</string>
+    <string name="coach_use_quest">चुनें</string>
+    <string name="chat_voice_on">आवाज़ चालू</string>
+    <string name="chat_voice_off">आवाज़</string>
+    <string name="chat_speak_cd">जवाब सुनें</string>
+</resources>

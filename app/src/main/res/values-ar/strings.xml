@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">تابع مزاج حيوانك الأليف ثلاثي الأبعاد ChibiPet وسلسلة التزامك وعاداتك اليومية مباشرة من الشاشة الرئيسية.</string>
+    <string name="splash_mascot_cd">تميمة ChibiPet</string>
+    <string name="splash_subtitle">رفيق جيب ثلاثي الأبعاد ومهام عادات يومية</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">رفيقي</string>
+    <string name="tab_chat">دردشة</string>
+    <string name="tab_friends">الأصدقاء</string>
+    <string name="tab_shop">المتجر</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">نعناع سحابي</string>
+    <string name="color_peach_label">موتشي الخوخ</string>
+    <string name="color_lavender_label">ليلكي نجمي</string>
+    <string name="color_lemon_label">يوزو بالعسل</string>
+    <string name="color_berry_label">توت سماوي</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">كلاسيكي دافئ</string>
+    <string name="outfit_none_desc">سحر طبيعي ناعم ولطيف</string>
+    <string name="outfit_bow_label">فيونكة الفراولة</string>
+    <string name="outfit_bow_desc">شريط لطيف أعلى الرأس</string>
+    <string name="outfit_crown_label">التاج الملكي</string>
+    <string name="outfit_crown_desc">تاج ذهبي لملوك الالتزام بالعادات</string>
+    <string name="outfit_headphones_label">سماعات لو-فاي</string>
+    <string name="outfit_headphones_desc">سماعات استوديو بألوان باستيل</string>
+    <string name="outfit_wizard_label">قبعة النجوم</string>
+    <string name="outfit_wizard_desc">قبعة ساحر مسحورة لزيادة التركيز</string>
+    <string name="outfit_shades_label">نظارات رائعة</string>
+    <string name="outfit_shades_desc">نظارات شمسية أنيقة بإطار نيون</string>
+    <string name="outfit_cape_label">رداء البطل</string>
+    <string name="outfit_cape_desc">رداء النصر القرمزي المتطاير</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">تجميد السلسلة</string>
+    <string name="consumable_freeze_desc">يحمي تلقائياً يوماً فائتاً حتى تظل سلسلة عاداتك متصلة</string>
+    <string name="consumable_elixir_label">إكسير المزاج الذهبي</string>
+    <string name="consumable_elixir_desc">يستعيد المزاج والطاقة فوراً إلى 100% مع رقصة متألقة</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">شرب الماء</string>
+    <string name="cat_hydration_hint">زجاجة ماء أو كوب</string>
+    <string name="cat_study_label">دراسة وتركيز</string>
+    <string name="cat_study_hint">كتاب أو دفتر أو مكتب دراسة</string>
+    <string name="cat_fitness_label">لياقة بدنية</string>
+    <string name="cat_fitness_hint">حذاء رياضي أو بساط يوغا أو معدات تمرين</string>
+    <string name="cat_mindfulness_label">صفاء ذهني</string>
+    <string name="cat_mindfulness_hint">دفتر يوميات أو شاي أو مكان هادئ</string>
+    <string name="cat_creative_label">إبداع</string>
+    <string name="cat_creative_hint">دفتر رسم أو آلة موسيقية أو عمل يدوي</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">شرب الماء (500 مل)</string>
+    <string name="starter_quest_study">جلسة دراسة مركزة</string>
+    <string name="starter_quest_fitness">حركة وإطالة</string>
+    <string name="starter_quest_mindful">5 دقائق تنفس هادئ</string>
+    <string name="starter_quest_creative">رسم أو كتابة صفحة واحدة</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">مشهد مكتب عائم دافئ لـ ChibiPet</string>
+    <string name="auth_ready_to_adopt">جاهز لتبني %1$s</string>
+    <string name="auth_title">تعرّف على ChibiPet</string>
+    <string name="auth_subtitle">رفيقك التفاعلي ثلاثي الأبعاد الذي يرتقي في المستوى عندما تنجز عاداتك الواقعية.</string>
+    <string name="auth_feature_vision_title">صوّر الإثبات واكسب نقاط الخبرة</string>
+    <string name="auth_feature_vision_sub">يتحقق Gemini Vision من زجاجة الماء أو مكتبك أو معدات الرياضة.</string>
+    <string name="auth_feature_chat_title">رفيق بذاكرة ذكية</string>
+    <string name="auth_feature_chat_sub">تحدث معه في أي وقت—يتذكر سلاسل التزامك ويشجعك دائماً.</string>
+    <string name="auth_feature_studio_title">أزياء ثلاثية الأبعاد واستوديو فني</string>
+    <string name="auth_feature_studio_sub">دوّر رفيقك ولبّسه وصمّم ملصقات مخصصة بالذكاء الاصطناعي.</string>
+    <string name="auth_checking_session">جارٍ التحقق من الجلسة…</string>
+    <string name="auth_signing_in">جارٍ تسجيل الدخول…</string>
+    <string name="auth_sign_in_google">تسجيل الدخول باستخدام Google</string>
+    <string name="auth_customize_tour">تخصيص الرفيق المبدئي والجولة التفاعلية</string>
+    <string name="auth_error_missing_client_id">إعداد تسجيل دخول Google مفقود: لم يتم العثور على default_web_client_id</string>
+    <string name="auth_error_unexpected_credential">تم إرجاع نوع بيانات اعتماد غير متوقع.</string>
+    <string name="auth_error_generic">فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">الخطوة %1$d من %2$d</string>
+    <string name="onboarding_skip">تخطي الجولة</string>
+    <string name="onboarding_back">رجوع</string>
+    <string name="onboarding_prev_step_cd">الخطوة السابقة</string>
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_adopt_start">تبنَّ %1$s وابدأ الآن!</string>
+    <string name="onboarding_p1_title">تعرّف على رفيقك الحي ثلاثي الأبعاد</string>
+    <string name="onboarding_p1_sub">جرّب تدوير ولمس %1$s الآن! يتنفس رفيقك ويقفز ويتفاعل مع عاداتك اليومية مباشرة.</string>
+    <string name="onboarding_p1_stage_hint">منصة ثلاثية الأبعاد • اسحب للتدوير • المس للقفز!</string>
+    <string name="onboarding_p1_coat_label">اللون:</string>
+    <string name="onboarding_p2_banner_cd">مرج مهام العادات في ChibiPet</string>
+    <string name="onboarding_p2_badge">التحقق من العادات عبر Gemini Vision</string>
+    <string name="onboarding_p2_title">التقط إثباتاً حقيقياً وارتقِ بمستواك!</string>
+    <string name="onboarding_p2_sub">حوّل العناية اليومية بالنفس إلى مغامرة مشوقة تجعل رفيقك يزدهر.</string>
+    <string name="onboarding_p2_step1_title">1. التقط صورة إثبات العادة</string>
+    <string name="onboarding_p2_step1_sub">صوّر زجاجة الماء أو دفتر الدراسة أو حذاء الجري باستخدام الكاميرا الحية أو المعرض.</string>
+    <string name="onboarding_p2_step2_title">2. تحقق فوري ومكافآت</string>
+    <string name="onboarding_p2_step2_sub">يفحص Gemini Vision صورتك ويشجعك ويمنحك نقاط خبرة وعملات نجمية.</string>
+    <string name="onboarding_p2_step3_title">3. صندوق إنجاز جميع المهام اليومي</string>
+    <string name="onboarding_p2_step3_sub">أكمل جميع مهام قائمتك في يوم واحد لفتح الصندوق اليومي (+30 XP إضافية و+25 عملة نجمية)!</string>
+    <string name="onboarding_p3_title">دردشة بذاكرة واستوديو وحماية ذكية للحصة المجانية</string>
+    <string name="onboarding_p3_sub">مصمم لكي تستمر سلاسل عاداتك وميزات الرفيق بسلاسة ودون انقطاع على الباقة المجانية.</string>
+    <string name="onboarding_p3_step1_title">دردشة الرفيق واستوديو الملصقات</string>
+    <string name="onboarding_p3_step1_sub">يتذكر رفيقك محادثاتك السابقة ويحتفل بسلاسلك ويصنع ملصقات مخصصة في الاستوديو.</string>
+    <string name="onboarding_p3_step2_title">التبديل التلقائي للنموذج (Flash ← Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">عند ازدحام Gemini Flash ينتقل التطبيق تلقائياً إلى Flash-Lite السريع ويوفر وضع Eco Lite لمضاعفة الحصة 3 مرات.</string>
+    <string name="onboarding_p3_step3_title">حماية السلسلة بدون عقوبات</string>
+    <string name="onboarding_p3_step3_sub">إذا كانت حصة الذكاء الاصطناعي في استراحة ليلاً، يضمن تسجيل الشرف وتجميد السلسلة عدم ضياع تقدمك.</string>
+    <string name="onboarding_p3_step4_title">رموز الأصدقاء والتشجيع اليومي</string>
+    <string name="onboarding_p3_step4_sub">تواصل مع أصدقائك عبر رمز مكون من 8 أحرف لإرسال التشجيع اليومي (+5 مزاج) ومقارنة أعلى السلاسل.</string>
+    <string name="onboarding_p4_title">تبنَّ رفيقك وخصّص مجموعة البداية</string>
+    <string name="onboarding_p4_sub">اختر اسماً لرفيقك ولون الفراء وحدد مهام عاداتك الأولى.</string>
+    <string name="onboarding_p4_name_label">اسم ChibiPet الخاص بك</string>
+    <string name="onboarding_p4_coat_title">لون الفراء المبدئي</string>
+    <string name="onboarding_p4_quests_title">اختر مهام البداية (%1$d محددة)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">محدد</string>
+    <string name="onboarding_not_selected_cd">غير محدد</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">تم رفض إذن الكاميرا. لا يزال بإمكانك اختيار صورة من المعرض أو كاميرا النظام.</string>
+    <string name="home_load_pet_error">تعذر تحميل الرفيق: %1$s</string>
+    <string name="home_cheer_from">تشجيع ودي من %1$s!</string>
+    <string name="home_claim_cheer">استلام +5</string>
+    <string name="home_sweep_chest_cd">الصندوق اليومي</string>
+    <string name="home_sweep_unlocked_title">تم فتح الصندوق اليومي!</string>
+    <string name="home_sweep_locked_title">صندوق إتمام جميع المهام اليومي</string>
+    <string name="home_sweep_unlocked_sub">تم استلام +30 XP إضافية و+25 عملة نجمية اليوم!</string>
+    <string name="home_sweep_locked_sub">أكمل جميع العادات الـ %1$d اليوم للحصول على +30 XP و+25 عملة</string>
+    <string name="home_habits_title">مهام العادات اليومية</string>
+    <string name="home_habits_progress">تم التحقق من %1$d من أصل %2$d بصورة إثبات اليوم</string>
+    <string name="home_add_habit_cd">إضافة عادة</string>
+    <string name="home_new_quest">مهمة جديدة</string>
+    <string name="home_filter_all">الكل (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">لا توجد عادات بعد!</string>
+    <string name="home_empty_habits_sub">اضغط على مهمة جديدة لإضافة عادة مثل شرب الماء أو الدراسة، ثم التقط صورة لرفع مستوى رفيقك.</string>
+    <string name="home_level_badge">مستوى %1$d</string>
+    <string name="home_edit_pet_cd">تخصيص اسم ولون الرفيق</string>
+    <string name="home_streak_freezes_cd">تجميد السلسلة</string>
+    <string name="home_give_treat_cd">تقديم حلوى</string>
+    <string name="home_treat_button">حلوى • 5★</string>
+    <string name="home_star_coins_cd">عملات نجمية</string>
+    <string name="home_stage_hint">اسحب للتدوير 3D • المس للمداعبة!</string>
+    <string name="home_experience_label">الخبرة</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">المزاج</string>
+    <string name="home_stat_energy">الطاقة</string>
+    <string name="home_stat_verified">مؤكدة</string>
+    <string name="home_streak_cd">السلسلة</string>
+    <string name="home_streak_days">%1$dي</string>
+    <string name="home_delete_habit_cd">حذف العادة</string>
+    <string name="home_last_proof">آخر إثبات: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d عملة</string>
+    <string name="home_verified_today">تم التحقق اليوم</string>
+    <string name="home_verify_proof">تحقق بالإثبات</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">التحقق من \"%1$s\"</string>
+    <string name="dialog_verify_body">أرِ %1$s صورة إثبات (%2$s) ليتمكن Gemini Vision من التحقق منها!</string>
+    <string name="dialog_verify_camerax">كاميرا CameraX المباشرة</string>
+    <string name="dialog_verify_gallery">المعرض</string>
+    <string name="dialog_verify_syscam">كاميرا النظام</string>
+    <string name="common_cancel">إلغاء</string>
+    <string name="common_close">إغلاق</string>
+    <string name="common_save">حفظ</string>
+    <string name="common_create">إنشاء</string>
+    <string name="common_delete">حذف</string>
+    <string name="dialog_delete_habit_title">حذف مهمة العادة؟</string>
+    <string name="dialog_delete_habit_body">هل تريد إزالة \"%1$s\"؟ سيتم حذف سلسلتك البالغة %2$d يوماً في هذه المهمة.</string>
+    <string name="dialog_keep_quest">الاحتفاظ بالمهمة</string>
+    <string name="dialog_proof_analyzing_title">%1$s يفحص الصورة…</string>
+    <string name="dialog_proof_levelup_title">ارتقاء مستوى! اكتملت المهمة!</string>
+    <string name="dialog_proof_verified_title">تم التحقق من المهمة!</string>
+    <string name="dialog_proof_rejected_title">همم، جرّب زاوية أخرى!</string>
+    <string name="dialog_proof_quota_title">الماسح المجاني في استراحة</string>
+    <string name="dialog_proof_error_title">خطأ في التحقق</string>
+    <string name="dialog_proof_submitted_cd">صورة إثبات العادة المرسلة</string>
+    <string name="dialog_proof_checking_body">يتحقق Gemini Vision من صورتك الخاصة بـ \"%1$s\"…</string>
+    <string name="dialog_proof_detected">تم رصد: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">المكافأة: +%1$d XP • +%2$d عملة نجمية (تم فتح الصندوق اليومي!)</string>
+    <string name="dialog_proof_reward_normal">المكافأة: +%1$d XP • +%2$d عملة نجمية</string>
+    <string name="dialog_proof_saw">تمت رؤية: %1$s</string>
+    <string name="dialog_proof_protection_title">خيارات حماية السلسلة</string>
+    <string name="dialog_proof_protection_body">لا تخسر سلسلتك اليومية أبداً عند انشغال الحصة السحابية! أعد المحاولة بنموذج Flash-Lite الخفيف أو سجّل تعهد شرف.</string>
+    <string name="dialog_proof_retry_lite">إعادة المحاولة Lite</string>
+    <string name="dialog_proof_honor_checkin">تسجيل شرف</string>
+    <string name="dialog_proof_yay">رائع!</string>
+    <string name="dialog_add_habit_title">إنشاء مهمة عادة</string>
+    <string name="dialog_add_habit_name_label">اسم العادة</string>
+    <string name="dialog_add_habit_name_hint">مثال: قراءة 20 صفحة، شرب الماء</string>
+    <string name="dialog_add_habit_category_label">الفئة</string>
+    <string name="dialog_add_habit_effort_label">الجهد والمكافأة</string>
+    <string name="effort_quick">سريع</string>
+    <string name="effort_daily">يومي</string>
+    <string name="effort_deep">عميق</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">تخصيص الرفيق</string>
+    <string name="dialog_edit_pet_name_label">اسم الرفيق</string>
+    <string name="dialog_edit_pet_coat_label">لون الفراء</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">معاينة الكاميرا غير متاحة على هذا الجهاز. جرّب المعرض أو كاميرا النظام.</string>
+    <string name="camerax_close_cd">إغلاق الكاميرا</string>
+    <string name="camerax_flash_cd">تبديل الفلاش</string>
+    <string name="camerax_switch_cd">تبديل الكاميرا</string>
+    <string name="camerax_looking_for">%1$s يبحث عن: %2$s</string>
+    <string name="camerax_center_hint">ضع الإثبات في وسط الإطار</string>
+    <string name="camerax_read_error">تعذرت قراءة الصورة الملتقطة.</string>
+    <string name="camerax_capture_failed">فشل الالتقاط.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">الدردشة مع %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite توفير</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">مستوى %1$d • المزاج %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">جارٍ تحميل الرفيق…</string>
+    <string name="chat_eco_on">التوفير مفعّل</string>
+    <string name="chat_eco_off">توفير</string>
+    <string name="chat_clear_cd">مسح سجل الدردشة</string>
+    <string name="chat_dismiss_error_cd">إخفاء الخطأ</string>
+    <string name="chat_quick_reflex">استجابة سريعة للرفيق (0 حصة)</string>
+    <string name="chat_empty_greeting">ألقِ التحية على %1$s! إنه يتذكر محادثاتك السابقة ويحتفل بعاداتك المنجزة.</string>
+    <string name="chat_prompt_1">كيف أدائي اليوم؟</string>
+    <string name="chat_prompt_2">أعطني دفعة حماس!</string>
+    <string name="chat_prompt_3">ما العادة التي يجب أن أبدأ بها الآن؟</string>
+    <string name="chat_input_placeholder">أرسل رسالة إلى %1$s…</string>
+    <string name="chat_send_cd">إرسال الرسالة</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">لقاءات الأصدقاء</string>
+    <string name="friends_subtitle">شارك سلاسل التزامك، وقم بزيارة غرف أصدقائك ثلاثية الأبعاد وأرسل التشجيع</string>
+    <string name="friends_refresh_cd">تحديث الأصدقاء</string>
+    <string name="friends_your_code">رمز الصداقة الخاص بك</string>
+    <string name="friends_copied_code">تم نسخ رمز الصداقة %1$s</string>
+    <string name="friends_copy_code_cd">نسخ رمز الصداقة</string>
+    <string name="friends_share_text">أضف رفيقي ChibiPet %1$s لمشاركة العادات اليومية! رمز الصداقة: %2$s</string>
+    <string name="friends_share_chooser">مشاركة رمز الصداقة</string>
+    <string name="friends_share_code_cd">مشاركة رمز الصداقة</string>
+    <string name="friends_add_title">إضافة صديق التزام</string>
+    <string name="friends_code_label">رمز الصداقة لصديقك</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">إضافة</string>
+    <string name="friends_empty_title">لا يوجد أصدقاء بعد</string>
+    <string name="friends_empty_sub">شارك رمز الصداقة أعلاه أو أدخل رمز صديق لزيارة رفيقه ثلاثي الأبعاد وتشجيعه.</string>
+    <string name="friends_default_cheer_msg">أرسل %1$s لمسة تشجيع لسلسلة عاداتك!</string>
+    <string name="friends_visit_cheer_msg">قفز %1$s لزيارتك ليقول لك: استمر في التألق!</string>
+    <string name="friends_top_streak_cd">أعلى سلسلة</string>
+    <string name="friends_best_streak">أفضل %1$dي</string>
+    <string name="friends_remove_cd">إزالة صديق</string>
+    <string name="friends_visit_3d">زيارة 3D</string>
+    <string name="friends_send_cheer">إرسال تشجيع</string>
+    <string name="friends_room_title">غرفة %1$s (مستوى %2$d)</string>
+    <string name="friends_room_sub">أفضل سلسلة: %1$d يوم • المس %2$s للمداعبة!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">يجلس على مكتب دراسة مشمس مع نجوم متوهجة</string>
+    <string name="studio_notif_perm_denied">تم رفض إذن الإشعارات — يرجى تفعيله من إعدادات النظام لتلقي التذكيرات.</string>
+    <string name="studio_header_title">المتجر والخزانة والاستوديو</string>
+    <string name="studio_header_sub">أنفق العملات النجمية على أزياء 3D وحماية السلسلة وفنون الذكاء الاصطناعي</string>
+    <string name="studio_coins_cd">عملات</string>
+    <string name="studio_live_preview_badge">معاينة 3D حية • %1$s</string>
+    <string name="studio_powerup_shop_title">متجر التعزيزات</string>
+    <string name="studio_freeze_held">لديك: %1$d/10</string>
+    <string name="studio_outfits_title">أزياء ثلاثية الأبعاد</string>
+    <string name="studio_outfit_equipped">مُجهّز</string>
+    <string name="studio_outfit_equip">تجهيز</string>
+    <string name="studio_art_header_title">استوديو الملصقات والملصقات الفنية بالذكاء الاصطناعي</string>
+    <string name="studio_art_header_sub">أنشئ أو أعد دمج رسومات ChibiPet المخصصة بدعم من Gemini Nano Banana</string>
+    <string name="studio_preset_1">ملصق دراسة في مقهى دافئ مع ماتشا لاتيه</string>
+    <string name="studio_preset_1_short">مقهى دراسة دافئ</string>
+    <string name="studio_preset_2">ملصق غرفة ألعاب نيون سايبربانك</string>
+    <string name="studio_preset_2_short">غرفة ألعاب سايبربانك</string>
+    <string name="studio_preset_3">لوحة ألوان مائية لنزهة ربيعية</string>
+    <string name="studio_preset_3_short">نزهة ربيعية بألوان مائية</string>
+    <string name="studio_prompt_label">فكرة زي أو مشهد</string>
+    <string name="studio_remix_photo">دمج صورة</string>
+    <string name="studio_photo_ready">الصورة جاهزة</string>
+    <string name="studio_clear_photo_cd">مسح الصورة المرجعية</string>
+    <string name="studio_generate_button">إنشاء</string>
+    <string name="studio_crafting_status">جارٍ رسم العمل الفني (30–60 ثانية)…</string>
+    <string name="studio_generated_cd">عمل فني مولّد لـ ChibiPet</string>
+    <string name="studio_saved_vault_note">تم الحفظ تلقائياً في خزنة ملصقاتي بالأسفل!</string>
+    <string name="studio_clear_preview">مسح المعاينة</string>
+    <string name="studio_craft_offline_emblem">صنع شعار Chibi (بدون استهلاك حصة سحابية)</string>
+    <string name="studio_instant_emblem_button">بطاقة شعار جامع فورية (0 حصة)</string>
+    <string name="studio_vault_title">خزنة ملصقاتي (%1$d)</string>
+    <string name="studio_quota_card_title">حصة الذكاء الاصطناعي المجانية وحارس التوفير</string>
+    <string name="studio_quota_eco_on_sub">وضع التوفير Lite مفعّل • %1$s</string>
+    <string name="studio_quota_eco_off_sub">تحويل تلقائي عند الازدحام • %1$s</string>
+    <string name="studio_quota_over_limit_banner">تم الوصول للحد اليومي المرن — تم التوجيه لوضع Lite والبدائل المجانية (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">تم استخدام أكثر من 80%% من الميزانية اليومية — يُنصح بوضع Eco Lite لمضاعفة الاستخدام 3 مرات!</string>
+    <string name="studio_quota_pill_vision">الرؤية</string>
+    <string name="studio_quota_pill_chat">الدردشة</string>
+    <string name="studio_quota_pill_studio">الاستوديو</string>
+    <string name="studio_quota_reset_countdown">يتجدد خلال %1$dس %2$dد</string>
+    <string name="studio_quota_value_receipt">حصيلة اليوم: %1$d إثبات عادة • %2$d دردشة • %3$d عمل فني</string>
+    <string name="studio_quota_failover_saves">مرات الإنقاذ التلقائي: %1$d</string>
+    <string name="studio_quota_need_boost">هل تحتاج إلى دفعة إضافية؟</string>
+    <string name="studio_quota_grace_claimed">تم استلام الرصيد الإضافي اليوم</string>
+    <string name="studio_quota_claim_grace">+3 رصيد إضافي مجاني</string>
+    <string name="studio_reminders_title">تذكيرات الرفيق اليومية</string>
+    <string name="studio_reminders_active_sub">مفعّل يومياً الساعة %1$s</string>
+    <string name="studio_reminders_inactive_sub">احصل على تذكير لطيف عندما تتبقى عادات</string>
+    <string name="studio_send_test_notif">إرسال إشعار تجريبي</string>
+    <string name="studio_signed_in_account">الحساب المسجل</string>
+    <string name="studio_google_account_fallback">حساب Google</string>
+    <string name="studio_sign_out">تسجيل الخروج</string>
+    <string name="studio_replay_onboarding">إعادة الجولة التفاعلية ومجموعة البداية</string>
+    <string name="studio_app_language_title">لغة التطبيق</string>
+    <string name="studio_app_language_system">افتراضي النظام</string>
+    <string name="studio_saved_sticker_title">ملصق محفوظ</string>
+    <string name="studio_share_sticker_chooser">مشاركة ملصق ChibiPet</string>
+    <string name="studio_share_button">مشاركة</string>
+    <string name="studio_loaded_remix_msg">تم تحميل الملصق كصورة مرجعية للدمج!</string>
+    <string name="studio_remix_button">دمج</string>
+    <string name="studio_delete_sticker_cd">حذف الملصق</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">تذكيرات عادات ChibiPet</string>
+    <string name="notif_channel_desc">تذكيرات يومية مشجعة من رفيقك ChibiPet</string>
+    <string name="notif_title">%1$s • تفقد العادات</string>
+    <string name="notif_body_pending">%1$s يشجعك! تتبقى %2$d مهمة عادة للتحقق منها اليوم.</string>
+    <string name="notif_body_all_done">%1$s يسلّم عليك! المس لملاعبة رفيقك ثلاثي الأبعاد وإبقاء سلسلتك متألقة.</string>
+    <string name="widget_pet_level">%1$s • مستوى %2$d</string>
+    <string name="widget_mood_streak">المزاج %1$d%% • السلسلة %2$dي</string>
+    <string name="widget_habits_today">%1$d / %2$d عادات اليوم</string>
+    <string name="widget_tap_open">المس لفتح ChibiPet</string>
+    <string name="widget_snap_button">تصوير</string>
+    <string name="widget_fallback_text">أداة ChibiPet — المس للفتح</string>
+    <string name="coach_section_title">مدرب المهام الذكي</string>
+    <string name="coach_goal_hint">هدفك (مثل: نوم أفضل، تركيز في الدراسة)</string>
+    <string name="coach_goal_preset_energy">طاقة الصباح</string>
+    <string name="coach_goal_preset_study">تركيز الدراسة</string>
+    <string name="coach_goal_preset_calm">هدوء المساء</string>
+    <string name="coach_ask_ai_button">اسأل المدرب الذكي</string>
+    <string name="coach_local_plan_button">خطة محلية فورية (0 حصة)</string>
+    <string name="coach_add_all_button">إضافة المهام الثلاث</string>
+    <string name="coach_use_quest">استخدام</string>
+    <string name="chat_voice_on">الصوت مفعل</string>
+    <string name="chat_voice_off">الصوت</string>
+    <string name="chat_speak_cd">قراءة الرد بصوت عالٍ</string>
+</resources>

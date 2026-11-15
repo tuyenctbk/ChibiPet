@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Pantau suasana hati ChibiPet 3D, rekor beruntun aktif, dan kebiasaan harian langsung di layar utama Anda.</string>
+    <string name="splash_mascot_cd">Maskot ChibiPet</string>
+    <string name="splash_subtitle">Teman Saku 3D &amp; Misi Kebiasaan</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Peliharaan</string>
+    <string name="tab_chat">Obrolan</string>
+    <string name="tab_friends">Teman</string>
+    <string name="tab_shop">Toko</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Mint Awan</string>
+    <string name="color_peach_label">Mochi Persik</string>
+    <string name="color_lavender_label">Lilac Bintang</string>
+    <string name="color_lemon_label">Yuzu Madu</string>
+    <string name="color_berry_label">Beri Langit</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Klasik Nyaman</string>
+    <string name="outfit_none_desc">Pesona berbulu lembut alami</string>
+    <string name="outfit_bow_label">Pita Stroberi</string>
+    <string name="outfit_bow_desc">Pita manis di atas kepala</string>
+    <string name="outfit_crown_label">Mahkota Kerajaan</string>
+    <string name="outfit_crown_desc">Mahkota emas untuk juara kebiasaan</string>
+    <string name="outfit_headphones_label">Irama Lo-Fi</string>
+    <string name="outfit_headphones_desc">Headphone studio warna pastel</string>
+    <string name="outfit_wizard_label">Topi Bintang</string>
+    <string name="outfit_wizard_desc">Topi penyihir ajaib untuk fokus penuh</string>
+    <string name="outfit_shades_label">Kacamata Keren</string>
+    <string name="outfit_shades_desc">Kacamata hitam ramping berbingkai neon</string>
+    <string name="outfit_cape_label">Jubah Pahlawan</string>
+    <string name="outfit_cape_desc">Jubah kemenangan merah tua yang berkibar</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Pembeku Rekor</string>
+    <string name="consumable_freeze_desc">Otomatis melindungi hari yang terlewat agar rekor beruntun tetap utuh</string>
+    <string name="consumable_elixir_label">Eliksir Mood Emas</string>
+    <string name="consumable_elixir_desc">Langsung memulihkan Mood &amp; Energi ke 100% dengan tarian berkilau</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Hidrasi</string>
+    <string name="cat_hydration_hint">Botol air, gelas, atau cangkir</string>
+    <string name="cat_study_label">Belajar &amp; Fokus</string>
+    <string name="cat_study_hint">Buku, buku catatan, atau meja belajar</string>
+    <string name="cat_fitness_label">Kebugaran</string>
+    <string name="cat_fitness_hint">Sepatu olahraga, matras yoga, atau alat latihan</string>
+    <string name="cat_mindfulness_label">Ketenangan</string>
+    <string name="cat_mindfulness_hint">Jurnal, teh, atau ruang tenang</string>
+    <string name="cat_creative_label">Kreatif</string>
+    <string name="cat_creative_hint">Buku sketsa, alat musik, atau prakarya</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Minum Air (500ml)</string>
+    <string name="starter_quest_study">Sesi Belajar Fokus</string>
+    <string name="starter_quest_fitness">Bergerak &amp; Peregangan</string>
+    <string name="starter_quest_mindful">Pernapasan Tenang 5 Menit</string>
+    <string name="starter_quest_creative">Sketsa atau Jurnal 1 Halaman</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">Diorama meja melayang nyaman ChibiPet</string>
+    <string name="auth_ready_to_adopt">Siap mengadopsi %1$s</string>
+    <string name="auth_title">Kenali ChibiPet</string>
+    <string name="auth_subtitle">Teman saku 3D interaktif yang naik level saat Anda menyelesaikan kebiasaan nyata.</string>
+    <string name="auth_feature_vision_title">Foto Bukti, Dapatkan XP</string>
+    <string name="auth_feature_vision_sub">Gemini Vision memverifikasi botol air, meja belajar, atau perlengkapan olahraga Anda.</string>
+    <string name="auth_feature_chat_title">Teman dengan Ingatan</string>
+    <string name="auth_feature_chat_sub">Mengobrol kapan saja—peliharaan Anda mengingat rekor dan menyemangati Anda.</string>
+    <string name="auth_feature_studio_title">Kostum 3D &amp; Studio Seni</string>
+    <string name="auth_feature_studio_sub">Putar, sentuh, dandani dalam 3D, dan buat stiker AI kustom.</string>
+    <string name="auth_checking_session">Memeriksa sesi…</string>
+    <string name="auth_signing_in">Sedang masuk…</string>
+    <string name="auth_sign_in_google">Masuk dengan Google</string>
+    <string name="auth_customize_tour">Sesuaikan Teman Awal &amp; Tur Interaktif</string>
+    <string name="auth_error_missing_client_id">Konfigurasi Google Sign-In tidak ditemukan: default_web_client_id hilang</string>
+    <string name="auth_error_unexpected_credential">Jenis kredensial tidak terduga dikembalikan.</string>
+    <string name="auth_error_generic">Gagal masuk. Silakan coba lagi.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Langkah %1$d dari %2$d</string>
+    <string name="onboarding_skip">Lewati Tur</string>
+    <string name="onboarding_back">Kembali</string>
+    <string name="onboarding_prev_step_cd">Langkah sebelumnya</string>
+    <string name="onboarding_next">Berikutnya</string>
+    <string name="onboarding_adopt_start">Adopsi %1$s &amp; Mulai!</string>
+    <string name="onboarding_p1_title">Temui Sahabat 3D Hidup Anda</string>
+    <string name="onboarding_p1_sub">Coba putar dan sentuh %1$s sekarang! Peliharaan Anda bernapas, melompat, dan bereaksi terhadap kebiasaan harian Anda secara 3D real-time.</string>
+    <string name="onboarding_p1_stage_hint">Panggung 3D Interaktif • Geser untuk memutar • Ketuk untuk melompat!</string>
+    <string name="onboarding_p1_coat_label">Warna bulu:</string>
+    <string name="onboarding_p2_banner_cd">Padang misi kebiasaan ChibiPet</string>
+    <string name="onboarding_p2_badge">Verifikasi Kebiasaan Gemini Vision</string>
+    <string name="onboarding_p2_title">Ambil Bukti Nyata, Naik Level!</string>
+    <string name="onboarding_p2_sub">Ubah perawatan diri sehari-hari menjadi petualangan RPG yang membuat peliharaan Anda tumbuh sehat.</string>
+    <string name="onboarding_p2_step1_title">1. Ambil Foto Bukti Kebiasaan</string>
+    <string name="onboarding_p2_step1_sub">Ambil foto botol air, buku catatan, atau sepatu lari menggunakan kamera langsung atau Galeri.</string>
+    <string name="onboarding_p2_step2_title">2. Verifikasi AI Instan &amp; Hadiah</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision memeriksa foto Anda, memberi semangat, serta menghadiahkan XP + Koin Bintang.</string>
+    <string name="onboarding_p2_step3_title">3. Peti Sapu Bersih Semua Misi Harian</string>
+    <string name="onboarding_p2_step3_sub">Selesaikan setiap misi di daftar Anda dalam satu hari untuk membuka Peti Harian (+30 XP Bonus &amp; +25 Koin Bintang)!</string>
+    <string name="onboarding_p3_title">Obrolan Memori, Studio &amp; Pelindung Kuota Gratis</string>
+    <string name="onboarding_p3_sub">Dirancang agar rekor kebiasaan dan fitur pendamping tetap lancar tanpa gangguan di paket gratis Gemini.</string>
+    <string name="onboarding_p3_step1_title">Obrolan Sahabat &amp; Studio Stiker</string>
+    <string name="onboarding_p3_step1_sub">Peliharaan Anda mengingat percakapan sebelumnya, merayakan rekor Anda, dan membuat stiker khusus di Studio.</string>
+    <string name="onboarding_p3_step2_title">Transisi Model Otomatis (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">Jika Gemini Flash sedang sibuk, ChibiPet otomatis beralih ke Flash-Lite super cepat dan menyediakan Mode Eco Lite untuk menghemat kuota 3× lipat.</string>
+    <string name="onboarding_p3_step3_title">Perlindungan Rekor Tanpa Penalti</string>
+    <string name="onboarding_p3_step3_sub">Jika kuota AI cloud sedang istirahat saat larut malam, Check-In Janji Kehormatan &amp; Pembeku Rekor memastikan rekor Anda tidak pernah hilang.</string>
+    <string name="onboarding_p3_step4_title">Kode Teman &amp; Semangat Harian</string>
+    <string name="onboarding_p3_step4_sub">Terhubung dengan teman melalui Kode Teman 8 karakter untuk mengirim semangat harian (+5 Mood) dan membandingkan rekor.</string>
+    <string name="onboarding_p4_title">Adopsi &amp; Sesuaikan Paket Awal Anda</string>
+    <string name="onboarding_p4_sub">Beri nama sahabat Anda, pilih warna bulu, dan pilih misi kebiasaan awal.</string>
+    <string name="onboarding_p4_name_label">Nama ChibiPet Anda</string>
+    <string name="onboarding_p4_coat_title">Warna Bulu Awal</string>
+    <string name="onboarding_p4_quests_title">Pilih Misi Awal (%1$d dipilih)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Dipilih</string>
+    <string name="onboarding_not_selected_cd">Tidak dipilih</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Izin kamera ditolak. Anda masih dapat memilih foto dari Galeri atau Kamera Sistem.</string>
+    <string name="home_load_pet_error">Tidak dapat memuat peliharaan: %1$s</string>
+    <string name="home_cheer_from">Semangat Bermain dari %1$s!</string>
+    <string name="home_claim_cheer">Klaim +5</string>
+    <string name="home_sweep_chest_cd">Peti Harian</string>
+    <string name="home_sweep_unlocked_title">Peti Harian Terbuka!</string>
+    <string name="home_sweep_locked_title">Peti Sapu Bersih Semua Misi Harian</string>
+    <string name="home_sweep_unlocked_sub">Mengklaim +30 XP Bonus &amp; +25 Koin Bintang hari ini!</string>
+    <string name="home_sweep_locked_sub">Selesaikan semua %1$d kebiasaan hari ini untuk +30 XP &amp; +25 Koin</string>
+    <string name="home_habits_title">Misi Kebiasaan Harian</string>
+    <string name="home_habits_progress">%1$d dari %2$d diverifikasi dengan bukti foto hari ini</string>
+    <string name="home_add_habit_cd">Tambah kebiasaan</string>
+    <string name="home_new_quest">Misi Baru</string>
+    <string name="home_filter_all">Semua (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Belum ada kebiasaan!</string>
+    <string name="home_empty_habits_sub">Ketuk Misi Baru untuk menambahkan kebiasaan seperti Minum Air atau Belajar, lalu foto buktinya untuk menaikkan level peliharaan.</string>
+    <string name="home_level_badge">Lv.%1$d</string>
+    <string name="home_edit_pet_cd">Sesuaikan nama dan warna peliharaan</string>
+    <string name="home_streak_freezes_cd">Pembeku Rekor</string>
+    <string name="home_give_treat_cd">Beri camilan</string>
+    <string name="home_treat_button">Camilan • 5★</string>
+    <string name="home_star_coins_cd">Koin bintang</string>
+    <string name="home_stage_hint">Geser untuk putar 3D • Ketuk untuk menyapa!</string>
+    <string name="home_experience_label">Pengalaman</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Mood</string>
+    <string name="home_stat_energy">Energi</string>
+    <string name="home_stat_verified">Terverifikasi</string>
+    <string name="home_streak_cd">Rekor</string>
+    <string name="home_streak_days">%1$dh</string>
+    <string name="home_delete_habit_cd">Hapus kebiasaan</string>
+    <string name="home_last_proof">Bukti terakhir: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Koin</string>
+    <string name="home_verified_today">Terverifikasi Hari Ini</string>
+    <string name="home_verify_proof">Verifikasi Bukti</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Verifikasi \"%1$s\"</string>
+    <string name="dialog_verify_body">Tunjukkan bukti foto (%2$s) kepada %1$s agar Gemini Vision dapat memverifikasinya!</string>
+    <string name="dialog_verify_camerax">Kamera Langsung CameraX</string>
+    <string name="dialog_verify_gallery">Galeri</string>
+    <string name="dialog_verify_syscam">Kamera Sistem</string>
+    <string name="common_cancel">Batal</string>
+    <string name="common_close">Tutup</string>
+    <string name="common_save">Simpan</string>
+    <string name="common_create">Buat</string>
+    <string name="common_delete">Hapus</string>
+    <string name="dialog_delete_habit_title">Hapus Misi Kebiasaan?</string>
+    <string name="dialog_delete_habit_body">Hapus \"%1$s\"? Rekor %2$d hari Anda pada misi ini akan dihapus.</string>
+    <string name="dialog_keep_quest">Simpan Misi</string>
+    <string name="dialog_proof_analyzing_title">%1$s sedang memeriksa…</string>
+    <string name="dialog_proof_levelup_title">Naik Level! Misi Selesai!</string>
+    <string name="dialog_proof_verified_title">Misi Terverifikasi!</string>
+    <string name="dialog_proof_rejected_title">Hmm, coba sudut foto lain!</string>
+    <string name="dialog_proof_quota_title">Pemindai Gratis Sedang Istirahat</string>
+    <string name="dialog_proof_error_title">Kesalahan Verifikasi</string>
+    <string name="dialog_proof_submitted_cd">Bukti kebiasaan yang dikirim</string>
+    <string name="dialog_proof_checking_body">Gemini Vision sedang memeriksa foto Anda untuk \"%1$s\"…</string>
+    <string name="dialog_proof_detected">Terdeteksi: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Hadiah: +%1$d XP • +%2$d Koin Bintang (Peti Harian Terbuka!)</string>
+    <string name="dialog_proof_reward_normal">Hadiah: +%1$d XP • +%2$d Koin Bintang</string>
+    <string name="dialog_proof_saw">Terlihat: %1$s</string>
+    <string name="dialog_proof_protection_title">Opsi Perlindungan Rekor</string>
+    <string name="dialog_proof_protection_body">Jangan pernah kehilangan rekor harian saat kuota AI cloud sedang sibuk! Coba lagi dengan Gemini Flash-Lite atau catat Check-In Kehormatan.</string>
+    <string name="dialog_proof_retry_lite">Coba Lite</string>
+    <string name="dialog_proof_honor_checkin">Check-In Kehormatan</string>
+    <string name="dialog_proof_yay">Hore!</string>
+    <string name="dialog_add_habit_title">Buat Misi Kebiasaan</string>
+    <string name="dialog_add_habit_name_label">Nama kebiasaan</string>
+    <string name="dialog_add_habit_name_hint">mis., Baca 20 halaman, Minum air</string>
+    <string name="dialog_add_habit_category_label">Kategori</string>
+    <string name="dialog_add_habit_effort_label">Usaha &amp; Hadiah</string>
+    <string name="effort_quick">Cepat</string>
+    <string name="effort_daily">Harian</string>
+    <string name="effort_deep">Mendalam</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Sesuaikan Sahabat</string>
+    <string name="dialog_edit_pet_name_label">Nama Peliharaan</string>
+    <string name="dialog_edit_pet_coat_label">Warna Bulu</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Pratinjau kamera tidak tersedia di perangkat ini. Coba Galeri atau Kamera Sistem.</string>
+    <string name="camerax_close_cd">Tutup kamera</string>
+    <string name="camerax_flash_cd">Alihkan lampu kilat</string>
+    <string name="camerax_switch_cd">Ganti kamera</string>
+    <string name="camerax_looking_for">%1$s sedang mencari: %2$s</string>
+    <string name="camerax_center_hint">Posisikan bukti Anda di tengah bingkai</string>
+    <string name="camerax_read_error">Tidak dapat membaca foto yang diambil.</string>
+    <string name="camerax_capture_failed">Gagal mengambil foto.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Mengobrol dengan %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Lv.%1$d • Mood %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Memuat sahabat…</string>
+    <string name="chat_eco_on">Eco AKTIF</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">Hapus riwayat obrolan</string>
+    <string name="chat_dismiss_error_cd">Tutup pesan kesalahan</string>
+    <string name="chat_quick_reflex">Respon Cepat Peliharaan (0 Kuota)</string>
+    <string name="chat_empty_greeting">Sapa %1$s! Dia mengingat obrolan Anda sebelumnya dan merayakan kebiasaan yang telah diverifikasi.</string>
+    <string name="chat_prompt_1">Bagaimana progresku hari ini?</string>
+    <string name="chat_prompt_2">Beri aku semangat!</string>
+    <string name="chat_prompt_3">Kebiasaan mana yang harus kulakukan selanjutnya?</string>
+    <string name="chat_input_placeholder">Kirim pesan ke %1$s…</string>
+    <string name="chat_send_cd">Kirim pesan</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Kunjungan Teman</string>
+    <string name="friends_subtitle">Bagikan rekor, kunjungi kamar 3D teman, dan kirim semangat</string>
+    <string name="friends_refresh_cd">Muat ulang teman</string>
+    <string name="friends_your_code">Kode Teman Anda</string>
+    <string name="friends_copied_code">Kode Teman %1$s disalin</string>
+    <string name="friends_copy_code_cd">Salin Kode Teman</string>
+    <string name="friends_share_text">Tambahkan ChibiPet saya %1$s untuk misi kebiasaan bersama! Kode Teman: %2$s</string>
+    <string name="friends_share_chooser">Bagikan Kode Teman</string>
+    <string name="friends_share_code_cd">Bagikan Kode Teman</string>
+    <string name="friends_add_title">Tambah Teman Kebiasaan</string>
+    <string name="friends_code_label">Kode Teman milik sahabat</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Tambah</string>
+    <string name="friends_empty_title">Belum Ada Teman Kunjungan</string>
+    <string name="friends_empty_sub">Bagikan Kode Teman di atas atau masukkan kode teman untuk mengunjungi peliharaan 3D mereka.</string>
+    <string name="friends_default_cheer_msg">%1$s mengirim sapaan semangat untuk rekor kebiasaan Anda!</string>
+    <string name="friends_visit_cheer_msg">%1$s mampir untuk menyemangati Anda agar terus konsisten!</string>
+    <string name="friends_top_streak_cd">Rekor tertinggi</string>
+    <string name="friends_best_streak">terbaik %1$dh</string>
+    <string name="friends_remove_cd">Hapus teman</string>
+    <string name="friends_visit_3d">Kunjungi 3D</string>
+    <string name="friends_send_cheer">Kirim Semangat</string>
+    <string name="friends_room_title">Kamar %1$s (Lv.%2$d)</string>
+    <string name="friends_room_sub">Rekor terbaik: %1$d hari • Ketuk %2$s untuk menyapa!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Duduk di meja belajar cerah dengan bintang-bintang bersinar</string>
+    <string name="studio_notif_perm_denied">Izin notifikasi ditolak — aktifkan di pengaturan sistem untuk pengingat peliharaan.</string>
+    <string name="studio_header_title">Toko, Lemari &amp; Studio</string>
+    <string name="studio_header_sub">Gunakan Koin Bintang untuk kostum 3D, pelindung rekor, dan seni AI</string>
+    <string name="studio_coins_cd">Koin</string>
+    <string name="studio_live_preview_badge">Pratinjau 3D Langsung • %1$s</string>
+    <string name="studio_powerup_shop_title">Toko Koin Power-Up</string>
+    <string name="studio_freeze_held">Dimiliki: %1$d/10</string>
+    <string name="studio_outfits_title">Kostum 3D</string>
+    <string name="studio_outfit_equipped">Terpasang</string>
+    <string name="studio_outfit_equip">Pasang</string>
+    <string name="studio_art_header_title">Studio Stiker &amp; Poster AI</string>
+    <string name="studio_art_header_sub">Buat atau remix karya seni ChibiPet kustom dengan Gemini Nano Banana</string>
+    <string name="studio_preset_1">Stiker belajar di kafe nyaman dengan matcha latte</string>
+    <string name="studio_preset_1_short">Stiker belajar kafe nyaman</string>
+    <string name="studio_preset_2">Poster ruang gaming neon cyberpunk</string>
+    <string name="studio_preset_2_short">Ruang gaming neon cyberpunk</string>
+    <string name="studio_preset_3">Potret piknik musim semi cat air</string>
+    <string name="studio_preset_3_short">Piknik musim semi cat air</string>
+    <string name="studio_prompt_label">Ide kostum atau adegan</string>
+    <string name="studio_remix_photo">Foto Remix</string>
+    <string name="studio_photo_ready">Foto Siap</string>
+    <string name="studio_clear_photo_cd">Hapus foto referensi</string>
+    <string name="studio_generate_button">Buat</string>
+    <string name="studio_crafting_status">Membuat karya seni (30–60 dtk)…</string>
+    <string name="studio_generated_cd">Karya seni ChibiPet yang dibuat</string>
+    <string name="studio_saved_vault_note">Disimpan otomatis ke Brankas Stiker Saya di bawah!</string>
+    <string name="studio_clear_preview">Hapus Pratinjau</string>
+    <string name="studio_craft_offline_emblem">Buat Stiker Emblem Chibi (0 Kuota Cloud)</string>
+    <string name="studio_instant_emblem_button">Kartu Emblem Kolektor Instan (0 Kuota)</string>
+    <string name="studio_vault_title">Brankas Stiker Saya (%1$d)</string>
+    <string name="studio_quota_card_title">Kuota Gratis AI &amp; Pelindung Eco</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite AKTIF • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Otomatis beralih saat 429 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Batas harian halus tercapai — dialihkan ke mode Lite &amp; cadangan tanpa kuota aktif (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">80%%+ anggaran AI harian terpakai — mode Eco Lite disarankan untuk memperpanjang sisa kuota 3×!</string>
+    <string name="studio_quota_pill_vision">Visi</string>
+    <string name="studio_quota_pill_chat">Obrolan</string>
+    <string name="studio_quota_pill_studio">Studio</string>
+    <string name="studio_quota_reset_countdown">Reset dalam %1$dj %2$dm</string>
+    <string name="studio_quota_value_receipt">Ringkasan Nilai AI Hari Ini: %1$d bukti kebiasaan • %2$d obrolan • %3$d karya studio</string>
+    <string name="studio_quota_failover_saves">Penyelamatan otomatis: %1$d</string>
+    <string name="studio_quota_need_boost">Butuh tambahan kuota?</string>
+    <string name="studio_quota_grace_claimed">Kuota Tambahan Diklaim Hari Ini</string>
+    <string name="studio_quota_claim_grace">+3 Kredit Tambahan Gratis</string>
+    <string name="studio_reminders_title">Pengingat Peliharaan Harian</string>
+    <string name="studio_reminders_active_sub">Aktif setiap hari pukul %1$s</string>
+    <string name="studio_reminders_inactive_sub">Dapatkan pengingat ramah saat masih ada kebiasaan</string>
+    <string name="studio_send_test_notif">Kirim Notifikasi Uji Coba</string>
+    <string name="studio_signed_in_account">Akun yang masuk</string>
+    <string name="studio_google_account_fallback">Akun Google</string>
+    <string name="studio_sign_out">Keluar</string>
+    <string name="studio_replay_onboarding">Putar Ulang Tur Interaktif &amp; Paket Awal</string>
+    <string name="studio_app_language_title">Bahasa Aplikasi</string>
+    <string name="studio_app_language_system">Default Sistem</string>
+    <string name="studio_saved_sticker_title">Stiker Tersimpan</string>
+    <string name="studio_share_sticker_chooser">Bagikan Stiker ChibiPet</string>
+    <string name="studio_share_button">Bagikan</string>
+    <string name="studio_loaded_remix_msg">Stiker dimuat sebagai Foto Remix!</string>
+    <string name="studio_remix_button">Remix</string>
+    <string name="studio_delete_sticker_cd">Hapus stiker</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">Pengingat Kebiasaan ChibiPet</string>
+    <string name="notif_channel_desc">Pengingat kebiasaan harian yang menyemangati dari ChibiPet Anda</string>
+    <string name="notif_title">%1$s • Cek Kebiasaan</string>
+    <string name="notif_body_pending">%1$s menyemangati Anda! Tersisa %2$d misi kebiasaan untuk diverifikasi hari ini.</string>
+    <string name="notif_body_all_done">%1$s menyapa Anda! Ketuk untuk mengelus sahabat 3D Anda dan menjaga rekor tetap bersinar.</string>
+    <string name="widget_pet_level">%1$s • Lv.%2$d</string>
+    <string name="widget_mood_streak">Mood %1$d%% • Rekor %2$dh</string>
+    <string name="widget_habits_today">%1$d / %2$d kebiasaan hari ini</string>
+    <string name="widget_tap_open">Ketuk untuk membuka ChibiPet</string>
+    <string name="widget_snap_button">Foto</string>
+    <string name="widget_fallback_text">Widget ChibiPet — Ketuk untuk membuka</string>
+    <string name="coach_section_title">Pelatih Misi Cerdas AI</string>
+    <string name="coach_goal_hint">Target Anda (mis. Tidur nyenyak, Fokus belajar)</string>
+    <string name="coach_goal_preset_energy">Energi Pagi</string>
+    <string name="coach_goal_preset_study">Fokus Belajar</string>
+    <string name="coach_goal_preset_calm">Tenang Malam</string>
+    <string name="coach_ask_ai_button">Tanya Pelatih AI</string>
+    <string name="coach_local_plan_button">Rencana Lokal (0 Kuota)</string>
+    <string name="coach_add_all_button">Tambah Semua 3 Misi</string>
+    <string name="coach_use_quest">Pakai</string>
+    <string name="chat_voice_on">Suara ON</string>
+    <string name="chat_voice_off">Suara</string>
+    <string name="chat_speak_cd">Bacakan balasan</string>
+</resources>

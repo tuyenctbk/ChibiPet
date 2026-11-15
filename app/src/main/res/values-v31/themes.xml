@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ChibiPet" parent="android:Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/chibipet_cream</item>
+        <item name="android:windowSplashScreenBackground">@color/chibipet_cream</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/chibipet_peach</item>
+        <item name="android:windowSplashScreenAnimationDuration">700</item>
+    </style>
+</resources>

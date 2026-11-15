@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">3D ChibiPet ruh halini, aktif serini ve günlük alışkanlıklarını doğrudan ana ekranından takip et.</string>
+    <string name="splash_mascot_cd">ChibiPet maskotu</string>
+    <string name="splash_subtitle">3D Cep Dostu &amp; Alışkanlık Görevleri</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Dostum</string>
+    <string name="tab_chat">Sohbet</string>
+    <string name="tab_friends">Arkadaşlar</string>
+    <string name="tab_shop">Mağaza</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Bulut Nanesi</string>
+    <string name="color_peach_label">Şeftali Mochi</string>
+    <string name="color_lavender_label">Yıldız Leylağı</string>
+    <string name="color_lemon_label">Ballı Yuzu</string>
+    <string name="color_berry_label">Gök Böğürtleni</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Klasik Yumuşak</string>
+    <string name="outfit_none_desc">Doğal pofuduk cazibe</string>
+    <string name="outfit_bow_label">Çilek Fiyonk</string>
+    <string name="outfit_bow_desc">Başın üstünde sevimli kurdele</string>
+    <string name="outfit_crown_label">Kraliyet Tacı</string>
+    <string name="outfit_crown_desc">Alışkanlık kralları için altın taç</string>
+    <string name="outfit_headphones_label">Lo-Fi Ritimler</string>
+    <string name="outfit_headphones_desc">Pastel stüdyo kulaklıkları</string>
+    <string name="outfit_wizard_label">Yıldızlı Şapka</string>
+    <string name="outfit_wizard_desc">Odaklanmayı artıran büyülü şapka</string>
+    <string name="outfit_shades_label">Havalı Gözlük</string>
+    <string name="outfit_shades_desc">Şık neon çerçeveli güneş gözlüğü</string>
+    <string name="outfit_cape_label">Kahraman Pelerini</string>
+    <string name="outfit_cape_desc">Dalgalanan kızıl zafer pelerini</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Seri Dondurucu</string>
+    <string name="consumable_freeze_desc">Kaçırılan bir günü otomatik koruyarak alışkanlık serini bozulmadan tutar</string>
+    <string name="consumable_elixir_label">Altın Moral İksiri</string>
+    <string name="consumable_elixir_desc">Işıltılı bir dansla Moral ve Enerjiyi anında %100\'e çıkarır</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Su Tüketimi</string>
+    <string name="cat_hydration_hint">Su matarası, bardak veya kupa</string>
+    <string name="cat_study_label">Çalışma &amp; Odak</string>
+    <string name="cat_study_hint">Kitap, defter veya çalışma masası</string>
+    <string name="cat_fitness_label">Fitness</string>
+    <string name="cat_fitness_hint">Spor ayakkabı, yoga matı veya ekipman</string>
+    <string name="cat_mindfulness_label">Farkındalık</string>
+    <string name="cat_mindfulness_hint">Günlük, çay veya sakin bir köşe</string>
+    <string name="cat_creative_label">Yaratıcılık</string>
+    <string name="cat_creative_hint">Eskiz defteri, enstrüman veya el işi</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Su İç (500 ml)</string>
+    <string name="starter_quest_study">Odaklı Çalışma Seansı</string>
+    <string name="starter_quest_fitness">Hareket Et &amp; Esne</string>
+    <string name="starter_quest_mindful">5 Dk Farkındalık Nefesi</string>
+    <string name="starter_quest_creative">1 Sayfa Çizim veya Günlük</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">ChibiPet sıcak yüzen çalışma masası dioraması</string>
+    <string name="auth_ready_to_adopt">%1$s sahiplenilmeye hazır</string>
+    <string name="auth_title">ChibiPet ile Tanış</string>
+    <string name="auth_subtitle">Gerçek dünyadaki alışkanlıklarını tamamladıkça seviye atlayan interaktif 3D cep dostun.</string>
+    <string name="auth_feature_vision_title">Kanıt Çek, XP Kazan</string>
+    <string name="auth_feature_vision_sub">Gemini Vision su mataranı, çalışma masanı veya spor ekipmanını doğrular.</string>
+    <string name="auth_feature_chat_title">Hafızalı Dost</string>
+    <string name="auth_feature_chat_sub">İstediğin zaman sohbet et—dostun serilerini hatırlar ve seni destekler.</string>
+    <string name="auth_feature_studio_title">3D Kostümler &amp; Sanat Stüdyosu</string>
+    <string name="auth_feature_studio_sub">3D olarak döndür, dokun, giydir ve özel yapay zeka çıkartmaları tasarla.</string>
+    <string name="auth_checking_session">Oturum kontrol ediliyor…</string>
+    <string name="auth_signing_in">Giriş yapılıyor…</string>
+    <string name="auth_sign_in_google">Google ile Giriş Yap</string>
+    <string name="auth_customize_tour">Başlangıç Dostunu Özelleştir &amp; İnteraktif Tur</string>
+    <string name="auth_error_missing_client_id">Google Giriş yapılandırması eksik: default_web_client_id bulunamadı</string>
+    <string name="auth_error_unexpected_credential">Beklenmeyen kimlik bilgisi türü döndürüldü.</string>
+    <string name="auth_error_generic">Giriş başarısız oldu. Lütfen tekrar deneyin.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Adım %1$d / %2$d</string>
+    <string name="onboarding_skip">Turu Atla</string>
+    <string name="onboarding_back">Geri</string>
+    <string name="onboarding_prev_step_cd">Önceki adım</string>
+    <string name="onboarding_next">İleri</string>
+    <string name="onboarding_adopt_start">%1$s Sahiplen &amp; Başla!</string>
+    <string name="onboarding_p1_title">Canlı 3D Dostunla Tanış</string>
+    <string name="onboarding_p1_sub">Hemen şimdi %1$s dostunu döndürmeyi ve ona dokunmayı dene! Gerçek zamanlı 3D olarak nefes alır, zıplar ve alışkanlıklarına tepki verir.</string>
+    <string name="onboarding_p1_stage_hint">İnteraktif 3D Sahne • Döndürmek için sürükle • Zıplatmak için dokun!</string>
+    <string name="onboarding_p1_coat_label">Tüy:</string>
+    <string name="onboarding_p2_banner_cd">ChibiPet alışkanlık görev çayırı</string>
+    <string name="onboarding_p2_badge">Gemini Vision Alışkanlık Doğrulaması</string>
+    <string name="onboarding_p2_title">Gerçek Kanıt Çek, Seviye Atla!</string>
+    <string name="onboarding_p2_sub">Günlük kişisel bakımını dostunu geliştiren bir RPG macerasına dönüştür.</string>
+    <string name="onboarding_p2_step1_title">1. Alışkanlık Kanıtını Çek</string>
+    <string name="onboarding_p2_step1_sub">Canlı kamera veya galeriyi kullanarak su mataranın, çalışma defterinin veya koşu ayakkabının fotoğrafını çek.</string>
+    <string name="onboarding_p2_step2_title">2. Anında Yapay Zeka Doğrulaması &amp; Ödüller</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision fotoğrafını inceler, seni tebrik eder ve XP + Yıldız Altını kazandırır.</string>
+    <string name="onboarding_p2_step3_title">3. Günlük Tüm Görevler Sandığı</string>
+    <string name="onboarding_p2_step3_sub">Günlük Sandığı (+30 Bonus XP &amp; +25 Yıldız Altını) açmak için listendeki tüm görevleri aynı gün içinde tamamla!</string>
+    <string name="onboarding_p3_title">Hafızalı Sohbet, Stüdyo &amp; Akıllı Ücretsiz Kota Koruması</string>
+    <string name="onboarding_p3_sub">Gemini Ücretsiz Katmanında serilerinin ve dost özelliklerinin kesintisiz çalışması için tasarlandı.</string>
+    <string name="onboarding_p3_step1_title">Dost Sohbeti &amp; Çıkartma Stüdyosu</string>
+    <string name="onboarding_p3_step1_sub">Dostun geçmiş sohbetleri hatırlar, serilerini kutlar ve Stüdyoda özel çıkartmalar üretir.</string>
+    <string name="onboarding_p3_step2_title">Otomatik Model Geçişi (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">Gemini Flash yoğun olduğunda ChibiPet otomatik olarak ultra hızlı Flash-Lite\'a geçer ve ücretsiz kotayı 3 katına çıkaran Eco Lite Modunu sunar.</string>
+    <string name="onboarding_p3_step3_title">Cezasız Seri Koruması</string>
+    <string name="onboarding_p3_step3_sub">Gece geç saatlerde bulut kotası dinleniyorsa, Onur Sözü Girişi ve Seri Dondurucular serini asla kaybetmemeni sağlar.</string>
+    <string name="onboarding_p3_step4_title">Arkadaş Kodları &amp; Tezahüratlar</string>
+    <string name="onboarding_p3_step4_sub">8 karakterli Arkadaş Kodu ile arkadaşlarınla bağlan, günlük tezahürat (+5 Moral) gönder ve en iyi serileri karşılaştır.</string>
+    <string name="onboarding_p4_title">Başlangıç Setini Sahiplen &amp; Özelleştir</string>
+    <string name="onboarding_p4_sub">Dostuna bir isim ver, tüy rengini seç ve başlangıç alışkanlık görevlerini belirle.</string>
+    <string name="onboarding_p4_name_label">ChibiPet\'inin Adı</string>
+    <string name="onboarding_p4_coat_title">Başlangıç Tüy Rengi</string>
+    <string name="onboarding_p4_quests_title">Başlangıç Görevlerini Seç (%1$d seçildi)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Seçildi</string>
+    <string name="onboarding_not_selected_cd">Seçilmedi</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Kamera izni reddedildi. Yine de Galeri veya Sistem Kamerasından fotoğraf seçebilirsiniz.</string>
+    <string name="home_load_pet_error">Dost yüklenemedi: %1$s</string>
+    <string name="home_cheer_from">%1$s tarafından Oyun Buluşması Tezahüratı!</string>
+    <string name="home_claim_cheer">+5 Al</string>
+    <string name="home_sweep_chest_cd">Günlük Sandık</string>
+    <string name="home_sweep_unlocked_title">Günlük Sandık Açıldı!</string>
+    <string name="home_sweep_locked_title">Günlük Tüm Görevler Sandığı</string>
+    <string name="home_sweep_unlocked_sub">Bugün +30 Bonus XP &amp; +25 Yıldız Altını alındı!</string>
+    <string name="home_sweep_locked_sub">+30 XP &amp; +25 Altın için bugün tüm %1$d alışkanlığı tamamla</string>
+    <string name="home_habits_title">Günlük Alışkanlık Görevleri</string>
+    <string name="home_habits_progress">Bugün fotoğrafla doğrulanan: %1$d / %2$d</string>
+    <string name="home_add_habit_cd">Alışkanlık ekle</string>
+    <string name="home_new_quest">Yeni Görev</string>
+    <string name="home_filter_all">Tümü (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Henüz alışkanlık yok!</string>
+    <string name="home_empty_habits_sub">Su İçmek veya Ders Çalışmak gibi bir alışkanlık eklemek için Yeni Görev\'e dokun, ardından kanıt çekerek dostunu geliştir.</string>
+    <string name="home_level_badge">Sv.%1$d</string>
+    <string name="home_edit_pet_cd">Dost adını ve rengini düzenle</string>
+    <string name="home_streak_freezes_cd">Seri Dondurucular</string>
+    <string name="home_give_treat_cd">Ödül maması ver</string>
+    <string name="home_treat_button">Mama • 5★</string>
+    <string name="home_star_coins_cd">Yıldız altınları</string>
+    <string name="home_stage_hint">3D döndürmek için sürükle • Sevmek için dokun!</string>
+    <string name="home_experience_label">Deneyim</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Moral</string>
+    <string name="home_stat_energy">Enerji</string>
+    <string name="home_stat_verified">Doğrulanan</string>
+    <string name="home_streak_cd">Seri</string>
+    <string name="home_streak_days">%1$dg</string>
+    <string name="home_delete_habit_cd">Alışkanlığı sil</string>
+    <string name="home_last_proof">Son kanıt: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Altın</string>
+    <string name="home_verified_today">Bugün Doğrulandı</string>
+    <string name="home_verify_proof">Kanıt Doğrula</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">\"%1$s\" Doğrula</string>
+    <string name="dialog_verify_body">Gemini Vision\'ın doğrulaması için %1$s dostuna fotoğraf kanıtı (%2$s) göster!</string>
+    <string name="dialog_verify_camerax">Canlı CameraX Vizörü</string>
+    <string name="dialog_verify_gallery">Galeri</string>
+    <string name="dialog_verify_syscam">Sistem Kamerası</string>
+    <string name="common_cancel">İptal</string>
+    <string name="common_close">Kapat</string>
+    <string name="common_save">Kaydet</string>
+    <string name="common_create">Oluştur</string>
+    <string name="common_delete">Sil</string>
+    <string name="dialog_delete_habit_title">Alışkanlık Görevi Silinsin mi?</string>
+    <string name="dialog_delete_habit_body">\"%1$s\" kaldırılsın mı? Bu görevdeki %2$d günlük serin silinecek.</string>
+    <string name="dialog_keep_quest">Görevi Tut</string>
+    <string name="dialog_proof_analyzing_title">%1$s inceliyor…</string>
+    <string name="dialog_proof_levelup_title">Seviye Atladın! Görev Tamamlandı!</string>
+    <string name="dialog_proof_verified_title">Görev Doğrulandı!</string>
+    <string name="dialog_proof_rejected_title">Hmm, başka bir açıdan dene!</string>
+    <string name="dialog_proof_quota_title">Ücretsiz Tarayıcı Dinleniyor</string>
+    <string name="dialog_proof_error_title">Doğrulama Hatası</string>
+    <string name="dialog_proof_submitted_cd">Gönderilen alışkanlık kanıtı</string>
+    <string name="dialog_proof_checking_body">Gemini Vision \"%1$s\" için fotoğrafını kontrol ediyor…</string>
+    <string name="dialog_proof_detected">Algılanan: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Ödül: +%1$d XP • +%2$d Yıldız Altını (Günlük Sandık Açıldı!)</string>
+    <string name="dialog_proof_reward_normal">Ödül: +%1$d XP • +%2$d Yıldız Altını</string>
+    <string name="dialog_proof_saw">Görülen: %1$s</string>
+    <string name="dialog_proof_protection_title">Seri Koruma Seçenekleri</string>
+    <string name="dialog_proof_protection_body">Bulut yapay zeka kotası yoğunken günlük serini asla kaybetme! Ultra hafif Gemini Flash-Lite ile tekrar dene veya Onur Sözü Girişi yap.</string>
+    <string name="dialog_proof_retry_lite">Lite ile Dene</string>
+    <string name="dialog_proof_honor_checkin">Onur Girişi</string>
+    <string name="dialog_proof_yay">Harika!</string>
+    <string name="dialog_add_habit_title">Alışkanlık Görevi Oluştur</string>
+    <string name="dialog_add_habit_name_label">Alışkanlık adı</string>
+    <string name="dialog_add_habit_name_hint">örn., 20 sayfa oku, Su iç</string>
+    <string name="dialog_add_habit_category_label">Kategori</string>
+    <string name="dialog_add_habit_effort_label">Çaba &amp; Ödül</string>
+    <string name="effort_quick">Hızlı</string>
+    <string name="effort_daily">Günlük</string>
+    <string name="effort_deep">Derin</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Dostunu Özelleştir</string>
+    <string name="dialog_edit_pet_name_label">Dost Adı</string>
+    <string name="dialog_edit_pet_coat_label">Tüy Rengi</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Bu cihazda kamera önizlemesi kullanılamıyor. Galeri veya Sistem Kamerasını deneyin.</string>
+    <string name="camerax_close_cd">Kamerayı kapat</string>
+    <string name="camerax_flash_cd">Flaşı aç/kapat</string>
+    <string name="camerax_switch_cd">Kamerayı değiştir</string>
+    <string name="camerax_looking_for">%1$s şunu arıyor: %2$s</string>
+    <string name="camerax_center_hint">Kanıtını çerçevenin ortasına hizala</string>
+    <string name="camerax_read_error">Çekilen fotoğraf okunamadı.</string>
+    <string name="camerax_capture_failed">Çekim başarısız oldu.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">%1$s ile Sohbet</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Sv.%1$d • Moral %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Dost yükleniyor…</string>
+    <string name="chat_eco_on">Eco AÇIK</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">Sohbet geçmişini temizle</string>
+    <string name="chat_dismiss_error_cd">Hatayı kapat</string>
+    <string name="chat_quick_reflex">Hızlı Dost Tepkisi (0 Kota)</string>
+    <string name="chat_empty_greeting">%1$s dostuna merhaba de! Geçmiş sohbetlerinizi hatırlar ve doğrulanan alışkanlıklarını kutlar.</string>
+    <string name="chat_prompt_1">Bugün nasıl gidiyorum?</string>
+    <string name="chat_prompt_2">Bana biraz motivasyon ver!</string>
+    <string name="chat_prompt_3">Sıradaki hangi alışkanlığı yapmalıyım?</string>
+    <string name="chat_input_placeholder">%1$s için mesaj yaz…</string>
+    <string name="chat_send_cd">Mesaj gönder</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Evcil Dost Buluşmaları</string>
+    <string name="friends_subtitle">Serileri paylaş, arkadaşlarının 3D odalarını ziyaret et ve tezahürat gönder</string>
+    <string name="friends_refresh_cd">Arkadaşları yenile</string>
+    <string name="friends_your_code">Senin Arkadaş Kodun</string>
+    <string name="friends_copied_code">Arkadaş Kodu %1$s kopyalandı</string>
+    <string name="friends_copy_code_cd">Arkadaş Kodunu Kopyala</string>
+    <string name="friends_share_text">Alışkanlık buluşmaları için ChibiPet\'im %1$s\'i ekle! Arkadaş Kodu: %2$s</string>
+    <string name="friends_share_chooser">Arkadaş Kodunu Paylaş</string>
+    <string name="friends_share_code_cd">Arkadaş Kodunu Paylaş</string>
+    <string name="friends_add_title">Alışkanlık Arkadaşı Ekle</string>
+    <string name="friends_code_label">Arkadaşının Kodu</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Ekle</string>
+    <string name="friends_empty_title">Henüz Buluşma Arkadaşı Yok</string>
+    <string name="friends_empty_sub">Yukarıdaki Arkadaş Kodunu paylaş veya bir arkadaşının 3D dostunu ziyaret etmek için kodunu gir.</string>
+    <string name="friends_default_cheer_msg">%1$s alışkanlık serin için sana neşeli bir dokunuş gönderdi!</string>
+    <string name="friends_visit_cheer_msg">%1$s uğradı ve böyle devam etmeni söyledi!</string>
+    <string name="friends_top_streak_cd">En iyi seri</string>
+    <string name="friends_best_streak">en iyi %1$dg</string>
+    <string name="friends_remove_cd">Arkadaşı kaldır</string>
+    <string name="friends_visit_3d">3D Ziyaret</string>
+    <string name="friends_send_cheer">Tezahürat Gönder</string>
+    <string name="friends_room_title">%1$s Odası (Sv.%2$d)</string>
+    <string name="friends_room_sub">En iyi seri: %1$d gün • Sevmek için %2$s üzerine dokun!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Parlayan yıldızlarla dolu güneşli bir çalışma masasında oturuyor</string>
+    <string name="studio_notif_perm_denied">Bildirim izni reddedildi — hatırlatıcılar için sistem ayarlarından etkinleştirin.</string>
+    <string name="studio_header_title">Mağaza, Gardırop &amp; Stüdyo</string>
+    <string name="studio_header_sub">Yıldız Altınlarını 3D kostümler, seri koruması ve yapay zeka sanatı için harca</string>
+    <string name="studio_coins_cd">Altınlar</string>
+    <string name="studio_live_preview_badge">Canlı 3D Önizleme • %1$s</string>
+    <string name="studio_powerup_shop_title">Güçlendirme Mağazası</string>
+    <string name="studio_freeze_held">Mevcut: %1$d/10</string>
+    <string name="studio_outfits_title">3D Kostümler</string>
+    <string name="studio_outfit_equipped">Giyildi</string>
+    <string name="studio_outfit_equip">Giy</string>
+    <string name="studio_art_header_title">Yapay Zeka Çıkartma &amp; Poster Stüdyosu</string>
+    <string name="studio_art_header_sub">Gemini Nano Banana ile özel ChibiPet eserleri oluştur veya remiksle</string>
+    <string name="studio_preset_1">Matcha latte ile sıcak kafede ders çalışma çıkartması</string>
+    <string name="studio_preset_1_short">Sıcak kafe çalışma çıkartması</string>
+    <string name="studio_preset_2">Cyberpunk neon oyuncu odası posteri</string>
+    <string name="studio_preset_2_short">Cyberpunk neon oyuncu odası</string>
+    <string name="studio_preset_3">Suluboya bahar pikniği portresi</string>
+    <string name="studio_preset_3_short">Suluboya bahar pikniği</string>
+    <string name="studio_prompt_label">Kostüm veya sahne fikri</string>
+    <string name="studio_remix_photo">Fotoğraf Remiksle</string>
+    <string name="studio_photo_ready">Fotoğraf Hazır</string>
+    <string name="studio_clear_photo_cd">Referans fotoğrafı temizle</string>
+    <string name="studio_generate_button">Oluştur</string>
+    <string name="studio_crafting_status">Sanat eseri hazırlanıyor (30–60 sn)…</string>
+    <string name="studio_generated_cd">Oluşturulan ChibiPet eseri</string>
+    <string name="studio_saved_vault_note">Aşağıdaki Çıkartma Kasama otomatik olarak kaydedildi!</string>
+    <string name="studio_clear_preview">Önizlemeyi Temizle</string>
+    <string name="studio_craft_offline_emblem">Chibi Amblem Çıkartması Üret (0 Bulut Kotası)</string>
+    <string name="studio_instant_emblem_button">Anında Koleksiyoncu Amblem Kartı (0 Kota)</string>
+    <string name="studio_vault_title">Çıkartma Kasam (%1$d)</string>
+    <string name="studio_quota_card_title">Yapay Zeka Ücretsiz Kota &amp; Eco Koruma</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite AÇIK • %1$s</string>
+    <string name="studio_quota_eco_off_sub">429\'da otomatik geçiş • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Günlük esnek limite ulaşıldı — Lite moduna ve sıfır kotalı yedeklere geçildi (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">Günlük yapay zeka bütçesinin %%80+\'i kullanıldı — kalan hakları 3 kat uzatmak için Eco Lite önerilir!</string>
+    <string name="studio_quota_pill_vision">Görsel</string>
+    <string name="studio_quota_pill_chat">Sohbet</string>
+    <string name="studio_quota_pill_studio">Stüdyo</string>
+    <string name="studio_quota_reset_countdown">%1$dsa %2$ddk içinde sıfırlanır</string>
+    <string name="studio_quota_value_receipt">Bugünün Yapay Zeka Özeti: %1$d alışkanlık kanıtı • %2$d sohbet • %3$d stüdyo eseri</string>
+    <string name="studio_quota_failover_saves">Otomatik kurtarma sayısı: %1$d</string>
+    <string name="studio_quota_need_boost">Ekstra desteğe mi ihtiyacın var?</string>
+    <string name="studio_quota_grace_claimed">Bugünkü Ek Hak Alındı</string>
+    <string name="studio_quota_claim_grace">+3 Ücretsiz Ek Kredi</string>
+    <string name="studio_reminders_title">Günlük Dost Hatırlatıcıları</string>
+    <string name="studio_reminders_active_sub">Her gün %1$s saatinde aktif</string>
+    <string name="studio_reminders_inactive_sub">Tamamlanmamış alışkanlıklar kaldığında dostça bir bildirim al</string>
+    <string name="studio_send_test_notif">Test Bildirimi Gönder</string>
+    <string name="studio_signed_in_account">Giriş yapılan hesap</string>
+    <string name="studio_google_account_fallback">Google Hesabı</string>
+    <string name="studio_sign_out">Çıkış Yap</string>
+    <string name="studio_replay_onboarding">İnteraktif Turu &amp; Başlangıç Setini Tekrarla</string>
+    <string name="studio_app_language_title">Uygulama Dili</string>
+    <string name="studio_app_language_system">Sistem Varsayılanı</string>
+    <string name="studio_saved_sticker_title">Kaydedilen Çıkartma</string>
+    <string name="studio_share_sticker_chooser">ChibiPet Çıkartmasını Paylaş</string>
+    <string name="studio_share_button">Paylaş</string>
+    <string name="studio_loaded_remix_msg">Çıkartma Remiks Fotoğrafı olarak yüklendi!</string>
+    <string name="studio_remix_button">Remiksle</string>
+    <string name="studio_delete_sticker_cd">Çıkartmayı sil</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">ChibiPet Alışkanlık Hatırlatıcıları</string>
+    <string name="notif_channel_desc">ChibiPet\'inden günlük motive edici alışkanlık bildirimleri</string>
+    <string name="notif_title">%1$s • Alışkanlık Kontrolü</string>
+    <string name="notif_body_pending">%1$s seni destekliyor! Bugün doğrulanacak %2$d alışkanlık görevi kaldı.</string>
+    <string name="notif_body_all_done">%1$s selam söylüyor! 3D dostunu sevmek ve serini parlak tutmak için dokun.</string>
+    <string name="widget_pet_level">%1$s • Sv.%2$d</string>
+    <string name="widget_mood_streak">Moral %1$d%% • Seri %2$dg</string>
+    <string name="widget_habits_today">Bugün %1$d / %2$d alışkanlık</string>
+    <string name="widget_tap_open">ChibiPet\'i açmak için dokun</string>
+    <string name="widget_snap_button">Çek</string>
+    <string name="widget_fallback_text">ChibiPet Widget — Açmak için dokun</string>
+    <string name="coach_section_title">YZ Akıllı Görev Koçu</string>
+    <string name="coach_goal_hint">Hedefin (ör. Daha iyi uyku, Sınav odağı)</string>
+    <string name="coach_goal_preset_energy">Sabah Enerjisi</string>
+    <string name="coach_goal_preset_study">Çalışma Odağı</string>
+    <string name="coach_goal_preset_calm">Akşam Huzuru</string>
+    <string name="coach_ask_ai_button">YZ Koça Sor</string>
+    <string name="coach_local_plan_button">Yerel Plan (0 Kota)</string>
+    <string name="coach_add_all_button">3 Görevi Birden Ekle</string>
+    <string name="coach_use_quest">Seç</string>
+    <string name="chat_voice_on">Ses AÇIK</string>
+    <string name="chat_voice_off">Ses</string>
+    <string name="chat_speak_cd">Yanıtı sesli oku</string>
+</resources>

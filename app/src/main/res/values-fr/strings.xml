@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Suivez l\'humeur de votre ChibiPet 3D, votre série active et vos habitudes quotidiennes sur votre écran d\'accueil.</string>
+    <string name="splash_mascot_cd">Mascotte ChibiPet</string>
+    <string name="splash_subtitle">Compagnon de Poche 3D &amp; Quêtes d\'Habitudes</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Animal</string>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_friends">Amis</string>
+    <string name="tab_shop">Boutique</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Menthe Nuage</string>
+    <string name="color_peach_label">Mochi Pêche</string>
+    <string name="color_lavender_label">Lilas Étoilé</string>
+    <string name="color_lemon_label">Yuzu Miel</string>
+    <string name="color_berry_label">Baie Céleste</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Classique Cosy</string>
+    <string name="outfit_none_desc">Charme doux et naturel</string>
+    <string name="outfit_bow_label">Nœud Fraise</string>
+    <string name="outfit_bow_desc">Joli ruban sur la tête</string>
+    <string name="outfit_crown_label">Couronne Royale</string>
+    <string name="outfit_crown_desc">Couronne dorée pour les rois des habitudes</string>
+    <string name="outfit_headphones_label">Casque Lo-Fi</string>
+    <string name="outfit_headphones_desc">Casque de studio aux tons pastel</string>
+    <string name="outfit_wizard_label">Chapeau Étoilé</string>
+    <string name="outfit_wizard_desc">Chapeau de sorcier enchanté pour la concentration</string>
+    <string name="outfit_shades_label">Lunettes Cool</string>
+    <string name="outfit_shades_desc">Lunettes de soleil élégantes à monture néon</string>
+    <string name="outfit_cape_label">Cape de Héros</string>
+    <string name="outfit_cape_desc">Cape flottante cramoisie de la victoire</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Gel de Série</string>
+    <string name="consumable_freeze_desc">Protège automatiquement un jour manqué pour garder votre série intacte</string>
+    <string name="consumable_elixir_label">Élixir Doré d\'Humeur</string>
+    <string name="consumable_elixir_desc">Restaure instantanément l\'Humeur et l\'Énergie à 100% avec une danse étincelante</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Hydratation</string>
+    <string name="cat_hydration_hint">Bouteille d\'eau, verre ou tasse</string>
+    <string name="cat_study_label">Étude &amp; Focus</string>
+    <string name="cat_study_hint">Livre, cahier ou bureau d\'étude</string>
+    <string name="cat_fitness_label">Forme</string>
+    <string name="cat_fitness_hint">Baskets, tapis de yoga ou équipement de sport</string>
+    <string name="cat_mindfulness_label">Pleine Conscience</string>
+    <string name="cat_mindfulness_hint">Journal, thé ou espace calme</string>
+    <string name="cat_creative_label">Créativité</string>
+    <string name="cat_creative_hint">Carnet de croquis, instrument ou bricolage</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Boire de l\'eau (500 ml)</string>
+    <string name="starter_quest_study">Session d\'étude concentrée</string>
+    <string name="starter_quest_fitness">Bouger &amp; s\'étirer</string>
+    <string name="starter_quest_mindful">5 min de respiration consciente</string>
+    <string name="starter_quest_creative">Dessiner ou écrire 1 page</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">Diorama de bureau flottant confortable de ChibiPet</string>
+    <string name="auth_ready_to_adopt">Prêt à adopter %1$s</string>
+    <string name="auth_title">Découvrez ChibiPet</string>
+    <string name="auth_subtitle">Votre compagnon de poche 3D interactif qui gagne des niveaux lorsque vous validez vos habitudes réelles.</string>
+    <string name="auth_feature_vision_title">Photo Preuve, Gagnez de l\'XP</string>
+    <string name="auth_feature_vision_sub">Gemini Vision vérifie votre bouteille d\'eau, bureau ou équipement sportif.</string>
+    <string name="auth_feature_chat_title">Compagnon avec Mémoire</string>
+    <string name="auth_feature_chat_sub">Discutez à tout moment — votre animal se souvient de vos séries et vous encourage.</string>
+    <string name="auth_feature_studio_title">Tenues 3D &amp; Studio d\'Art</string>
+    <string name="auth_feature_studio_sub">Faites tourner, caressez, habillez en 3D et créez des stickers IA personnalisés.</string>
+    <string name="auth_checking_session">Vérification de la session…</string>
+    <string name="auth_signing_in">Connexion en cours…</string>
+    <string name="auth_sign_in_google">Se connecter avec Google</string>
+    <string name="auth_customize_tour">Personnaliser le Compagnon &amp; Visite Guidée</string>
+    <string name="auth_error_missing_client_id">Configuration Google Sign-In manquante : default_web_client_id introuvable</string>
+    <string name="auth_error_unexpected_credential">Type d\'identifiant inattendu renvoyé.</string>
+    <string name="auth_error_generic">Échec de la connexion. Veuillez réessayer.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Étape %1$d sur %2$d</string>
+    <string name="onboarding_skip">Passer</string>
+    <string name="onboarding_back">Retour</string>
+    <string name="onboarding_prev_step_cd">Étape précédente</string>
+    <string name="onboarding_next">Suivant</string>
+    <string name="onboarding_adopt_start">Adopter %1$s &amp; Commencer !</string>
+    <string name="onboarding_p1_title">Rencontrez Votre Compagnon 3D Vivant</string>
+    <string name="onboarding_p1_sub">Essayez de faire tourner et de toucher %1$s maintenant ! Votre animal respire, saute et réagit à vos habitudes en 3D en temps réel.</string>
+    <string name="onboarding_p1_stage_hint">Scène 3D interactive • Glissez pour tourner • Touchez pour sauter !</string>
+    <string name="onboarding_p1_coat_label">Pelage :</string>
+    <string name="onboarding_p2_banner_cd">Prairie des quêtes d\'habitudes de ChibiPet</string>
+    <string name="onboarding_p2_badge">Vérification d\'Habitudes Gemini Vision</string>
+    <string name="onboarding_p2_title">Prenez une Preuve, Gagnez des Niveaux !</string>
+    <string name="onboarding_p2_sub">Transformez vos routines quotidiennes en aventure RPG pour faire prospérer votre compagnon.</string>
+    <string name="onboarding_p2_step1_title">1. Photographiez Votre Preuve</string>
+    <string name="onboarding_p2_step1_sub">Prenez en photo votre bouteille d\'eau, cahier ou chaussures de sport avec la caméra en direct ou la galerie.</string>
+    <string name="onboarding_p2_step2_title">2. Vérification IA Instantanée &amp; Récompenses</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision inspecte votre photo, vous félicite et vous accorde XP + Pièces Étoile.</string>
+    <string name="onboarding_p2_step3_title">3. Coffre Quotidien Grand Chelem</string>
+    <string name="onboarding_p2_step3_sub">Terminez toutes les quêtes de votre liste en une journée pour débloquer le Coffre Quotidien (+30 XP bonus &amp; +25 Pièces Étoile) !</string>
+    <string name="onboarding_p3_title">Chat Mémoire, Studio &amp; Protection Quota</string>
+    <string name="onboarding_p3_sub">Conçu pour que vos séries et fonctionnalités restent fluides et ininterrompues sur le niveau gratuit de Gemini.</string>
+    <string name="onboarding_p3_step1_title">Chat Compagnon &amp; Studio de Stickers</string>
+    <string name="onboarding_p3_step1_sub">Votre animal mémorise vos discussions, célèbre vos séries et crée des stickers personnalisés dans le Studio.</string>
+    <string name="onboarding_p3_step2_title">Cascade Auto (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">Si Gemini Flash est très sollicité, ChibiPet bascule automatiquement vers Flash-Lite et propose le Mode Éco Lite pour tripler le quota gratuit.</string>
+    <string name="onboarding_p3_step3_title">Protection de Série Sans Pénalité</string>
+    <string name="onboarding_p3_step3_sub">Si le quota IA se repose tard le soir, la Validation sur l\'Honneur et les Gels de Série protègent toujours votre série.</string>
+    <string name="onboarding_p3_step4_title">Codes Amis &amp; Encouragements</string>
+    <string name="onboarding_p3_step4_sub">Connectez-vous avec vos amis via des Codes à 8 caractères pour envoyer des encouragements quotidiens (+5 Humeur) et comparer vos séries.</string>
+    <string name="onboarding_p4_title">Adoptez &amp; Personnalisez Votre Kit de Départ</string>
+    <string name="onboarding_p4_sub">Nommez votre compagnon, choisissez une couleur de pelage et sélectionnez vos premières quêtes.</string>
+    <string name="onboarding_p4_name_label">Nom de votre ChibiPet</string>
+    <string name="onboarding_p4_coat_title">Couleur de Pelage de Départ</string>
+    <string name="onboarding_p4_quests_title">Quêtes de Départ (%1$d sélectionnées)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Sélectionné</string>
+    <string name="onboarding_not_selected_cd">Non sélectionné</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Autorisation caméra refusée. Vous pouvez toujours choisir une photo depuis la Galerie ou l\'Appareil photo.</string>
+    <string name="home_load_pet_error">Impossible de charger l\'animal : %1$s</string>
+    <string name="home_cheer_from">Encouragement de %1$s !</string>
+    <string name="home_claim_cheer">Réclamer +5</string>
+    <string name="home_sweep_chest_cd">Coffre Quotidien</string>
+    <string name="home_sweep_unlocked_title">Coffre Quotidien Débloqué !</string>
+    <string name="home_sweep_locked_title">Coffre Quotidien Toutes Quêtes</string>
+    <string name="home_sweep_unlocked_sub">+30 XP bonus &amp; +25 Pièces Étoile réclamés aujourd\'hui !</string>
+    <string name="home_sweep_locked_sub">Complétez les %1$d habitudes aujourd\'hui pour +30 XP &amp; +25 Pièces</string>
+    <string name="home_habits_title">Quêtes d\'Habitudes du Jour</string>
+    <string name="home_habits_progress">%1$d sur %2$d vérifiées avec preuve photo aujourd\'hui</string>
+    <string name="home_add_habit_cd">Ajouter une habitude</string>
+    <string name="home_new_quest">Nouvelle Quête</string>
+    <string name="home_filter_all">Toutes (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Aucune habitude pour le moment !</string>
+    <string name="home_empty_habits_sub">Touchez Nouvelle Quête pour ajouter une habitude comme Boire de l\'eau ou Étudier, puis prenez une photo pour faire évoluer votre animal.</string>
+    <string name="home_level_badge">Niv.%1$d</string>
+    <string name="home_edit_pet_cd">Personnaliser le nom et la couleur</string>
+    <string name="home_streak_freezes_cd">Gels de Série</string>
+    <string name="home_give_treat_cd">Donner une friandise</string>
+    <string name="home_treat_button">Friandise • 5★</string>
+    <string name="home_star_coins_cd">Pièces étoile</string>
+    <string name="home_stage_hint">Glissez pour tourner en 3D • Touchez pour caresser !</string>
+    <string name="home_experience_label">Expérience</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Humeur</string>
+    <string name="home_stat_energy">Énergie</string>
+    <string name="home_stat_verified">Vérifiées</string>
+    <string name="home_streak_cd">Série</string>
+    <string name="home_streak_days">%1$dj</string>
+    <string name="home_delete_habit_cd">Supprimer l\'habitude</string>
+    <string name="home_last_proof">Dernière preuve : %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Pièces</string>
+    <string name="home_verified_today">Vérifiée Aujourd\'hui</string>
+    <string name="home_verify_proof">Vérifier Preuve</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Vérifier \"%1$s\"</string>
+    <string name="dialog_verify_body">Montrez à %1$s une preuve photo (%2$s) pour que Gemini Vision la vérifie !</string>
+    <string name="dialog_verify_camerax">Caméra Direct CameraX</string>
+    <string name="dialog_verify_gallery">Galerie</string>
+    <string name="dialog_verify_syscam">Caméra Système</string>
+    <string name="common_cancel">Annuler</string>
+    <string name="common_close">Fermer</string>
+    <string name="common_save">Enregistrer</string>
+    <string name="common_create">Créer</string>
+    <string name="common_delete">Supprimer</string>
+    <string name="dialog_delete_habit_title">Supprimer la Quête d\'Habitude ?</string>
+    <string name="dialog_delete_habit_body">Supprimer \"%1$s\" ? Votre série de %2$d jours sur cette quête sera perdue.</string>
+    <string name="dialog_keep_quest">Garder la Quête</string>
+    <string name="dialog_proof_analyzing_title">%1$s inspecte…</string>
+    <string name="dialog_proof_levelup_title">Niveau Supérieur ! Quête Terminée !</string>
+    <string name="dialog_proof_verified_title">Quête Vérifiée !</string>
+    <string name="dialog_proof_rejected_title">Hmm, essayez un autre angle !</string>
+    <string name="dialog_proof_quota_title">Scanner Gratuit au Repos</string>
+    <string name="dialog_proof_error_title">Erreur de Vérification</string>
+    <string name="dialog_proof_submitted_cd">Preuve d\'habitude envoyée</string>
+    <string name="dialog_proof_checking_body">Gemini Vision vérifie votre photo pour \"%1$s\"…</string>
+    <string name="dialog_proof_detected">Détecté : %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Récompense : +%1$d XP • +%2$d Pièces Étoile (Coffre Quotidien Débloqué !)</string>
+    <string name="dialog_proof_reward_normal">Récompense : +%1$d XP • +%2$d Pièces Étoile</string>
+    <string name="dialog_proof_saw">Aperçu : %1$s</string>
+    <string name="dialog_proof_protection_title">Options de Protection de Série</string>
+    <string name="dialog_proof_protection_body">Ne perdez jamais une série quand le quota IA est occupé ! Réessayez avec Gemini Flash-Lite ou validez sur l\'honneur.</string>
+    <string name="dialog_proof_retry_lite">Réessayer Lite</string>
+    <string name="dialog_proof_honor_checkin">Validation d\'Honneur</string>
+    <string name="dialog_proof_yay">Super !</string>
+    <string name="dialog_add_habit_title">Créer une Quête d\'Habitude</string>
+    <string name="dialog_add_habit_name_label">Nom de l\'habitude</string>
+    <string name="dialog_add_habit_name_hint">ex. Lire 20 pages, S\'hydrater</string>
+    <string name="dialog_add_habit_category_label">Catégorie</string>
+    <string name="dialog_add_habit_effort_label">Effort &amp; Récompense</string>
+    <string name="effort_quick">Rapide</string>
+    <string name="effort_daily">Quotidien</string>
+    <string name="effort_deep">Intense</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Personnaliser le Compagnon</string>
+    <string name="dialog_edit_pet_name_label">Nom de l\'Animal</string>
+    <string name="dialog_edit_pet_coat_label">Couleur du Pelage</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Aperçu caméra indisponible sur cet appareil. Essayez la Galerie ou la Caméra système.</string>
+    <string name="camerax_close_cd">Fermer la caméra</string>
+    <string name="camerax_flash_cd">Activer/désactiver le flash</string>
+    <string name="camerax_switch_cd">Changer de caméra</string>
+    <string name="camerax_looking_for">%1$s cherche : %2$s</string>
+    <string name="camerax_center_hint">Centrez votre preuve dans le cadre</string>
+    <string name="camerax_read_error">Impossible de lire la photo capturée.</string>
+    <string name="camerax_capture_failed">Échec de la capture.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Discuter avec %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Éco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Niv.%1$d • Humeur %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Chargement du compagnon…</string>
+    <string name="chat_eco_on">Éco ACTIF</string>
+    <string name="chat_eco_off">Éco</string>
+    <string name="chat_clear_cd">Effacer l\'historique du chat</string>
+    <string name="chat_dismiss_error_cd">Fermer l\'erreur</string>
+    <string name="chat_quick_reflex">Réflexe Animal Rapide (0 Quota)</string>
+    <string name="chat_empty_greeting">Dites bonjour à %1$s ! Il se souvient de vos discussions et célèbre vos habitudes vérifiées.</string>
+    <string name="chat_prompt_1">Comment je m\'en sors aujourd\'hui ?</string>
+    <string name="chat_prompt_2">Donne-moi un coup de boost !</string>
+    <string name="chat_prompt_3">Quelle habitude dois-je faire ensuite ?</string>
+    <string name="chat_input_placeholder">Message à %1$s…</string>
+    <string name="chat_send_cd">Envoyer le message</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Rencontres entre Animaux</string>
+    <string name="friends_subtitle">Partagez vos séries, visitez les salles 3D de vos amis et envoyez des encouragements</string>
+    <string name="friends_refresh_cd">Actualiser les amis</string>
+    <string name="friends_your_code">Votre Code Ami</string>
+    <string name="friends_copied_code">Code Ami copié : %1$s</string>
+    <string name="friends_copy_code_cd">Copier le Code Ami</string>
+    <string name="friends_share_text">Ajoute mon ChibiPet %1$s pour nos habitudes ! Code Ami : %2$s</string>
+    <string name="friends_share_chooser">Partager le Code Ami</string>
+    <string name="friends_share_code_cd">Partager le Code Ami</string>
+    <string name="friends_add_title">Ajouter un Partenaire d\'Habitudes</string>
+    <string name="friends_code_label">Code Ami d\'un proche</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Ajouter</string>
+    <string name="friends_empty_title">Aucun Ami pour l\'Instant</string>
+    <string name="friends_empty_sub">Partagez votre Code Ami ci-dessus ou entrez celui d\'un ami pour visiter son animal 3D et encourager ses séries.</string>
+    <string name="friends_default_cheer_msg">%1$s vous a envoyé une caresse d\'encouragement pour votre série !</string>
+    <string name="friends_visit_cheer_msg">%1$s est passé vous dire de continuer comme ça !</string>
+    <string name="friends_top_streak_cd">Meilleure série</string>
+    <string name="friends_best_streak">%1$dj record</string>
+    <string name="friends_remove_cd">Supprimer l\'ami</string>
+    <string name="friends_visit_3d">Visiter 3D</string>
+    <string name="friends_send_cheer">Encourager</string>
+    <string name="friends_room_title">Chambre de %1$s (Niv.%2$d)</string>
+    <string name="friends_room_sub">Meilleure série : %1$d jours • Touchez %2$s pour le caresser !</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Assis à un bureau ensoleillé avec des étoiles brillantes</string>
+    <string name="studio_notif_perm_denied">Autorisation de notification refusée — activez-la dans les paramètres système.</string>
+    <string name="studio_header_title">Boutique, Garde-Robe &amp; Studio</string>
+    <string name="studio_header_sub">Dépensez vos Pièces Étoile en tenues 3D, protections de série et art IA</string>
+    <string name="studio_coins_cd">Pièces</string>
+    <string name="studio_live_preview_badge">Aperçu 3D en Direct • %1$s</string>
+    <string name="studio_powerup_shop_title">Boutique Bonus</string>
+    <string name="studio_freeze_held">En stock : %1$d/10</string>
+    <string name="studio_outfits_title">Tenues 3D</string>
+    <string name="studio_outfit_equipped">Équipé</string>
+    <string name="studio_outfit_equip">Équiper</string>
+    <string name="studio_art_header_title">Studio de Stickers &amp; Posters IA</string>
+    <string name="studio_art_header_sub">Créez ou remixez des illustrations ChibiPet avec Gemini Nano Banana</string>
+    <string name="studio_preset_1">Sticker d\'étude dans un café cosy avec matcha latte</string>
+    <string name="studio_preset_1_short">Sticker café cosy</string>
+    <string name="studio_preset_2">Poster de salle gaming néon cyberpunk</string>
+    <string name="studio_preset_2_short">Salle gaming néon</string>
+    <string name="studio_preset_3">Portrait aquarelle de pique-nique printanier</string>
+    <string name="studio_preset_3_short">Pique-nique aquarelle</string>
+    <string name="studio_prompt_label">Idée de tenue ou de scène</string>
+    <string name="studio_remix_photo">Photo Remix</string>
+    <string name="studio_photo_ready">Photo Prête</string>
+    <string name="studio_clear_photo_cd">Effacer la photo de référence</string>
+    <string name="studio_generate_button">Générer</string>
+    <string name="studio_crafting_status">Création de l\'illustration (30–60 s)…</string>
+    <string name="studio_generated_cd">Illustration ChibiPet générée</string>
+    <string name="studio_saved_vault_note">Enregistré automatiquement dans Mon Coffre à Stickers ci-dessous !</string>
+    <string name="studio_clear_preview">Effacer l\'Aperçu</string>
+    <string name="studio_craft_offline_emblem">Créer un Emblème Chibi (0 Quota Cloud)</string>
+    <string name="studio_instant_emblem_button">Carte Emblème Collector Instantanée (0 Quota)</string>
+    <string name="studio_vault_title">Mon Coffre à Stickers (%1$d)</string>
+    <string name="studio_quota_card_title">Quota Gratuit IA &amp; Garde Éco</string>
+    <string name="studio_quota_eco_on_sub">Éco Lite ACTIF • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Cascade auto sur 429 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Limite quotidienne atteinte — mode Lite et secours sans quota actifs (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">80%%+ du budget IA quotidien utilisé — mode Éco Lite recommandé pour tripler vos appels restants !</string>
+    <string name="studio_quota_pill_vision">Vision</string>
+    <string name="studio_quota_pill_chat">Chat</string>
+    <string name="studio_quota_pill_studio">Studio</string>
+    <string name="studio_quota_reset_countdown">Réinitialisation dans %1$dh %2$dm</string>
+    <string name="studio_quota_value_receipt">Bilan IA du Jour : %1$d preuve(s) vérifiée(s) • %2$d chat(s) • %3$d création(s) studio</string>
+    <string name="studio_quota_failover_saves">Basculements auto : %1$d</string>
+    <string name="studio_quota_need_boost">Besoin d\'un coup de pouce ?</string>
+    <string name="studio_quota_grace_claimed">Crédits Bonus Réclamés</string>
+    <string name="studio_quota_claim_grace">+3 Crédits Bonus Gratuits</string>
+    <string name="studio_reminders_title">Rappels Quotidiens</string>
+    <string name="studio_reminders_active_sub">Actif tous les jours à %1$s</string>
+    <string name="studio_reminders_inactive_sub">Recevez un rappel amical lorsqu\'il reste des habitudes</string>
+    <string name="studio_send_test_notif">Envoyer une Notification Test</string>
+    <string name="studio_signed_in_account">Compte connecté</string>
+    <string name="studio_google_account_fallback">Compte Google</string>
+    <string name="studio_sign_out">Déconnexion</string>
+    <string name="studio_replay_onboarding">Rejouer la Visite Interactive &amp; Kit de Départ</string>
+    <string name="studio_app_language_title">Langue de l\'Application</string>
+    <string name="studio_app_language_system">Par Défaut du Système</string>
+    <string name="studio_saved_sticker_title">Sticker Enregistré</string>
+    <string name="studio_share_sticker_chooser">Partager le Sticker ChibiPet</string>
+    <string name="studio_share_button">Partager</string>
+    <string name="studio_loaded_remix_msg">Sticker chargé comme Photo Remix !</string>
+    <string name="studio_remix_button">Remixer</string>
+    <string name="studio_delete_sticker_cd">Supprimer le sticker</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">Rappels d\'Habitudes ChibiPet</string>
+    <string name="notif_channel_desc">Rappels quotidiens encourageants de votre ChibiPet</string>
+    <string name="notif_title">%1$s • Point Habitudes</string>
+    <string name="notif_body_pending">%1$s vous encourage ! Plus que %2$d quête(s) à vérifier aujourd\'hui.</string>
+    <string name="notif_body_all_done">%1$s vous dit bonjour ! Touchez pour caresser votre compagnon 3D et faire briller votre série.</string>
+    <string name="widget_pet_level">%1$s • Niv.%2$d</string>
+    <string name="widget_mood_streak">Humeur %1$d%% • Série %2$dj</string>
+    <string name="widget_habits_today">%1$d / %2$d habitudes aujourd\'hui</string>
+    <string name="widget_tap_open">Touchez pour ouvrir ChibiPet</string>
+    <string name="widget_snap_button">Photo</string>
+    <string name="widget_fallback_text">Widget ChibiPet — Touchez pour ouvrir</string>
+    <string name="coach_section_title">Coach IA de Quêtes</string>
+    <string name="coach_goal_hint">Votre objectif (ex. Mieux dormir, Étudier)</string>
+    <string name="coach_goal_preset_energy">Énergie du Matin</string>
+    <string name="coach_goal_preset_study">Focus Étude</string>
+    <string name="coach_goal_preset_calm">Calme du Soir</string>
+    <string name="coach_ask_ai_button">Plan Coach IA</string>
+    <string name="coach_local_plan_button">Plan Local (0 Quota)</string>
+    <string name="coach_add_all_button">Ajouter les 3 Quêtes</string>
+    <string name="coach_use_quest">Choisir</string>
+    <string name="chat_voice_on">Voix ON</string>
+    <string name="chat_voice_off">Voix</string>
+    <string name="chat_speak_cd">Lire la réponse à voix haute</string>
+</resources>

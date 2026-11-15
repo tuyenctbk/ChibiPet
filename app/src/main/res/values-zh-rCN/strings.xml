@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">在主屏幕上随时查看 3D ChibiPet 的心情、连续打卡天数和每日习惯。</string>
+    <string name="splash_mascot_cd">ChibiPet 吉祥物</string>
+    <string name="splash_subtitle">3D 口袋伙伴与习惯任务</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">宠物</string>
+    <string name="tab_chat">聊天</string>
+    <string name="tab_friends">好友</string>
+    <string name="tab_shop">商店</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">云朵薄荷</string>
+    <string name="color_peach_label">蜜桃麻薯</string>
+    <string name="color_lavender_label">星光丁香</string>
+    <string name="color_lemon_label">蜂蜜柚子</string>
+    <string name="color_berry_label">晴空莓果</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">经典暖绒</string>
+    <string name="outfit_none_desc">自然蓬松的可爱魅力</string>
+    <string name="outfit_bow_label">草莓蝴蝶结</string>
+    <string name="outfit_bow_desc">头顶可爱的丝带蝴蝶结</string>
+    <string name="outfit_crown_label">皇家王冠</string>
+    <string name="outfit_crown_desc">献给自律达人的金色王冠</string>
+    <string name="outfit_headphones_label">Lo-Fi 耳机</string>
+    <string name="outfit_headphones_desc">马卡龙色系录音室耳机</string>
+    <string name="outfit_wizard_label">星空巫师帽</string>
+    <string name="outfit_wizard_desc">提升专注力的魔法巫师帽</string>
+    <string name="outfit_shades_label">炫酷墨镜</string>
+    <string name="outfit_shades_desc">时尚霓虹边框太阳镜</string>
+    <string name="outfit_cape_label">英雄披风</string>
+    <string name="outfit_cape_desc">迎风飘扬的绯红胜利披风</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">连胜冻结卡</string>
+    <string name="consumable_freeze_desc">自动保护漏打卡的一天，让你的习惯连胜纪录不断裂</string>
+    <string name="consumable_elixir_label">黄金元气灵药</string>
+    <string name="consumable_elixir_desc">伴随闪耀舞蹈，立即将心情与能量恢复至 100%</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">科学饮水</string>
+    <string name="cat_hydration_hint">水壶、水杯或马克杯</string>
+    <string name="cat_study_label">学习与专注</string>
+    <string name="cat_study_hint">书籍、笔记本或书桌</string>
+    <string name="cat_fitness_label">运动健身</string>
+    <string name="cat_fitness_hint">运动鞋、瑜伽垫或健身器材</string>
+    <string name="cat_mindfulness_label">正念冥想</string>
+    <string name="cat_mindfulness_hint">手账本、茶饮或安静角落</string>
+    <string name="cat_creative_label">创意手造</string>
+    <string name="cat_creative_hint">速写本、乐器或手工作品</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">喝水 (500毫升)</string>
+    <string name="starter_quest_study">专注学习时光</string>
+    <string name="starter_quest_fitness">运动与拉伸</string>
+    <string name="starter_quest_mindful">5 分钟正念呼吸</string>
+    <string name="starter_quest_creative">速写或写 1 页日记</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">ChibiPet 温馨悬浮书桌微缩场景</string>
+    <string name="auth_ready_to_adopt">准备领养 %1$s</string>
+    <string name="auth_title">遇见 ChibiPet</string>
+    <string name="auth_subtitle">你的互动式 3D 口袋伙伴，当你完成现实生活中的习惯时它会一同升级。</string>
+    <string name="auth_feature_vision_title">拍照打卡，赢取经验</string>
+    <string name="auth_feature_vision_sub">Gemini Vision 智能核验你的水杯、书桌或运动装备。</string>
+    <string name="auth_feature_chat_title">有记忆的贴心伙伴</string>
+    <string name="auth_feature_chat_sub">随时畅聊——你的宠物记得你的连胜纪录并为你加油打气。</string>
+    <string name="auth_feature_studio_title">3D 换装与艺术工坊</string>
+    <string name="auth_feature_studio_sub">3D 旋转、戳一戳、换装打扮，并制作专属 AI 宠物贴纸。</string>
+    <string name="auth_checking_session">正在检查登录状态…</string>
+    <string name="auth_signing_in">正在登录…</string>
+    <string name="auth_sign_in_google">使用 Google 账号登录</string>
+    <string name="auth_customize_tour">定制初始伙伴与互动导览</string>
+    <string name="auth_error_missing_client_id">缺少 Google 登录配置：未找到 default_web_client_id</string>
+    <string name="auth_error_unexpected_credential">返回了未知的凭据类型。</string>
+    <string name="auth_error_generic">登录失败，请重试。</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">第 %1$d / %2$d 步</string>
+    <string name="onboarding_skip">跳过导览</string>
+    <string name="onboarding_back">上一步</string>
+    <string name="onboarding_prev_step_cd">上一步</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_adopt_start">领养 %1$s 并开始！</string>
+    <string name="onboarding_p1_title">认识你活灵活现的 3D 伙伴</string>
+    <string name="onboarding_p1_sub">现在就试着旋转并点一下 %1$s 吧！你的宠物会在实时 3D 舞台上呼吸、跳跃并回应你的每日习惯。</string>
+    <string name="onboarding_p1_stage_hint">互动 3D 舞台 • 拖动旋转 • 点击跳跃！</string>
+    <string name="onboarding_p1_coat_label">毛色：</string>
+    <string name="onboarding_p2_banner_cd">ChibiPet 习惯任务草地</string>
+    <string name="onboarding_p2_badge">Gemini Vision 习惯核验</string>
+    <string name="onboarding_p2_title">拍下真实凭证，快乐升级！</string>
+    <string name="onboarding_p2_sub">将日常自律变成一场 RPG 冒险，让你的宠物元气满满地成长。</string>
+    <string name="onboarding_p2_step1_title">1. 拍下习惯凭证</string>
+    <string name="onboarding_p2_step1_sub">使用实时取景相机或相册拍下你的水壶、学习笔记或跑鞋。</string>
+    <string name="onboarding_p2_step2_title">2. AI 即时核验与奖励</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision 会检查照片，以宠物口吻为你喝彩，并奖励 XP 与星星币。</string>
+    <string name="onboarding_p2_step3_title">3. 每日全任务大满贯宝箱</string>
+    <string name="onboarding_p2_step3_sub">单日完成列表中的所有任务，即可解锁大满贯宝箱（+30 额外 XP 与 +25 星星币）！</string>
+    <string name="onboarding_p3_title">记忆聊天、艺术工坊与免费额度智能守护</string>
+    <string name="onboarding_p3_sub">精心设计，确保在 Gemini 免费额度下你的习惯连胜与伙伴功能依然流畅无阻。</string>
+    <string name="onboarding_p3_step1_title">伙伴聊天与贴纸工坊</string>
+    <string name="onboarding_p3_step1_sub">你的宠物记得过往对话，庆祝你的连胜，并在工坊为你创作专属贴纸。</string>
+    <string name="onboarding_p3_step2_title">自动模型降级保护 (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">当 Gemini Flash 繁忙时，ChibiPet 会自动切换至超快 Flash-Lite，并提供省流 Eco 模式将免费额度延长 3 倍。</string>
+    <string name="onboarding_p3_step3_title">零惩罚连胜保护</string>
+    <string name="onboarding_p3_step3_sub">若深夜打卡时云端 AI 额度正在休息，荣誉承诺打卡与连胜冻结卡可确保你绝不丢失连胜。</string>
+    <string name="onboarding_p3_step4_title">伙伴代码与好友加油</string>
+    <string name="onboarding_p3_step4_sub">通过 8 位伙伴代码连接好友，互送每日加油（+5 心情）并比拼最高连胜。</string>
+    <string name="onboarding_p4_title">领养并定制你的初始套装</string>
+    <string name="onboarding_p4_sub">为伙伴取个名字，挑选毛色，并选择你的初始习惯任务。</string>
+    <string name="onboarding_p4_name_label">ChibiPet 的名字</string>
+    <string name="onboarding_p4_coat_title">初始毛色</string>
+    <string name="onboarding_p4_quests_title">选择初始任务（已选 %1$d 项）</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">已选择</string>
+    <string name="onboarding_not_selected_cd">未选择</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">相机权限被拒绝。你仍可以从相册或系统相机选择照片。</string>
+    <string name="home_load_pet_error">无法加载宠物：%1$s</string>
+    <string name="home_cheer_from">来自 %1$s 的好友加油！</string>
+    <string name="home_claim_cheer">领取 +5</string>
+    <string name="home_sweep_chest_cd">每日大满贯宝箱</string>
+    <string name="home_sweep_unlocked_title">每日大满贯宝箱已解锁！</string>
+    <string name="home_sweep_locked_title">每日全任务大满贯宝箱</string>
+    <string name="home_sweep_unlocked_sub">今日已领取 +30 额外 XP 与 +25 星星币！</string>
+    <string name="home_sweep_locked_sub">今日完成全部 %1$d 项习惯即可赢取 +30 XP 与 +25 星星币</string>
+    <string name="home_habits_title">每日习惯任务</string>
+    <string name="home_habits_progress">今日已拍照核验 %1$d / %2$d 项</string>
+    <string name="home_add_habit_cd">添加习惯</string>
+    <string name="home_new_quest">新建任务</string>
+    <string name="home_filter_all">全部 (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">还没有习惯任务！</string>
+    <string name="home_empty_habits_sub">点击“新建任务”添加如喝水或学习等习惯，然后拍照打卡帮助宠物升级。</string>
+    <string name="home_level_badge">Lv.%1$d</string>
+    <string name="home_edit_pet_cd">自定义宠物名字和颜色</string>
+    <string name="home_streak_freezes_cd">连胜冻结卡</string>
+    <string name="home_give_treat_cd">喂零食</string>
+    <string name="home_treat_button">零食 • 5★</string>
+    <string name="home_star_coins_cd">星星币</string>
+    <string name="home_stage_hint">拖动旋转 3D • 点击互动！</string>
+    <string name="home_experience_label">经验值</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">心情</string>
+    <string name="home_stat_energy">能量</string>
+    <string name="home_stat_verified">已核验</string>
+    <string name="home_streak_cd">连胜</string>
+    <string name="home_streak_days">%1$d天</string>
+    <string name="home_delete_habit_cd">删除习惯</string>
+    <string name="home_last_proof">上次打卡：%1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d 星星币</string>
+    <string name="home_verified_today">今日已核验</string>
+    <string name="home_verify_proof">拍照核验</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">核验“%1$s”</string>
+    <string name="dialog_verify_body">向 %1$s 展示打卡照片（%2$s），让 Gemini Vision 为你核验！</string>
+    <string name="dialog_verify_camerax">实时取景拍摄</string>
+    <string name="dialog_verify_gallery">相册选图</string>
+    <string name="dialog_verify_syscam">系统相机</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_close">关闭</string>
+    <string name="common_save">保存</string>
+    <string name="common_create">创建</string>
+    <string name="common_delete">删除</string>
+    <string name="dialog_delete_habit_title">删除习惯任务？</string>
+    <string name="dialog_delete_habit_body">确定移除“%1$s”吗？该任务上已累积的 %2$d 天连胜纪录将被删除。</string>
+    <string name="dialog_keep_quest">保留任务</string>
+    <string name="dialog_proof_analyzing_title">%1$s 正在仔细检查…</string>
+    <string name="dialog_proof_levelup_title">升级啦！任务完成！</string>
+    <string name="dialog_proof_verified_title">任务核验通过！</string>
+    <string name="dialog_proof_rejected_title">唔，换个角度再拍试试！</string>
+    <string name="dialog_proof_quota_title">免费扫描仪休息中</string>
+    <string name="dialog_proof_error_title">核验出错</string>
+    <string name="dialog_proof_submitted_cd">已提交的习惯凭证</string>
+    <string name="dialog_proof_checking_body">Gemini Vision 正在核验你的“%1$s”照片…</string>
+    <string name="dialog_proof_detected">识别结果：%1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">奖励：+%1$d XP • +%2$d 星星币（每日大满贯宝箱已解锁！）</string>
+    <string name="dialog_proof_reward_normal">奖励：+%1$d XP • +%2$d 星星币</string>
+    <string name="dialog_proof_saw">看到的内容：%1$s</string>
+    <string name="dialog_proof_protection_title">连胜保护选项</string>
+    <string name="dialog_proof_protection_body">云端 AI 额度繁忙时绝不丢失连胜！可使用超轻量 Gemini Flash-Lite 重试，或进行荣誉承诺打卡。</string>
+    <string name="dialog_proof_retry_lite">Lite 重试</string>
+    <string name="dialog_proof_honor_checkin">荣誉打卡</string>
+    <string name="dialog_proof_yay">太棒啦！</string>
+    <string name="dialog_add_habit_title">创建习惯任务</string>
+    <string name="dialog_add_habit_name_label">习惯名称</string>
+    <string name="dialog_add_habit_name_hint">例如：阅读 20 页书、喝水</string>
+    <string name="dialog_add_habit_category_label">分类</string>
+    <string name="dialog_add_habit_effort_label">难度与奖励</string>
+    <string name="effort_quick">轻松</string>
+    <string name="effort_daily">日常</string>
+    <string name="effort_deep">深度</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">装扮伙伴</string>
+    <string name="dialog_edit_pet_name_label">宠物名字</string>
+    <string name="dialog_edit_pet_coat_label">毛色</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">当前设备无法使用相机预览，请尝试使用相册或系统相机。</string>
+    <string name="camerax_close_cd">关闭相机</string>
+    <string name="camerax_flash_cd">切换闪光灯</string>
+    <string name="camerax_switch_cd">切换摄像头</string>
+    <string name="camerax_looking_for">%1$s 正在寻找：%2$s</string>
+    <string name="camerax_center_hint">请将打卡物品放在取景框中央</string>
+    <string name="camerax_read_error">无法读取拍摄的照片。</string>
+    <string name="camerax_capture_failed">拍摄失败。</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">与 %1$s 聊天</string>
+    <string name="chat_mode_lite">Flash-Lite 省流</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Lv.%1$d • 心情 %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">正在加载伙伴…</string>
+    <string name="chat_eco_on">省流已开</string>
+    <string name="chat_eco_off">省流</string>
+    <string name="chat_clear_cd">清空聊天记录</string>
+    <string name="chat_dismiss_error_cd">忽略错误</string>
+    <string name="chat_quick_reflex">宠物快捷回应 (0 额度消耗)</string>
+    <string name="chat_empty_greeting">向 %1$s 打个招呼吧！它记得你们之前的对话，并会为你完成的习惯欢呼。</string>
+    <string name="chat_prompt_1">我今天表现怎么样？</string>
+    <string name="chat_prompt_2">给我加加油吧！</string>
+    <string name="chat_prompt_3">接下来我该完成哪个习惯？</string>
+    <string name="chat_input_placeholder">给 %1$s 发消息…</string>
+    <string name="chat_send_cd">发送消息</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">宠物串门与好友</string>
+    <string name="friends_subtitle">分享连胜、拜访好友的 3D 房间并互送加油</string>
+    <string name="friends_refresh_cd">刷新好友</string>
+    <string name="friends_your_code">你的伙伴代码</string>
+    <string name="friends_copied_code">已复制伙伴代码 %1$s</string>
+    <string name="friends_copy_code_cd">复制伙伴代码</string>
+    <string name="friends_share_text">快添加我的 ChibiPet %1$s 一起打卡养成好习惯！伙伴代码：%2$s</string>
+    <string name="friends_share_chooser">分享伙伴代码</string>
+    <string name="friends_share_code_cd">分享伙伴代码</string>
+    <string name="friends_add_title">添加自律伙伴</string>
+    <string name="friends_code_label">好友的伙伴代码</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">添加</string>
+    <string name="friends_empty_title">还没有串门好友</string>
+    <string name="friends_empty_sub">分享上方的伙伴代码或输入好友代码，即可拜访对方的 3D 宠物并为连胜加油。</string>
+    <string name="friends_default_cheer_msg">%1$s 为你的习惯连胜送来了一个元气戳戳！</string>
+    <string name="friends_visit_cheer_msg">%1$s 跳来串门，祝你继续保持连胜！</string>
+    <string name="friends_top_streak_cd">最高连胜</string>
+    <string name="friends_best_streak">最高 %1$d天</string>
+    <string name="friends_remove_cd">移除好友</string>
+    <string name="friends_visit_3d">3D 串门</string>
+    <string name="friends_send_cheer">送出加油</string>
+    <string name="friends_room_title">%1$s 的房间 (Lv.%2$d)</string>
+    <string name="friends_room_sub">最高连胜：%1$d 天 • 点击 %2$s 互动吧！</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">坐在洒满阳光、闪烁着星星的书桌前</string>
+    <string name="studio_notif_perm_denied">通知权限被拒绝——请在系统设置中开启以接收宠物提醒。</string>
+    <string name="studio_header_title">商店、衣橱与艺术工坊</string>
+    <string name="studio_header_sub">使用星星币兑换 3D 装扮、连胜保护道具和 AI 艺术作品</string>
+    <string name="studio_coins_cd">星星币</string>
+    <string name="studio_live_preview_badge">实时 3D 预览 • %1$s</string>
+    <string name="studio_powerup_shop_title">增益道具商店</string>
+    <string name="studio_freeze_held">持有：%1$d/10</string>
+    <string name="studio_outfits_title">3D 装扮</string>
+    <string name="studio_outfit_equipped">已装备</string>
+    <string name="studio_outfit_equip">装备</string>
+    <string name="studio_art_header_title">AI 贴纸与海报工坊</string>
+    <string name="studio_art_header_sub">由 Gemini Nano Banana 驱动，创作或重混专属 ChibiPet 艺术画作</string>
+    <string name="studio_preset_1">温馨咖啡馆抹茶拿铁自习贴纸</string>
+    <string name="studio_preset_1_short">温馨咖啡馆自习贴纸</string>
+    <string name="studio_preset_2">赛博朋克霓虹电竞房海报</string>
+    <string name="studio_preset_2_short">赛博朋克霓虹电竞房</string>
+    <string name="studio_preset_3">水彩风格春日野餐肖像</string>
+    <string name="studio_preset_3_short">水彩春日野餐</string>
+    <string name="studio_prompt_label">装扮或场景灵感</string>
+    <string name="studio_remix_photo">参考图重混</string>
+    <string name="studio_photo_ready">参考图已就绪</string>
+    <string name="studio_clear_photo_cd">清除参考照片</string>
+    <string name="studio_generate_button">生成画作</string>
+    <string name="studio_crafting_status">正在绘制艺术作品 (30–60秒)…</string>
+    <string name="studio_generated_cd">生成的 ChibiPet 艺术作品</string>
+    <string name="studio_saved_vault_note">已自动保存至下方“我的贴纸宝库”！</string>
+    <string name="studio_clear_preview">清除预览</string>
+    <string name="studio_craft_offline_emblem">制作 Chibi 徽章贴纸 (0 云端额度)</string>
+    <string name="studio_instant_emblem_button">即时生成典藏徽章卡 (0 额度消耗)</string>
+    <string name="studio_vault_title">我的贴纸宝库 (%1$d)</string>
+    <string name="studio_quota_card_title">AI 免费额度与省流守护</string>
+    <string name="studio_quota_eco_on_sub">Eco 省流已开启 • %1$s</string>
+    <string name="studio_quota_eco_off_sub">遇 429 自动降级保活 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">已达今日软上限——已自动路由至 Lite 模式并启用零额度兜底方案 (%1$s)。</string>
+    <string name="studio_quota_near_limit_banner">今日 AI 额度已用 80%% 以上——建议开启 Eco 省流模式将剩余可用次数延长 3 倍！</string>
+    <string name="studio_quota_pill_vision">视觉核验</string>
+    <string name="studio_quota_pill_chat">伙伴聊天</string>
+    <string name="studio_quota_pill_studio">艺术工坊</string>
+    <string name="studio_quota_reset_countdown">%1$d小时 %2$d分后重置</string>
+    <string name="studio_quota_value_receipt">今日 AI 价值账单：核验 %1$d 次习惯 • 畅聊 %2$d 次 • 创作 %3$d 幅作品</string>
+    <string name="studio_quota_failover_saves">自动降级救援次数：%1$d</string>
+    <string name="studio_quota_need_boost">需要临时补充额度？</string>
+    <string name="studio_quota_grace_claimed">今日宽限额度已领</string>
+    <string name="studio_quota_claim_grace">+3 免费宽限额度</string>
+    <string name="studio_reminders_title">每日宠物提醒</string>
+    <string name="studio_reminders_active_sub">每天 %1$s 贴心提醒</string>
+    <string name="studio_reminders_inactive_sub">当还有未完成的习惯时收到温馨提醒</string>
+    <string name="studio_send_test_notif">发送测试通知</string>
+    <string name="studio_signed_in_account">当前登录账号</string>
+    <string name="studio_google_account_fallback">Google 账号</string>
+    <string name="studio_sign_out">退出登录</string>
+    <string name="studio_replay_onboarding">重新体验互动导览与初始套装</string>
+    <string name="studio_app_language_title">应用语言</string>
+    <string name="studio_app_language_system">跟随系统默认</string>
+    <string name="studio_saved_sticker_title">已保存的贴纸</string>
+    <string name="studio_share_sticker_chooser">分享 ChibiPet 贴纸</string>
+    <string name="studio_share_button">分享</string>
+    <string name="studio_loaded_remix_msg">已将贴纸加载为重混参考图！</string>
+    <string name="studio_remix_button">重混创作</string>
+    <string name="studio_delete_sticker_cd">删除贴纸</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">ChibiPet 习惯提醒</string>
+    <string name="notif_channel_desc">来自 ChibiPet 的每日暖心习惯打卡提醒</string>
+    <string name="notif_title">%1$s • 习惯打卡时间</string>
+    <string name="notif_body_pending">%1$s 正在为你加油！今天还有 %2$d 个习惯任务等待核验。</string>
+    <string name="notif_body_all_done">%1$s 向你问好！点进来摸摸你的 3D 伙伴，保持连胜闪耀吧。</string>
+    <string name="widget_pet_level">%1$s • Lv.%2$d</string>
+    <string name="widget_mood_streak">心情 %1$d%% • 连胜 %2$d天</string>
+    <string name="widget_habits_today">今日习惯 %1$d / %2$d</string>
+    <string name="widget_tap_open">点击打开 ChibiPet</string>
+    <string name="widget_snap_button">打卡</string>
+    <string name="widget_fallback_text">ChibiPet 小组件 — 点击打开</string>
+    <string name="coach_section_title">AI 智能任务教练</string>
+    <string name="coach_goal_hint">输入目标（如：改善睡眠、专注备考）</string>
+    <string name="coach_goal_preset_energy">晨间活力</string>
+    <string name="coach_goal_preset_study">专注学习</string>
+    <string name="coach_goal_preset_calm">晚间放松</string>
+    <string name="coach_ask_ai_button">咨询 AI 教练</string>
+    <string name="coach_local_plan_button">本地速成方案 (0配额)</string>
+    <string name="coach_add_all_button">一键添加全部 3 项任务</string>
+    <string name="coach_use_quest">选用</string>
+    <string name="chat_voice_on">语音开启</string>
+    <string name="chat_voice_off">语音</string>
+    <string name="chat_speak_cd">朗读宠物回复</string>
+</resources>

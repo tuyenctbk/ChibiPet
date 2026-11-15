@@ -1,0 +1,346 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Track your 3D ChibiPet mood, active streak, and daily habits right on your home screen.</string>
+    <string name="splash_mascot_cd">ChibiPet mascot</string>
+    <string name="splash_subtitle">3D Pocket Buddy &amp; Habit Quests</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Pet</string>
+    <string name="tab_chat">Chat</string>
+    <string name="tab_friends">Friends</string>
+    <string name="tab_shop">Shop</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Cloud Mint</string>
+    <string name="color_peach_label">Peach Mochi</string>
+    <string name="color_lavender_label">Starlight Lilac</string>
+    <string name="color_lemon_label">Honey Yuzu</string>
+    <string name="color_berry_label">Sky Berry</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Classic Cozy</string>
+    <string name="outfit_none_desc">Natural fuzzy charm</string>
+    <string name="outfit_bow_label">Strawberry Bow</string>
+    <string name="outfit_bow_desc">Cute ribbon bow on top</string>
+    <string name="outfit_crown_label">Royal Crown</string>
+    <string name="outfit_crown_desc">Golden crown for habit royalty</string>
+    <string name="outfit_headphones_label">Lo-Fi Beats</string>
+    <string name="outfit_headphones_desc">Pastel studio headphones</string>
+    <string name="outfit_wizard_label">Starry Hat</string>
+    <string name="outfit_wizard_desc">Enchanted focus wizard hat</string>
+    <string name="outfit_shades_label">Cool Shades</string>
+    <string name="outfit_shades_desc">Sleek neon-rimmed sunglasses</string>
+    <string name="outfit_cape_label">Hero Cape</string>
+    <string name="outfit_cape_desc">Flowing crimson victory cape</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Streak Freeze</string>
+    <string name="consumable_freeze_desc">Auto-protects a missed day so your habit streak stays unbroken</string>
+    <string name="consumable_elixir_label">Golden Mood Elixir</string>
+    <string name="consumable_elixir_desc">Instantly restores Mood &amp; Energy to 100% with a sparkle dance</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Hydration</string>
+    <string name="cat_hydration_hint">Water bottle, glass, or mug</string>
+    <string name="cat_study_label">Study &amp; Focus</string>
+    <string name="cat_study_hint">Book, notebook, or study desk</string>
+    <string name="cat_fitness_label">Fitness</string>
+    <string name="cat_fitness_hint">Sneakers, yoga mat, or workout gear</string>
+    <string name="cat_mindfulness_label">Mindfulness</string>
+    <string name="cat_mindfulness_hint">Journal, tea, or calm space</string>
+    <string name="cat_creative_label">Creative</string>
+    <string name="cat_creative_hint">Sketchbook, instrument, or craft</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Drink Water (500ml)</string>
+    <string name="starter_quest_study">Focus Study Session</string>
+    <string name="starter_quest_fitness">Move &amp; Stretch</string>
+    <string name="starter_quest_mindful">5-Min Mindful Breathing</string>
+    <string name="starter_quest_creative">Sketch or Journal 1 Page</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">ChibiPet cozy floating desk diorama</string>
+    <string name="auth_ready_to_adopt">Ready to adopt %1$s</string>
+    <string name="auth_title">Meet ChibiPet</string>
+    <string name="auth_subtitle">Your interactive 3D pocket companion that levels up when you complete real-world habits.</string>
+    <string name="auth_feature_vision_title">Snap Proof, Earn XP</string>
+    <string name="auth_feature_vision_sub">Gemini Vision verifies your water bottle, desk, or workout gear.</string>
+    <string name="auth_feature_chat_title">Companion with Memory</string>
+    <string name="auth_feature_chat_sub">Chat anytime—your pet remembers streaks and cheers you on.</string>
+    <string name="auth_feature_studio_title">3D Outfits &amp; Art Studio</string>
+    <string name="auth_feature_studio_sub">Spin, boop, dress up in 3D, and craft custom AI pet stickers.</string>
+    <string name="auth_checking_session">Checking session…</string>
+    <string name="auth_signing_in">Signing in…</string>
+    <string name="auth_sign_in_google">Sign in with Google</string>
+    <string name="auth_customize_tour">Customize Starter Buddy &amp; Interactive Tour</string>
+    <string name="auth_error_missing_client_id">Google Sign-In configuration missing: default_web_client_id not found</string>
+    <string name="auth_error_unexpected_credential">Unexpected credential type returned.</string>
+    <string name="auth_error_generic">Sign-in failed. Please try again.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Step %1$d of %2$d</string>
+    <string name="onboarding_skip">Skip Tour</string>
+    <string name="onboarding_back">Back</string>
+    <string name="onboarding_prev_step_cd">Previous step</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_adopt_start">Adopt %1$s &amp; Start!</string>
+    <string name="onboarding_p1_title">Meet Your 3D Living Buddy</string>
+    <string name="onboarding_p1_sub">Try spinning and booping %1$s right now! Your pet breathes, jumps, and reacts to your daily habits in real-time 3D.</string>
+    <string name="onboarding_p1_stage_hint">Interactive 3D Stage • Drag to rotate • Tap to jump!</string>
+    <string name="onboarding_p1_coat_label">Coat:</string>
+    <string name="onboarding_p2_banner_cd">ChibiPet habit quest meadow</string>
+    <string name="onboarding_p2_badge">Gemini Vision Habit Verification</string>
+    <string name="onboarding_p2_title">Snap Real Proof, Level Up!</string>
+    <string name="onboarding_p2_sub">Turn everyday self-care into an RPG adventure that keeps your pet thriving.</string>
+    <string name="onboarding_p2_step1_title">1. Snap Your Habit Proof</string>
+    <string name="onboarding_p2_step1_sub">Take a photo of your water bottle, study notebook, or running shoes using the live Camera viewfinder or Gallery.</string>
+    <string name="onboarding_p2_step2_title">2. Instant AI Verification &amp; Rewards</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision inspects your photo, cheers you on in character, and awards XP + Star Coins.</string>
+    <string name="onboarding_p2_step3_title">3. Daily All-Quests Sweep Chest</string>
+    <string name="onboarding_p2_step3_sub">Complete every quest on your list in a single day to unlock the Sweep Chest (+30 Bonus XP &amp; +25 Star Coins)!</string>
+    <string name="onboarding_p3_title">Memory Chat, Studio &amp; Smart Free-Tier Guard</string>
+    <string name="onboarding_p3_sub">Engineered so your habit streaks and companion features stay smooth and uninterrupted on Gemini Free Tier.</string>
+    <string name="onboarding_p3_step1_title">Companion Chat &amp; Sticker Studio</string>
+    <string name="onboarding_p3_step1_sub">Your pet remembers past conversations, celebrates your streaks, and crafts custom stickers in the Studio.</string>
+    <string name="onboarding_p3_step2_title">Auto Model Cascade (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">If Gemini Flash hits a busy minute, ChibiPet automatically cascades to ultra-fast Flash-Lite and offers Eco Lite Mode to stretch free quotas 3×.</string>
+    <string name="onboarding_p3_step3_title">Zero-Penalty Streak Protection</string>
+    <string name="onboarding_p3_step3_sub">If cloud AI quota ever rests during a late-night check-in, Honor Pledge Check-In &amp; Streak Freezes ensure you never lose a streak.</string>
+    <string name="onboarding_p3_step4_title">Buddy Codes &amp; Friend Cheers</string>
+    <string name="onboarding_p3_step4_sub">Link with friends via 8-character Buddy Codes to send daily cheers (+5 Mood) and compare top streaks.</string>
+    <string name="onboarding_p4_title">Adopt &amp; Customize Your Starter Kit</string>
+    <string name="onboarding_p4_sub">Name your buddy, pick a coat color, and choose your starter habit quests.</string>
+    <string name="onboarding_p4_name_label">Your ChibiPet\'s Name</string>
+    <string name="onboarding_p4_coat_title">Starter Coat Color</string>
+    <string name="onboarding_p4_quests_title">Select Starter Quests (%1$d selected)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Selected</string>
+    <string name="onboarding_not_selected_cd">Not selected</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Camera permission denied. You can still pick a photo from Gallery or System Camera.</string>
+    <string name="home_load_pet_error">Could not load pet: %1$s</string>
+    <string name="home_cheer_from">Playdate Cheer from %1$s!</string>
+    <string name="home_claim_cheer">Claim +5</string>
+    <string name="home_sweep_chest_cd">Daily Sweep Chest</string>
+    <string name="home_sweep_unlocked_title">Daily Sweep Chest Unlocked!</string>
+    <string name="home_sweep_locked_title">Daily All-Quests Sweep Chest</string>
+    <string name="home_sweep_unlocked_sub">Claimed +30 Bonus XP &amp; +25 Star Coins today!</string>
+    <string name="home_sweep_locked_sub">Complete all %1$d habits today for +30 XP &amp; +25 Coins</string>
+    <string name="home_habits_title">Daily Habit Quests</string>
+    <string name="home_habits_progress">%1$d of %2$d verified with photo proof today</string>
+    <string name="home_add_habit_cd">Add habit</string>
+    <string name="home_new_quest">New Quest</string>
+    <string name="home_filter_all">All (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">No habits yet!</string>
+    <string name="home_empty_habits_sub">Tap New Quest to add a habit like Drink Water or Study, then snap proof to level up your pet.</string>
+    <string name="home_level_badge">Lv.%1$d</string>
+    <string name="home_edit_pet_cd">Customize pet name and color</string>
+    <string name="home_streak_freezes_cd">Streak Freezes</string>
+    <string name="home_give_treat_cd">Give treat</string>
+    <string name="home_treat_button">Treat • 5★</string>
+    <string name="home_star_coins_cd">Star coins</string>
+    <string name="home_stage_hint">Drag to spin 3D • Tap to boop!</string>
+    <string name="home_experience_label">Experience</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Mood</string>
+    <string name="home_stat_energy">Energy</string>
+    <string name="home_stat_verified">Verified</string>
+    <string name="home_streak_cd">Streak</string>
+    <string name="home_streak_days">%1$dd</string>
+    <string name="home_delete_habit_cd">Delete habit</string>
+    <string name="home_last_proof">Last proof: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Coins</string>
+    <string name="home_verified_today">Verified Today</string>
+    <string name="home_verify_proof">Verify Proof</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Verify \"%1$s\"</string>
+    <string name="dialog_verify_body">Show %1$s photo proof (%2$s) so Gemini Vision can verify it!</string>
+    <string name="dialog_verify_camerax">Live CameraX Frame</string>
+    <string name="dialog_verify_gallery">Gallery</string>
+    <string name="dialog_verify_syscam">System Cam</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_close">Close</string>
+    <string name="common_save">Save</string>
+    <string name="common_create">Create</string>
+    <string name="common_delete">Delete</string>
+    <string name="dialog_delete_habit_title">Delete Habit Quest?</string>
+    <string name="dialog_delete_habit_body">Remove \"%1$s\"? Your %2$d-day streak on this quest will be deleted.</string>
+    <string name="dialog_keep_quest">Keep Quest</string>
+    <string name="dialog_proof_analyzing_title">%1$s is inspecting…</string>
+    <string name="dialog_proof_levelup_title">Level Up! Quest Complete!</string>
+    <string name="dialog_proof_verified_title">Quest Verified!</string>
+    <string name="dialog_proof_rejected_title">Hmm, try another angle!</string>
+    <string name="dialog_proof_quota_title">Free-Tier Scanner Resting</string>
+    <string name="dialog_proof_error_title">Verification Error</string>
+    <string name="dialog_proof_submitted_cd">Submitted habit proof</string>
+    <string name="dialog_proof_checking_body">Gemini Vision is checking your photo for \"%1$s\"…</string>
+    <string name="dialog_proof_detected">Detected: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Reward: +%1$d XP • +%2$d Star Coins (Daily Sweep Chest Unlocked!)</string>
+    <string name="dialog_proof_reward_normal">Reward: +%1$d XP • +%2$d Star Coins</string>
+    <string name="dialog_proof_saw">Saw: %1$s</string>
+    <string name="dialog_proof_protection_title">Streak Protection Options</string>
+    <string name="dialog_proof_protection_body">Never lose a daily streak when cloud AI quota is busy! Retry with ultra-light Gemini Flash-Lite or log an Honor Pledge check-in.</string>
+    <string name="dialog_proof_retry_lite">Retry Lite</string>
+    <string name="dialog_proof_honor_checkin">Honor Check-In</string>
+    <string name="dialog_proof_yay">Yay!</string>
+    <string name="dialog_add_habit_title">Create Habit Quest</string>
+    <string name="dialog_add_habit_name_label">Habit name</string>
+    <string name="dialog_add_habit_name_hint">e.g., Read 20 pages, Hydrate</string>
+    <string name="dialog_add_habit_category_label">Category</string>
+    <string name="dialog_add_habit_effort_label">Effort &amp; Reward</string>
+    <string name="effort_quick">Quick</string>
+    <string name="effort_daily">Daily</string>
+    <string name="effort_deep">Deep</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Customize Buddy</string>
+    <string name="dialog_edit_pet_name_label">Pet Name</string>
+    <string name="dialog_edit_pet_coat_label">Coat Color</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Camera preview unavailable on this device. Try Gallery or System Camera.</string>
+    <string name="camerax_close_cd">Close camera</string>
+    <string name="camerax_flash_cd">Toggle flash</string>
+    <string name="camerax_switch_cd">Switch camera</string>
+    <string name="camerax_looking_for">%1$s is looking for: %2$s</string>
+    <string name="camerax_center_hint">Center your proof inside the frame</string>
+    <string name="camerax_read_error">Could not read captured photo.</string>
+    <string name="camerax_capture_failed">Capture failed.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Chat with %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Lv.%1$d • Mood %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Loading buddy…</string>
+    <string name="chat_eco_on">Eco ON</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">Clear chat history</string>
+    <string name="chat_dismiss_error_cd">Dismiss error</string>
+    <string name="chat_quick_reflex">Quick Pet Reflex (0 Quota)</string>
+    <string name="chat_empty_greeting">Say hi to %1$s! They remember your past conversations and celebrate your verified habits.</string>
+    <string name="chat_prompt_1">How am I doing today?</string>
+    <string name="chat_prompt_2">Give me a boost!</string>
+    <string name="chat_prompt_3">Which habit should I do next?</string>
+    <string name="chat_input_placeholder">Message %1$s…</string>
+    <string name="chat_send_cd">Send message</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Pet Playdates</string>
+    <string name="friends_subtitle">Share streaks, visit friends\' 3D rooms, and send cheers</string>
+    <string name="friends_refresh_cd">Refresh friends</string>
+    <string name="friends_your_code">Your Buddy Code</string>
+    <string name="friends_copied_code">Copied Buddy Code %1$s</string>
+    <string name="friends_copy_code_cd">Copy Buddy Code</string>
+    <string name="friends_share_text">Add my ChibiPet %1$s for habit playdates! Buddy Code: %2$s</string>
+    <string name="friends_share_chooser">Share Buddy Code</string>
+    <string name="friends_share_code_cd">Share Buddy Code</string>
+    <string name="friends_add_title">Add Accountability Buddy</string>
+    <string name="friends_code_label">Friend\'s Buddy Code</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Add</string>
+    <string name="friends_empty_title">No Playdate Buddies Yet</string>
+    <string name="friends_empty_sub">Share your Buddy Code above or enter a friend\'s code to visit their 3D pet and cheer their streaks.</string>
+    <string name="friends_default_cheer_msg">%1$s sent a cheering boop for your habit streak!</string>
+    <string name="friends_visit_cheer_msg">%1$s hopped over to say keep going!</string>
+    <string name="friends_top_streak_cd">Top streak</string>
+    <string name="friends_best_streak">%1$dd best</string>
+    <string name="friends_remove_cd">Remove friend</string>
+    <string name="friends_visit_3d">Visit 3D</string>
+    <string name="friends_send_cheer">Send Cheer</string>
+    <string name="friends_room_title">%1$s\'s Room (Lv.%2$d)</string>
+    <string name="friends_room_sub">Best streak: %1$d days • Tap %2$s to boop!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Sitting at a sunny study desk with glowing stars</string>
+    <string name="studio_notif_perm_denied">Notification permission denied — enable it in system settings for pet reminders.</string>
+    <string name="studio_header_title">Shop, Wardrobe &amp; Studio</string>
+    <string name="studio_header_sub">Spend Star Coins on 3D outfits, streak protection, and AI art</string>
+    <string name="studio_coins_cd">Coins</string>
+    <string name="studio_live_preview_badge">Live 3D Preview • %1$s</string>
+    <string name="studio_powerup_shop_title">Power-Up Coin Shop</string>
+    <string name="studio_freeze_held">Held: %1$d/10</string>
+    <string name="studio_outfits_title">3D Outfits</string>
+    <string name="studio_outfit_equipped">Equipped</string>
+    <string name="studio_outfit_equip">Equip</string>
+    <string name="studio_art_header_title">AI Sticker &amp; Poster Studio</string>
+    <string name="studio_art_header_sub">Create or remix custom ChibiPet artwork powered by Gemini Nano Banana</string>
+    <string name="studio_preset_1">Cozy café study sticker with matcha latte</string>
+    <string name="studio_preset_1_short">Cozy café study sticker</string>
+    <string name="studio_preset_2">Cyberpunk neon gaming room poster</string>
+    <string name="studio_preset_2_short">Cyberpunk neon gaming room</string>
+    <string name="studio_preset_3">Watercolor spring picnic portrait</string>
+    <string name="studio_preset_3_short">Watercolor spring picnic</string>
+    <string name="studio_prompt_label">Outfit or scene idea</string>
+    <string name="studio_remix_photo">Remix Photo</string>
+    <string name="studio_photo_ready">Photo Ready</string>
+    <string name="studio_clear_photo_cd">Clear reference photo</string>
+    <string name="studio_generate_button">Generate</string>
+    <string name="studio_crafting_status">Crafting artwork (30–60s)…</string>
+    <string name="studio_generated_cd">Generated ChibiPet artwork</string>
+    <string name="studio_saved_vault_note">Saved automatically to My Sticker Vault below!</string>
+    <string name="studio_clear_preview">Clear Preview</string>
+    <string name="studio_craft_offline_emblem">Craft Chibi Emblem Sticker (0 Cloud Quota)</string>
+    <string name="studio_instant_emblem_button">Instant Collector Emblem Card (0 Quota)</string>
+    <string name="studio_vault_title">My Sticker Vault (%1$d)</string>
+    <string name="studio_quota_card_title">AI Free-Tier Quota &amp; Eco Guard</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite ON • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Auto-cascades on 429 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Soft daily limit reached — auto-routed to Lite mode &amp; zero-quota fallbacks active (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">80%%+ daily AI budget used — Eco Lite mode recommended to stretch remaining calls 3×!</string>
+    <string name="studio_quota_pill_vision">Vision</string>
+    <string name="studio_quota_pill_chat">Chat</string>
+    <string name="studio_quota_pill_studio">Studio</string>
+    <string name="studio_quota_reset_countdown">Resets in %1$dh %2$dm</string>
+    <string name="studio_quota_value_receipt">Today\'s AI Value Receipt: %1$d habit proof(s) verified • %2$d companion chat(s) • %3$d studio creation(s)</string>
+    <string name="studio_quota_failover_saves">Auto-failover saves: %1$d</string>
+    <string name="studio_quota_need_boost">Need a mid-task boost?</string>
+    <string name="studio_quota_grace_claimed">Grace Claimed Today</string>
+    <string name="studio_quota_claim_grace">+3 Free Grace Credits</string>
+    <string name="studio_reminders_title">Daily Pet Reminders</string>
+    <string name="studio_reminders_active_sub">Active daily at %1$s</string>
+    <string name="studio_reminders_inactive_sub">Get a friendly check-in when habits remain</string>
+    <string name="studio_send_test_notif">Send Test Notification</string>
+    <string name="studio_signed_in_account">Signed in account</string>
+    <string name="studio_google_account_fallback">Google Account</string>
+    <string name="studio_sign_out">Sign Out</string>
+    <string name="studio_replay_onboarding">Replay Interactive Onboarding &amp; Starter Kit</string>
+    <string name="studio_app_language_title">App Language</string>
+    <string name="studio_app_language_system">System Default</string>
+    <string name="studio_saved_sticker_title">Saved Sticker</string>
+    <string name="studio_share_sticker_chooser">Share ChibiPet Sticker</string>
+    <string name="studio_share_button">Share</string>
+    <string name="studio_loaded_remix_msg">Loaded sticker as Remix Photo!</string>
+    <string name="studio_remix_button">Remix</string>
+    <string name="studio_delete_sticker_cd">Delete sticker</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">ChibiPet Habit Reminders</string>
+    <string name="notif_channel_desc">Daily encouraging habit reminders from your ChibiPet</string>
+    <string name="notif_title">%1$s • Habit Check-In</string>
+    <string name="notif_body_pending">%1$s is cheering for you! %2$d habit quest(s) left to verify today.</string>
+    <string name="notif_body_all_done">%1$s says hi! Tap to pet your 3D buddy and keep your streak glowing.</string>
+    <string name="widget_pet_level">%1$s • Lv.%2$d</string>
+    <string name="widget_mood_streak">Mood %1$d%% • Streak %2$dd</string>
+    <string name="widget_habits_today">%1$d / %2$d habits today</string>
+    <string name="widget_tap_open">Tap to open ChibiPet</string>
+    <string name="widget_snap_button">Snap</string>
+    <string name="widget_fallback_text">ChibiPet Widget — Tap to open</string>
+
+    <!-- AI Smart Quest Coach & Chibi Voice TTS -->
+    <string name="coach_section_title">AI Smart Quest Coach</string>
+    <string name="coach_goal_hint">Your goal (e.g., Sleep better, Study focus)</string>
+    <string name="coach_goal_preset_energy">Morning Energy</string>
+    <string name="coach_goal_preset_study">Study Focus</string>
+    <string name="coach_goal_preset_calm">Evening Calm</string>
+    <string name="coach_ask_ai_button">Ask AI Coach</string>
+    <string name="coach_local_plan_button">Instant Local Plan (0 Quota)</string>
+    <string name="coach_add_all_button">Add All 3 Quests</string>
+    <string name="coach_use_quest">Use</string>
+    <string name="chat_voice_on">Voice ON</string>
+    <string name="chat_voice_off">Voice</string>
+    <string name="chat_speak_cd">Read reply aloud</string>
+</resources>

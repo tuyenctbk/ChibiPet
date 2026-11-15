@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Crown -->
+    <path
+        android:fillColor="#F5A623"
+        android:pathData="M43,31 L46,23 L51,27 L54,21 L57,27 L62,23 L65,31 Z" />
+    <!-- Left & Right Ears -->
+    <path
+        android:fillColor="#6CD4B5"
+        android:pathData="M34,48 L30,28 L47,38 Z" />
+    <path
+        android:fillColor="#6CD4B5"
+        android:pathData="M74,48 L78,28 L61,38 Z" />
+    <!-- Inner Ears -->
+    <path
+        android:fillColor="#FFF8EE"
+        android:pathData="M35,44 L33,33 L43,39 Z" />
+    <path
+        android:fillColor="#FFF8EE"
+        android:pathData="M73,44 L75,33 L65,39 Z" />
+    <!-- Chibi Head -->
+    <path
+        android:fillColor="#8BE2C8"
+        android:pathData="M54,34 C72,34 81,45 81,58 C81,72 69,80 54,80 C39,80 27,72 27,58 C27,45 36,34 54,34 Z" />
+    <!-- Cream Muzzle -->
+    <path
+        android:fillColor="#FFF8EE"
+        android:pathData="M54,55 C66,55 74,60 74,68 C74,75 65,79 54,79 C43,79 34,75 34,68 C34,60 42,55 54,55 Z" />
+    <!-- Rosy Cheeks -->
+    <path
+        android:fillColor="#FF9EB5"
+        android:pathData="M38,63 A4.5,3 0 1,0 47,63 A4.5,3 0 1,0 38,63 Z" />
+    <path
+        android:fillColor="#FF9EB5"
+        android:pathData="M61,63 A4.5,3 0 1,0 70,63 A4.5,3 0 1,0 61,63 Z" />
+    <!-- Sparkling Eyes -->
+    <path
+        android:fillColor="#242130"
+        android:pathData="M41,56 A3.5,4 0 1,0 48,56 A3.5,4 0 1,0 41,56 Z" />
+    <path
+        android:fillColor="#242130"
+        android:pathData="M60,56 A3.5,4 0 1,0 67,56 A3.5,4 0 1,0 60,56 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M43,54.5 A1.2,1.2 0 1,0 45.4,54.5 A1.2,1.2 0 1,0 43,54.5 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M62,54.5 A1.2,1.2 0 1,0 64.4,54.5 A1.2,1.2 0 1,0 62,54.5 Z" />
+    <!-- Nose & Smile -->
+    <path
+        android:fillColor="#242130"
+        android:pathData="M52.2,61.5 L55.8,61.5 L54,63.8 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#242130"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M49,66 Q51.5,68.5 54,65.5 Q56.5,68.5 59,66" />
+</vector>

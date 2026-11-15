@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Theo dõi tâm trạng ChibiPet 3D, chuỗi ngày liên tiếp và thói quen hàng ngày ngay trên màn hình chính.</string>
+    <string name="splash_mascot_cd">Linh vật ChibiPet</string>
+    <string name="splash_subtitle">Thú Cưng Bỏ Túi 3D &amp; Nhiệm Vụ Thói Quen</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Thú cưng</string>
+    <string name="tab_chat">Trò chuyện</string>
+    <string name="tab_friends">Bạn bè</string>
+    <string name="tab_shop">Cửa hàng</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Bạc Hà Mây</string>
+    <string name="color_peach_label">Mochi Đào</string>
+    <string name="color_lavender_label">Tử Đinh Hương Sao</string>
+    <string name="color_lemon_label">Thanh Yên Mật Ong</string>
+    <string name="color_berry_label">Quả Mọng Trời Xanh</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Cổ Điển Ấm Áp</string>
+    <string name="outfit_none_desc">Vẻ đáng yêu bông xù tự nhiên</string>
+    <string name="outfit_bow_label">Nơ Dâu Tây</string>
+    <string name="outfit_bow_desc">Chiếc nơ ruy băng xinh xắn trên đầu</string>
+    <string name="outfit_crown_label">Vương Miện Hoàng Gia</string>
+    <string name="outfit_crown_desc">Vương miện vàng cho bậc thầy thói quen</string>
+    <string name="outfit_headphones_label">Tai Nghe Lo-Fi</string>
+    <string name="outfit_headphones_desc">Tai nghe phòng thu màu pastel</string>
+    <string name="outfit_wizard_label">Mũ Phù Thủy Sao</string>
+    <string name="outfit_wizard_desc">Mũ phép thuật giúp tăng cường tập trung</string>
+    <string name="outfit_shades_label">Kính Râm Cực Ngầu</string>
+    <string name="outfit_shades_desc">Kính mát gọng neon sành điệu</string>
+    <string name="outfit_cape_label">Áo Choàng Anh Hùng</string>
+    <string name="outfit_cape_desc">Áo choàng chiến thắng đỏ thẫm tung bay</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Đóng Băng Chuỗi</string>
+    <string name="consumable_freeze_desc">Tự động bảo vệ một ngày bỏ lỡ để chuỗi thói quen không bị đứt</string>
+    <string name="consumable_elixir_label">Tinh Dược Tâm Trạng Vàng</string>
+    <string name="consumable_elixir_desc">Khôi phục ngay Tâm trạng &amp; Năng lượng lên 100% cùng điệu nhảy lấp lánh</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Uống Nước</string>
+    <string name="cat_hydration_hint">Bình nước, ly hoặc cốc</string>
+    <string name="cat_study_label">Học Tập &amp; Tập Trung</string>
+    <string name="cat_study_hint">Sách, sổ tay hoặc bàn học</string>
+    <string name="cat_fitness_label">Thể Dục</string>
+    <string name="cat_fitness_hint">Giày thể thao, thảm yoga hoặc dụng cụ tập</string>
+    <string name="cat_mindfulness_label">Chánh Niệm</string>
+    <string name="cat_mindfulness_hint">Nhật ký, tách trà hoặc góc yên tĩnh</string>
+    <string name="cat_creative_label">Sáng Tạo</string>
+    <string name="cat_creative_hint">Sổ vẽ, nhạc cụ hoặc đồ thủ công</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Uống nước (500ml)</string>
+    <string name="starter_quest_study">Phiên học tập trung</string>
+    <string name="starter_quest_fitness">Vận động &amp; Giãn cơ</string>
+    <string name="starter_quest_mindful">5 phút hít thở chánh niệm</string>
+    <string name="starter_quest_creative">Vẽ hoặc viết nhật ký 1 trang</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">Mô hình bàn học nổi ấm cúng của ChibiPet</string>
+    <string name="auth_ready_to_adopt">Sẵn sàng nhận nuôi %1$s</string>
+    <string name="auth_title">Gặp gỡ ChibiPet</string>
+    <string name="auth_subtitle">Người bạn 3D bỏ túi tương tác sẽ lên cấp khi bạn hoàn thành các thói quen ngoài đời thực.</string>
+    <string name="auth_feature_vision_title">Chụp Minh Chứng, Nhận XP</string>
+    <string name="auth_feature_vision_sub">Gemini Vision xác minh bình nước, bàn học hoặc dụng cụ tập luyện của bạn.</string>
+    <string name="auth_feature_chat_title">Bạn Đồng Hành Có Trí Nhớ</string>
+    <string name="auth_feature_chat_sub">Trò chuyện bất cứ lúc nào—thú cưng nhớ chuỗi ngày của bạn và cổ vũ bạn.</string>
+    <string name="auth_feature_studio_title">Trang Phục 3D &amp; Xưởng Nghệ Thuật</string>
+    <string name="auth_feature_studio_sub">Xoay, chạm, diện đồ 3D và tạo nhãn dán AI độc đáo.</string>
+    <string name="auth_checking_session">Đang kiểm tra phiên đăng nhập…</string>
+    <string name="auth_signing_in">Đang đăng nhập…</string>
+    <string name="auth_sign_in_google">Đăng nhập bằng Google</string>
+    <string name="auth_customize_tour">Tùy Chỉnh Thú Cưng Đầu Tiên &amp; Xem Hướng Dẫn</string>
+    <string name="auth_error_missing_client_id">Thiếu cấu hình Google Sign-In: không tìm thấy default_web_client_id</string>
+    <string name="auth_error_unexpected_credential">Loại thông tin xác thực trả về không hợp lệ.</string>
+    <string name="auth_error_generic">Đăng nhập thất bại. Vui lòng thử lại.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Bước %1$d / %2$d</string>
+    <string name="onboarding_skip">Bỏ qua</string>
+    <string name="onboarding_back">Quay lại</string>
+    <string name="onboarding_prev_step_cd">Bước trước</string>
+    <string name="onboarding_next">Tiếp theo</string>
+    <string name="onboarding_adopt_start">Nhận nuôi %1$s &amp; Bắt đầu!</string>
+    <string name="onboarding_p1_title">Gặp Gỡ Người Bạn 3D Sống Động</string>
+    <string name="onboarding_p1_sub">Hãy thử xoay và chạm vào %1$s ngay bây giờ! Thú cưng thở, nhảy và phản ứng với thói quen của bạn trong không gian 3D thời gian thực.</string>
+    <string name="onboarding_p1_stage_hint">Sân khấu 3D tương tác • Kéo để xoay • Chạm để nhảy!</string>
+    <string name="onboarding_p1_coat_label">Màu lông:</string>
+    <string name="onboarding_p2_banner_cd">Đồng cỏ nhiệm vụ thói quen ChibiPet</string>
+    <string name="onboarding_p2_badge">Xác Minh Thói Quen Bằng Gemini Vision</string>
+    <string name="onboarding_p2_title">Chụp Minh Chứng Thật, Lên Cấp Ngay!</string>
+    <string name="onboarding_p2_sub">Biến việc chăm sóc bản thân mỗi ngày thành cuộc phiêu lưu RPG giúp thú cưng phát triển.</string>
+    <string name="onboarding_p2_step1_title">1. Chụp Ảnh Minh Chứng Thói Quen</string>
+    <string name="onboarding_p2_step1_sub">Chụp ảnh bình nước, sổ ghi chép hoặc giày chạy bộ bằng Camera trực tiếp hoặc Thư viện ảnh.</string>
+    <string name="onboarding_p2_step2_title">2. AI Xác Minh Tức Thì &amp; Trao Thưởng</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision kiểm tra ảnh, cổ vũ bạn và thưởng XP + Xu Ngôi Sao.</string>
+    <string name="onboarding_p2_step3_title">3. Rương Quét Sạch Nhiệm Vụ Hàng Ngày</string>
+    <string name="onboarding_p2_step3_sub">Hoàn thành mọi nhiệm vụ trong danh sách trong ngày để mở Rương Thưởng (+30 XP &amp; +25 Xu Ngôi Sao)!</string>
+    <string name="onboarding_p3_title">Trò Chuyện Có Trí Nhớ, Studio &amp; Bảo Vệ Hạn Mức Miễn Phí</string>
+    <string name="onboarding_p3_sub">Được thiết kế để chuỗi thói quen và tính năng đồng hành luôn mượt mà trên gói miễn phí Gemini.</string>
+    <string name="onboarding_p3_step1_title">Trò Chuyện &amp; Xưởng Nhãn Dán</string>
+    <string name="onboarding_p3_step1_sub">Thú cưng ghi nhớ cuộc trò chuyện trước, ăn mừng chuỗi ngày và tạo nhãn dán riêng trong Studio.</string>
+    <string name="onboarding_p3_step2_title">Tự Động Chuyển Đổi Mô Hình (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">Nếu Gemini Flash bận, ChibiPet tự động chuyển sang Flash-Lite siêu tốc và cung cấp Chế Độ Eco Lite giúp tăng gấp 3 lần hạn mức.</string>
+    <string name="onboarding_p3_step3_title">Bảo Vệ Chuỗi Không Phạt</string>
+    <string name="onboarding_p3_step3_sub">Nếu hạn mức AI đám mây tạm nghỉ vào đêm muộn, Điểm Danh Danh Dự &amp; Đóng Băng Chuỗi đảm bảo bạn không bao giờ mất chuỗi.</string>
+    <string name="onboarding_p3_step4_title">Mã Kết Bạn &amp; Lời Cổ Vũ</string>
+    <string name="onboarding_p3_step4_sub">Kết nối bạn bè qua Mã Bạn Bè 8 ký tự để gửi lời cổ vũ hàng ngày (+5 Tâm trạng) và so sánh kỷ lục chuỗi.</string>
+    <string name="onboarding_p4_title">Nhận Nuôi &amp; Tùy Chỉnh Bộ Khởi Đầu</string>
+    <string name="onboarding_p4_sub">Đặt tên cho thú cưng, chọn màu lông và chọn các nhiệm vụ thói quen khởi đầu.</string>
+    <string name="onboarding_p4_name_label">Tên ChibiPet Của Bạn</string>
+    <string name="onboarding_p4_coat_title">Màu Lông Khởi Đầu</string>
+    <string name="onboarding_p4_quests_title">Chọn Nhiệm Vụ Khởi Đầu (Đã chọn %1$d)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Đã chọn</string>
+    <string name="onboarding_not_selected_cd">Chưa chọn</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Quyền máy ảnh bị từ chối. Bạn vẫn có thể chọn ảnh từ Thư viện hoặc Máy ảnh hệ thống.</string>
+    <string name="home_load_pet_error">Không thể tải thú cưng: %1$s</string>
+    <string name="home_cheer_from">Lời cổ vũ từ %1$s!</string>
+    <string name="home_claim_cheer">Nhận +5</string>
+    <string name="home_sweep_chest_cd">Rương Thưởng Hàng Ngày</string>
+    <string name="home_sweep_unlocked_title">Đã Mở Rương Thưởng Hàng Ngày!</string>
+    <string name="home_sweep_locked_title">Rương Quét Sạch Nhiệm Vụ Hàng Ngày</string>
+    <string name="home_sweep_unlocked_sub">Đã nhận +30 XP thưởng &amp; +25 Xu Ngôi Sao hôm nay!</string>
+    <string name="home_sweep_locked_sub">Hoàn thành tất cả %1$d thói quen hôm nay để nhận +30 XP &amp; +25 Xu</string>
+    <string name="home_habits_title">Nhiệm Vụ Thói Quen Hàng Ngày</string>
+    <string name="home_habits_progress">Đã xác minh bằng ảnh %1$d / %2$d thói quen hôm nay</string>
+    <string name="home_add_habit_cd">Thêm thói quen</string>
+    <string name="home_new_quest">Nhiệm Vụ Mới</string>
+    <string name="home_filter_all">Tất cả (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Chưa có thói quen nào!</string>
+    <string name="home_empty_habits_sub">Nhấn Nhiệm Vụ Mới để thêm thói quen như Uống nước hoặc Học bài, sau đó chụp ảnh minh chứng để tăng cấp thú cưng.</string>
+    <string name="home_level_badge">Cấp %1$d</string>
+    <string name="home_edit_pet_cd">Tùy chỉnh tên và màu thú cưng</string>
+    <string name="home_streak_freezes_cd">Đóng Băng Chuỗi</string>
+    <string name="home_give_treat_cd">Cho bánh thưởng</string>
+    <string name="home_treat_button">Bánh • 5★</string>
+    <string name="home_star_coins_cd">Xu ngôi sao</string>
+    <string name="home_stage_hint">Kéo để xoay 3D • Chạm để nựng!</string>
+    <string name="home_experience_label">Kinh nghiệm</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Tâm trạng</string>
+    <string name="home_stat_energy">Năng lượng</string>
+    <string name="home_stat_verified">Đã xác minh</string>
+    <string name="home_streak_cd">Chuỗi</string>
+    <string name="home_streak_days">%1$d ngày</string>
+    <string name="home_delete_habit_cd">Xóa thói quen</string>
+    <string name="home_last_proof">Minh chứng gần nhất: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d Xu</string>
+    <string name="home_verified_today">Đã Xác Minh Hôm Nay</string>
+    <string name="home_verify_proof">Xác Minh Ảnh</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Xác minh \"%1$s\"</string>
+    <string name="dialog_verify_body">Cho %1$s xem ảnh minh chứng (%2$s) để Gemini Vision kiểm tra nhé!</string>
+    <string name="dialog_verify_camerax">Khung CameraX Trực Tiếp</string>
+    <string name="dialog_verify_gallery">Thư Viện</string>
+    <string name="dialog_verify_syscam">Camera Hệ Thống</string>
+    <string name="common_cancel">Hủy</string>
+    <string name="common_close">Đóng</string>
+    <string name="common_save">Lưu</string>
+    <string name="common_create">Tạo</string>
+    <string name="common_delete">Xóa</string>
+    <string name="dialog_delete_habit_title">Xóa Nhiệm Vụ Thói Quen?</string>
+    <string name="dialog_delete_habit_body">Xóa \"%1$s\"? Chuỗi %2$d ngày của bạn trong nhiệm vụ này sẽ bị mất.</string>
+    <string name="dialog_keep_quest">Giữ Nhiệm Vụ</string>
+    <string name="dialog_proof_analyzing_title">%1$s đang kiểm tra…</string>
+    <string name="dialog_proof_levelup_title">Lên Cấp! Hoàn Thành Nhiệm Vụ!</string>
+    <string name="dialog_proof_verified_title">Đã Xác Minh Nhiệm Vụ!</string>
+    <string name="dialog_proof_rejected_title">Hmm, thử góc chụp khác xem!</string>
+    <string name="dialog_proof_quota_title">Máy Quét Miễn Phí Đang Nghỉ</string>
+    <string name="dialog_proof_error_title">Lỗi Xác Minh</string>
+    <string name="dialog_proof_submitted_cd">Ảnh minh chứng đã gửi</string>
+    <string name="dialog_proof_checking_body">Gemini Vision đang kiểm tra ảnh của bạn cho \"%1$s\"…</string>
+    <string name="dialog_proof_detected">Phát hiện: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Phần thưởng: +%1$d XP • +%2$d Xu Ngôi Sao (Đã Mở Rương Thưởng Hàng Ngày!)</string>
+    <string name="dialog_proof_reward_normal">Phần thưởng: +%1$d XP • +%2$d Xu Ngôi Sao</string>
+    <string name="dialog_proof_saw">Nhìn thấy: %1$s</string>
+    <string name="dialog_proof_protection_title">Tùy Chọn Bảo Vệ Chuỗi</string>
+    <string name="dialog_proof_protection_body">Không bao giờ mất chuỗi khi hạn mức AI đám mây bận! Thử lại bằng Gemini Flash-Lite siêu nhẹ hoặc Điểm danh Danh dự.</string>
+    <string name="dialog_proof_retry_lite">Thử Lại Lite</string>
+    <string name="dialog_proof_honor_checkin">Điểm Danh Danh Dự</string>
+    <string name="dialog_proof_yay">Tuyệt vời!</string>
+    <string name="dialog_add_habit_title">Tạo Nhiệm Vụ Thói Quen</string>
+    <string name="dialog_add_habit_name_label">Tên thói quen</string>
+    <string name="dialog_add_habit_name_hint">VD: Đọc 20 trang sách, Uống nước</string>
+    <string name="dialog_add_habit_category_label">Danh mục</string>
+    <string name="dialog_add_habit_effort_label">Mức độ &amp; Phần thưởng</string>
+    <string name="effort_quick">Nhanh</string>
+    <string name="effort_daily">Hàng ngày</string>
+    <string name="effort_deep">Chuyên sâu</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Tùy Chỉnh Thú Cưng</string>
+    <string name="dialog_edit_pet_name_label">Tên Thú Cưng</string>
+    <string name="dialog_edit_pet_coat_label">Màu Lông</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Xem trước camera không khả dụng trên thiết bị này. Hãy thử Thư viện hoặc Camera hệ thống.</string>
+    <string name="camerax_close_cd">Đóng camera</string>
+    <string name="camerax_flash_cd">Bật/tắt đèn flash</string>
+    <string name="camerax_switch_cd">Đổi camera</string>
+    <string name="camerax_looking_for">%1$s đang tìm: %2$s</string>
+    <string name="camerax_center_hint">Căn giữa vật minh chứng vào trong khung</string>
+    <string name="camerax_read_error">Không thể đọc ảnh đã chụp.</string>
+    <string name="camerax_capture_failed">Chụp ảnh thất bại.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Trò chuyện với %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Eco</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Cấp %1$d • Tâm trạng %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Đang tải thú cưng…</string>
+    <string name="chat_eco_on">Eco BẬT</string>
+    <string name="chat_eco_off">Eco</string>
+    <string name="chat_clear_cd">Xóa lịch sử trò chuyện</string>
+    <string name="chat_dismiss_error_cd">Đóng thông báo lỗi</string>
+    <string name="chat_quick_reflex">Phản Xạ Thú Cưng Nhanh (0 Hạn Mức)</string>
+    <string name="chat_empty_greeting">Hãy chào %1$s nhé! Bé nhớ các cuộc trò chuyện trước và chúc mừng những thói quen bạn đã hoàn thành.</string>
+    <string name="chat_prompt_1">Hôm nay mình làm tốt chứ?</string>
+    <string name="chat_prompt_2">Tiếp thêm động lực cho mình đi!</string>
+    <string name="chat_prompt_3">Mình nên làm thói quen nào tiếp theo?</string>
+    <string name="chat_input_placeholder">Nhắn tin cho %1$s…</string>
+    <string name="chat_send_cd">Gửi tin nhắn</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Giao Lưu Thú Cưng</string>
+    <string name="friends_subtitle">Chia sẻ chuỗi ngày, thăm phòng 3D của bạn bè và gửi lời cổ vũ</string>
+    <string name="friends_refresh_cd">Làm mới danh sách bạn bè</string>
+    <string name="friends_your_code">Mã Bạn Bè Của Bạn</string>
+    <string name="friends_copied_code">Đã sao chép Mã Bạn Bè %1$s</string>
+    <string name="friends_copy_code_cd">Sao chép Mã Bạn Bè</string>
+    <string name="friends_share_text">Kết bạn với ChibiPet %1$s của mình để cùng rèn thói quen nhé! Mã Bạn Bè: %2$s</string>
+    <string name="friends_share_chooser">Chia Sẻ Mã Bạn Bè</string>
+    <string name="friends_share_code_cd">Chia sẻ Mã Bạn Bè</string>
+    <string name="friends_add_title">Thêm Bạn Đồng Hành</string>
+    <string name="friends_code_label">Mã Bạn Bè của người bạn</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Thêm</string>
+    <string name="friends_empty_title">Chưa Có Bạn Giao Lưu</string>
+    <string name="friends_empty_sub">Chia sẻ Mã Bạn Bè ở trên hoặc nhập mã của bạn bè để thăm thú cưng 3D và cổ vũ chuỗi ngày của họ.</string>
+    <string name="friends_default_cheer_msg">%1$s đã gửi một cái chạm cổ vũ cho chuỗi thói quen của bạn!</string>
+    <string name="friends_visit_cheer_msg">%1$s ghé thăm và nhắn bạn hãy tiếp tục cố gắng nhé!</string>
+    <string name="friends_top_streak_cd">Chuỗi cao nhất</string>
+    <string name="friends_best_streak">Kỷ lục %1$d ngày</string>
+    <string name="friends_remove_cd">Xóa bạn</string>
+    <string name="friends_visit_3d">Thăm 3D</string>
+    <string name="friends_send_cheer">Cổ Vũ</string>
+    <string name="friends_room_title">Phòng của %1$s (Cấp %2$d)</string>
+    <string name="friends_room_sub">Chuỗi tốt nhất: %1$d ngày • Chạm vào %2$s để nựng!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Ngồi bên bàn học đầy nắng với những ngôi sao lấp lánh</string>
+    <string name="studio_notif_perm_denied">Quyền thông báo bị từ chối — hãy bật trong cài đặt hệ thống để nhận lời nhắc.</string>
+    <string name="studio_header_title">Cửa Hàng, Tủ Đồ &amp; Studio</string>
+    <string name="studio_header_sub">Dùng Xu Ngôi Sao mua trang phục 3D, bảo vệ chuỗi và tạo tranh AI</string>
+    <string name="studio_coins_cd">Xu</string>
+    <string name="studio_live_preview_badge">Xem Trước 3D Trực Tiếp • %1$s</string>
+    <string name="studio_powerup_shop_title">Cửa Hàng Vật Phẩm Bổ Trợ</string>
+    <string name="studio_freeze_held">Đang có: %1$d/10</string>
+    <string name="studio_outfits_title">Trang Phục 3D</string>
+    <string name="studio_outfit_equipped">Đang Mặc</string>
+    <string name="studio_outfit_equip">Mặc</string>
+    <string name="studio_art_header_title">Studio Nhãn Dán &amp; Áp Phích AI</string>
+    <string name="studio_art_header_sub">Tạo hoặc phối lại tranh ChibiPet độc quyền với Gemini Nano Banana</string>
+    <string name="studio_preset_1">Nhãn dán học bài ở quán cà phê ấm cúng cùng matcha latte</string>
+    <string name="studio_preset_1_short">Quán cà phê học bài ấm cúng</string>
+    <string name="studio_preset_2">Áp phích phòng chơi game neon cyberpunk</string>
+    <string name="studio_preset_2_short">Phòng game neon cyberpunk</string>
+    <string name="studio_preset_3">Tranh màu nước dã ngoại mùa xuân</string>
+    <string name="studio_preset_3_short">Dã ngoại mùa xuân màu nước</string>
+    <string name="studio_prompt_label">Ý tưởng trang phục hoặc bối cảnh</string>
+    <string name="studio_remix_photo">Ảnh Phối Lại</string>
+    <string name="studio_photo_ready">Đã Có Ảnh</string>
+    <string name="studio_clear_photo_cd">Xóa ảnh tham chiếu</string>
+    <string name="studio_generate_button">Tạo Tranh</string>
+    <string name="studio_crafting_status">Đang vẽ tác phẩm (30–60 giây)…</string>
+    <string name="studio_generated_cd">Tranh ChibiPet đã tạo</string>
+    <string name="studio_saved_vault_note">Đã tự động lưu vào Kho Nhãn Dán Của Tôi bên dưới!</string>
+    <string name="studio_clear_preview">Xóa Xem Trước</string>
+    <string name="studio_craft_offline_emblem">Tạo Huy Hiệu Chibi (0 Hạn Mức Đám Mây)</string>
+    <string name="studio_instant_emblem_button">Thẻ Huy Hiệu Sưu Tập Tức Thì (0 Hạn Mức)</string>
+    <string name="studio_vault_title">Kho Nhãn Dán Của Tôi (%1$d)</string>
+    <string name="studio_quota_card_title">Hạn Mức AI Miễn Phí &amp; Lá Chắn Eco</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite BẬT • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Tự chuyển đổi khi quá tải • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Đã chạm giới hạn mềm trong ngày — tự động chuyển sang chế độ Lite &amp; tính năng 0 hạn mức (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">Đã dùng hơn 80%% hạn mức AI hôm nay — khuyên dùng chế độ Eco Lite để kéo dài lượt dùng gấp 3 lần!</string>
+    <string name="studio_quota_pill_vision">Thị giác</string>
+    <string name="studio_quota_pill_chat">Trò chuyện</string>
+    <string name="studio_quota_pill_studio">Studio</string>
+    <string name="studio_quota_reset_countdown">Làm mới sau %1$dg %2$dp</string>
+    <string name="studio_quota_value_receipt">Giá trị AI hôm nay: %1$d ảnh xác minh • %2$d lượt trò chuyện • %3$d tác phẩm studio</string>
+    <string name="studio_quota_failover_saves">Số lần tự động chuyển đổi cứu nguy: %1$d</string>
+    <string name="studio_quota_need_boost">Cần thêm lượt dùng ngay?</string>
+    <string name="studio_quota_grace_claimed">Đã Nhận Trợ Cấp Hôm Nay</string>
+    <string name="studio_quota_claim_grace">+3 Lượt Trợ Cấp Miễn Phí</string>
+    <string name="studio_reminders_title">Lời Nhắc Thú Cưng Hàng Ngày</string>
+    <string name="studio_reminders_active_sub">Hoạt động hàng ngày lúc %1$s</string>
+    <string name="studio_reminders_inactive_sub">Nhận lời nhắc thân thiện khi còn nhiệm vụ chưa xong</string>
+    <string name="studio_send_test_notif">Gửi Thông Báo Thử Nghiệm</string>
+    <string name="studio_signed_in_account">Tài khoản đã đăng nhập</string>
+    <string name="studio_google_account_fallback">Tài khoản Google</string>
+    <string name="studio_sign_out">Đăng Xuất</string>
+    <string name="studio_replay_onboarding">Xem Lại Hướng Dẫn Tương Tác &amp; Bộ Khởi Đầu</string>
+    <string name="studio_app_language_title">Ngôn Ngữ Ứng Dụng</string>
+    <string name="studio_app_language_system">Mặc Định Hệ Thống</string>
+    <string name="studio_saved_sticker_title">Nhãn Dán Đã Lưu</string>
+    <string name="studio_share_sticker_chooser">Chia Sẻ Nhãn Dán ChibiPet</string>
+    <string name="studio_share_button">Chia sẻ</string>
+    <string name="studio_loaded_remix_msg">Đã tải nhãn dán làm Ảnh Phối Lại!</string>
+    <string name="studio_remix_button">Phối lại</string>
+    <string name="studio_delete_sticker_cd">Xóa nhãn dán</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">Lời Nhắc Thói Quen ChibiPet</string>
+    <string name="notif_channel_desc">Lời nhắc khích lệ thói quen hàng ngày từ ChibiPet của bạn</string>
+    <string name="notif_title">%1$s • Điểm Danh Thói Quen</string>
+    <string name="notif_body_pending">%1$s đang cổ vũ bạn! Còn %2$d nhiệm vụ thói quen cần xác minh hôm nay.</string>
+    <string name="notif_body_all_done">%1$s gửi lời chào! Chạm để vuốt ve người bạn 3D và giữ chuỗi ngày luôn rực sáng.</string>
+    <string name="widget_pet_level">%1$s • Cấp %2$d</string>
+    <string name="widget_mood_streak">Tâm trạng %1$d%% • Chuỗi %2$d ngày</string>
+    <string name="widget_habits_today">%1$d / %2$d thói quen hôm nay</string>
+    <string name="widget_tap_open">Chạm để mở ChibiPet</string>
+    <string name="widget_snap_button">Chụp</string>
+    <string name="widget_fallback_text">Tiện ích ChibiPet — Chạm để mở</string>
+    <string name="coach_section_title">Huấn Luyện Viên Nhiệm Vụ AI</string>
+    <string name="coach_goal_hint">Mục tiêu của bạn (vd: Ngủ ngon, Tập trung học)</string>
+    <string name="coach_goal_preset_energy">Năng Lượng Sáng</string>
+    <string name="coach_goal_preset_study">Tập Trung Học</string>
+    <string name="coach_goal_preset_calm">Thư Giãn Tối</string>
+    <string name="coach_ask_ai_button">Hỏi AI Coach</string>
+    <string name="coach_local_plan_button">Kế Hoạch Nội Bộ (0 Hạn Mức)</string>
+    <string name="coach_add_all_button">Thêm Cả 3 Nhiệm Vụ</string>
+    <string name="coach_use_quest">Dùng</string>
+    <string name="chat_voice_on">Giọng BẬT</string>
+    <string name="chat_voice_off">Giọng</string>
+    <string name="chat_speak_cd">Đọc to câu trả lời</string>
+</resources>

@@ -1,0 +1,344 @@
+<resources>
+    <!-- App & Widget Core -->
+    <string name="app_name">ChibiPet</string>
+    <string name="widget_description">Следите за настроением 3D ChibiPet, активной серией и ежедневными привычками прямо на главном экране.</string>
+    <string name="splash_mascot_cd">Талисман ChibiPet</string>
+    <string name="splash_subtitle">Карманный 3D-друг и Квесты привычек</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_pet">Питомец</string>
+    <string name="tab_chat">Чат</string>
+    <string name="tab_friends">Друзья</string>
+    <string name="tab_shop">Магазин</string>
+
+    <!-- Species Coat Colors -->
+    <string name="color_mint_label">Облачная мята</string>
+    <string name="color_peach_label">Персиковый моти</string>
+    <string name="color_lavender_label">Звёздная сирень</string>
+    <string name="color_lemon_label">Медовый юдзу</string>
+    <string name="color_berry_label">Небесная ягода</string>
+
+    <!-- Pet Outfits -->
+    <string name="outfit_none_label">Уютная классика</string>
+    <string name="outfit_none_desc">Естественное пушистое очарование</string>
+    <string name="outfit_bow_label">Клубничный бант</string>
+    <string name="outfit_bow_desc">Милый бантик из ленты на макушке</string>
+    <string name="outfit_crown_label">Королевская корона</string>
+    <string name="outfit_crown_desc">Золотая корона для мастеров привычек</string>
+    <string name="outfit_headphones_label">Lo-Fi биты</string>
+    <string name="outfit_headphones_desc">Пастельные студийные наушники</string>
+    <string name="outfit_wizard_label">Звёздная шляпа</string>
+    <string name="outfit_wizard_desc">Волшебная шляпа для максимальной концентрации</string>
+    <string name="outfit_shades_label">Крутые очки</string>
+    <string name="outfit_shades_desc">Стильные очки в неоновой оправе</string>
+    <string name="outfit_cape_label">Плащ героя</string>
+    <string name="outfit_cape_desc">Развевающийся алый плащ победы</string>
+
+    <!-- Shop Consumables -->
+    <string name="consumable_freeze_label">Заморозка серии</string>
+    <string name="consumable_freeze_desc">Автоматически защищает пропущенный день, сохраняя вашу серию привычек</string>
+    <string name="consumable_elixir_label">Золотой эликсир настроения</string>
+    <string name="consumable_elixir_desc">Мгновенно восстанавливает настроение и энергию до 100% с искрящимся танцем</string>
+
+    <!-- Habit Categories -->
+    <string name="cat_hydration_label">Водный баланс</string>
+    <string name="cat_hydration_hint">Бутылка воды, стакан или кружка</string>
+    <string name="cat_study_label">Учёба и фокус</string>
+    <string name="cat_study_hint">Книга, тетрадь или рабочий стол</string>
+    <string name="cat_fitness_label">Фитнес</string>
+    <string name="cat_fitness_hint">Кроссовки, коврик для йоги или форма</string>
+    <string name="cat_mindfulness_label">Осознанность</string>
+    <string name="cat_mindfulness_hint">Дневник, чай или спокойный уголок</string>
+    <string name="cat_creative_label">Творчество</string>
+    <string name="cat_creative_hint">Скетчбук, инструмент или поделка</string>
+
+    <!-- Starter Quest Templates -->
+    <string name="starter_quest_hydrate">Выпить воды (500 мл)</string>
+    <string name="starter_quest_study">Фокус-сессия учёбы</string>
+    <string name="starter_quest_fitness">Разминка и растяжка</string>
+    <string name="starter_quest_mindful">5 мин осознанного дыхания</string>
+    <string name="starter_quest_creative">Набросок или 1 страница дневника</string>
+
+    <!-- Auth Screen -->
+    <string name="auth_hero_cd">Уютная парящая диорама рабочего стола ChibiPet</string>
+    <string name="auth_ready_to_adopt">Готов приютить %1$s</string>
+    <string name="auth_title">Встречайте ChibiPet</string>
+    <string name="auth_subtitle">Ваш интерактивный карманный 3D-компаньон, который растёт, когда вы выполняете полезные привычки.</string>
+    <string name="auth_feature_vision_title">Фотоотчёт — и опыт ваш</string>
+    <string name="auth_feature_vision_sub">Gemini Vision проверяет вашу бутылку воды, учебный стол или спорт-инвентарь.</string>
+    <string name="auth_feature_chat_title">Друг с хорошей памятью</string>
+    <string name="auth_feature_chat_sub">Общайтесь в любое время — питомец помнит ваши серии и поддерживает вас.</string>
+    <string name="auth_feature_studio_title">3D-наряды и Арт-студия</string>
+    <string name="auth_feature_studio_sub">Вращайте, гладьте, наряжайте в 3D и создавайте уникальные ИИ-стикеры.</string>
+    <string name="auth_checking_session">Проверка сессии…</string>
+    <string name="auth_signing_in">Вход…</string>
+    <string name="auth_sign_in_google">Войти через Google</string>
+    <string name="auth_customize_tour">Настроить питомца и пройти интерактивный тур</string>
+    <string name="auth_error_missing_client_id">Отсутствует настройка входа Google: не найден default_web_client_id</string>
+    <string name="auth_error_unexpected_credential">Получен неожиданный тип учётных данных.</string>
+    <string name="auth_error_generic">Не удалось войти. Попробуйте ещё раз.</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_step_badge">Шаг %1$d из %2$d</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_back">Назад</string>
+    <string name="onboarding_prev_step_cd">Предыдущий шаг</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_adopt_start">Приютить %1$s и начать!</string>
+    <string name="onboarding_p1_title">Познакомьтесь с живым 3D-другом</string>
+    <string name="onboarding_p1_sub">Попробуйте покрутить и нажать на %1$s прямо сейчас! Питомец дышит, прыгает и реагирует на ваши привычки в реальном 3D.</string>
+    <string name="onboarding_p1_stage_hint">Интерактивная 3D-сцена • Тяните для вращения • Нажмите для прыжка!</string>
+    <string name="onboarding_p1_coat_label">Окрас:</string>
+    <string name="onboarding_p2_banner_cd">Поляна квестов привычек ChibiPet</string>
+    <string name="onboarding_p2_badge">Проверка привычек Gemini Vision</string>
+    <string name="onboarding_p2_title">Снимайте подтверждение и повышайте уровень!</string>
+    <string name="onboarding_p2_sub">Превратите ежедневную заботу о себе в RPG-приключение для вашего питомца.</string>
+    <string name="onboarding_p2_step1_title">1. Сфотографируйте выполнение привычки</string>
+    <string name="onboarding_p2_step1_sub">Сделайте фото бутылки воды, конспекта или кроссовок через встроенную камеру или галерею.</string>
+    <string name="onboarding_p2_step2_title">2. Мгновенная ИИ-проверка и награды</string>
+    <string name="onboarding_p2_step2_sub">Gemini Vision проверит снимок, похвалит вас и начислит XP + Звёздные монеты.</string>
+    <string name="onboarding_p2_step3_title">3. Ежедневный сундук за все квесты</string>
+    <string name="onboarding_p2_step3_sub">Выполните все квесты списка за день, чтобы открыть Сундук дня (+30 бонусных XP и +25 Звёздных монет)!</string>
+    <string name="onboarding_p3_title">Чат с памятью, Студия и Умная защита квоты</string>
+    <string name="onboarding_p3_sub">Спроектировано так, чтобы ваши серии и общение с питомцем работали без перебоев на бесплатном тарифе Gemini.</string>
+    <string name="onboarding_p3_step1_title">Чат с другом и Студия стикеров</string>
+    <string name="onboarding_p3_step1_sub">Питомец помнит прошлые беседы, празднует ваши серии и рисует стикеры в Студии.</string>
+    <string name="onboarding_p3_step2_title">Авто-каскад моделей (Flash → Flash-Lite)</string>
+    <string name="onboarding_p3_step2_sub">При высокой нагрузке на Gemini Flash приложение автоматически переключается на быстрый Flash-Lite, а режим Eco Lite экономит квоту в 3 раза.</string>
+    <string name="onboarding_p3_step3_title">Защита серии без штрафов</string>
+    <string name="onboarding_p3_step3_sub">Если облачная квота отдыхает поздно вечером, Честная отметка и Заморозки серии сохранят ваш прогресс.</string>
+    <string name="onboarding_p3_step4_title">Коды друзей и Поддержка</string>
+    <string name="onboarding_p3_step4_sub">Добавляйте друзей по 8-значному коду, отправляйте ежедневную поддержку (+5 к настроению) и сравнивайте рекорды.</string>
+    <string name="onboarding_p4_title">Приютите друга и соберите стартовый набор</string>
+    <string name="onboarding_p4_sub">Дайте питомцу имя, выберите окрас и отметьте стартовые привычки.</string>
+    <string name="onboarding_p4_name_label">Имя вашего ChibiPet</string>
+    <string name="onboarding_p4_coat_title">Стартовый окрас</string>
+    <string name="onboarding_p4_quests_title">Стартовые квесты (выбрано: %1$d)</string>
+    <string name="onboarding_p4_quest_meta">%1$s • +%2$d XP</string>
+    <string name="onboarding_selected_cd">Выбрано</string>
+    <string name="onboarding_not_selected_cd">Не выбрано</string>
+
+    <!-- Home Pet Screen -->
+    <string name="home_camera_perm_denied">Доступ к камере отклонён. Вы всё ещё можете выбрать фото из Галереи или системной камеры.</string>
+    <string name="home_load_pet_error">Не удалось загрузить питомца: %1$s</string>
+    <string name="home_cheer_from">Дружеский привет от %1$s!</string>
+    <string name="home_claim_cheer">Забрать +5</string>
+    <string name="home_sweep_chest_cd">Ежедневный сундук</string>
+    <string name="home_sweep_unlocked_title">Ежедневный сундук открыт!</string>
+    <string name="home_sweep_locked_title">Ежедневный сундук за все квесты</string>
+    <string name="home_sweep_unlocked_sub">Получено +30 бонусных XP и +25 Звёздных монет сегодня!</string>
+    <string name="home_sweep_locked_sub">Выполните все привычки (%1$d) сегодня и получите +30 XP и +25 монет</string>
+    <string name="home_habits_title">Ежедневные квесты привычек</string>
+    <string name="home_habits_progress">Подтверждено фото сегодня: %1$d из %2$d</string>
+    <string name="home_add_habit_cd">Добавить привычку</string>
+    <string name="home_new_quest">Новый квест</string>
+    <string name="home_filter_all">Все (%1$d)</string>
+    <string name="home_filter_category">%1$s (%2$d)</string>
+    <string name="home_empty_habits_title">Пока нет привычек!</string>
+    <string name="home_empty_habits_sub">Нажмите «Новый квест», чтобы добавить привычку, а затем сделайте фотоотчёт для повышения уровня питомца.</string>
+    <string name="home_level_badge">Ур.%1$d</string>
+    <string name="home_edit_pet_cd">Изменить имя и цвет питомца</string>
+    <string name="home_streak_freezes_cd">Заморозки серии</string>
+    <string name="home_give_treat_cd">Дать угощение</string>
+    <string name="home_treat_button">Угощение • 5★</string>
+    <string name="home_star_coins_cd">Звёздные монеты</string>
+    <string name="home_stage_hint">Тяните для 3D-вращения • Нажмите, чтобы погладить!</string>
+    <string name="home_experience_label">Опыт</string>
+    <string name="home_xp_progress">%1$d / %2$d XP</string>
+    <string name="home_stat_mood">Настроение</string>
+    <string name="home_stat_energy">Энергия</string>
+    <string name="home_stat_verified">Выполнено</string>
+    <string name="home_streak_cd">Серия</string>
+    <string name="home_streak_days">%1$dд</string>
+    <string name="home_delete_habit_cd">Удалить привычку</string>
+    <string name="home_last_proof">Последний отчёт: %1$s</string>
+    <string name="home_habit_reward">+%1$d XP • +%2$d монет</string>
+    <string name="home_verified_today">Выполнено сегодня</string>
+    <string name="home_verify_proof">Подтвердить фото</string>
+
+    <!-- Home Dialogs -->
+    <string name="dialog_verify_title">Подтвердить «%1$s»</string>
+    <string name="dialog_verify_body">Покажите %1$s фотоотчёт (%2$s), чтобы Gemini Vision проверил его!</string>
+    <string name="dialog_verify_camerax">Живая камера CameraX</string>
+    <string name="dialog_verify_gallery">Галерея</string>
+    <string name="dialog_verify_syscam">Системная камера</string>
+    <string name="common_cancel">Отмена</string>
+    <string name="common_close">Закрыть</string>
+    <string name="common_save">Сохранить</string>
+    <string name="common_create">Создать</string>
+    <string name="common_delete">Удалить</string>
+    <string name="dialog_delete_habit_title">Удалить квест привычки?</string>
+    <string name="dialog_delete_habit_body">Удалить «%1$s»? Ваша серия из %2$d дн. по этому квесту будет удалена.</string>
+    <string name="dialog_keep_quest">Оставить</string>
+    <string name="dialog_proof_analyzing_title">%1$s проверяет…</string>
+    <string name="dialog_proof_levelup_title">Новый уровень! Квест выполнен!</string>
+    <string name="dialog_proof_verified_title">Квест подтверждён!</string>
+    <string name="dialog_proof_rejected_title">Хм, попробуйте другой ракурс!</string>
+    <string name="dialog_proof_quota_title">Бесплатный сканер отдыхает</string>
+    <string name="dialog_proof_error_title">Ошибка проверки</string>
+    <string name="dialog_proof_submitted_cd">Отправленное фото подтверждения</string>
+    <string name="dialog_proof_checking_body">Gemini Vision проверяет ваше фото для «%1$s»…</string>
+    <string name="dialog_proof_detected">Обнаружено: %1$s (%2$d%%)</string>
+    <string name="dialog_proof_reward_sweep">Награда: +%1$d XP • +%2$d Звёздных монет (Ежедневный сундук открыт!)</string>
+    <string name="dialog_proof_reward_normal">Награда: +%1$d XP • +%2$d Звёздных монет</string>
+    <string name="dialog_proof_saw">Увидено: %1$s</string>
+    <string name="dialog_proof_protection_title">Защита серии</string>
+    <string name="dialog_proof_protection_body">Не теряйте серию, когда облачная квота занята! Повторите через быстрый Gemini Flash-Lite или сделайте Честную отметку.</string>
+    <string name="dialog_proof_retry_lite">Повтор Lite</string>
+    <string name="dialog_proof_honor_checkin">Честная отметка</string>
+    <string name="dialog_proof_yay">Ура!</string>
+    <string name="dialog_add_habit_title">Создать квест привычки</string>
+    <string name="dialog_add_habit_name_label">Название привычки</string>
+    <string name="dialog_add_habit_name_hint">напр., Прочитать 20 страниц, Выпить воды</string>
+    <string name="dialog_add_habit_category_label">Категория</string>
+    <string name="dialog_add_habit_effort_label">Сложность и награда</string>
+    <string name="effort_quick">Быстро</string>
+    <string name="effort_daily">Обычно</string>
+    <string name="effort_deep">Глубоко</string>
+    <string name="effort_chip_format">%1$s • %2$dXP</string>
+    <string name="dialog_edit_pet_title">Настроить питомца</string>
+    <string name="dialog_edit_pet_name_label">Имя питомца</string>
+    <string name="dialog_edit_pet_coat_label">Цвет окраса</string>
+
+    <!-- CameraX Proof Dialog -->
+    <string name="camerax_preview_unavailable">Предпросмотр камеры недоступен на этом устройстве. Попробуйте Галерею или Системную камеру.</string>
+    <string name="camerax_close_cd">Закрыть камеру</string>
+    <string name="camerax_flash_cd">Переключить вспышку</string>
+    <string name="camerax_switch_cd">Переключить камеру</string>
+    <string name="camerax_looking_for">%1$s ищет: %2$s</string>
+    <string name="camerax_center_hint">Поместите предмет в центр рамки</string>
+    <string name="camerax_read_error">Не удалось прочитать сделанный снимок.</string>
+    <string name="camerax_capture_failed">Ошибка съёмки.</string>
+
+    <!-- Chat Screen -->
+    <string name="chat_title">Чат с %1$s</string>
+    <string name="chat_mode_lite">Flash-Lite Эко</string>
+    <string name="chat_mode_standard">Flash</string>
+    <string name="chat_subtitle_status">Ур.%1$d • Настроение %2$d%% • %3$s</string>
+    <string name="chat_loading_buddy">Загрузка питомца…</string>
+    <string name="chat_eco_on">Эко ВКЛ</string>
+    <string name="chat_eco_off">Эко</string>
+    <string name="chat_clear_cd">Очистить историю чата</string>
+    <string name="chat_dismiss_error_cd">Скрыть ошибку</string>
+    <string name="chat_quick_reflex">Быстрый ответ питомца (0 квоты)</string>
+    <string name="chat_empty_greeting">Поздоровайтесь с %1$s! Питомец помнит прошлые разговоры и радуется вашим успехам.</string>
+    <string name="chat_prompt_1">Как мои успехи сегодня?</string>
+    <string name="chat_prompt_2">Подбодри меня!</string>
+    <string name="chat_prompt_3">Какую привычку выполнить следующей?</string>
+    <string name="chat_input_placeholder">Сообщение для %1$s…</string>
+    <string name="chat_send_cd">Отправить сообщение</string>
+
+    <!-- Friends Screen -->
+    <string name="friends_title">Встречи питомцев</string>
+    <string name="friends_subtitle">Делитесь сериями, заходите в 3D-комнаты друзей и отправляйте поддержку</string>
+    <string name="friends_refresh_cd">Обновить список друзей</string>
+    <string name="friends_your_code">Ваш Код Друга</string>
+    <string name="friends_copied_code">Код Друга %1$s скопирован</string>
+    <string name="friends_copy_code_cd">Скопировать Код Друга</string>
+    <string name="friends_share_text">Добавляй моего ChibiPet %1$s для совместных привычек! Код Друга: %2$s</string>
+    <string name="friends_share_chooser">Поделиться Кодом Друга</string>
+    <string name="friends_share_code_cd">Поделиться Кодом Друга</string>
+    <string name="friends_add_title">Добавить друга по привычкам</string>
+    <string name="friends_code_label">Код Друга</string>
+    <string name="friends_code_placeholder">PET-A1B2C3</string>
+    <string name="friends_add_button">Добавить</string>
+    <string name="friends_empty_title">Пока нет друзей</string>
+    <string name="friends_empty_sub">Поделитесь своим кодом выше или введите код друга, чтобы заглянуть к его 3D-питомцу.</string>
+    <string name="friends_default_cheer_msg">%1$s отправил вам бодрящий привет за серию привычек!</string>
+    <string name="friends_visit_cheer_msg">%1$s заглянул в гости пожелать отличного продолжения!</string>
+    <string name="friends_top_streak_cd">Лучшая серия</string>
+    <string name="friends_best_streak">рекорд %1$dд</string>
+    <string name="friends_remove_cd">Удалить друга</string>
+    <string name="friends_visit_3d">В гости 3D</string>
+    <string name="friends_send_cheer">Поддержать</string>
+    <string name="friends_room_title">Комната %1$s (Ур.%2$d)</string>
+    <string name="friends_room_sub">Лучшая серия: %1$d дн. • Нажмите на %2$s, чтобы погладить!</string>
+
+    <!-- Wardrobe & Studio Screen -->
+    <string name="studio_default_prompt">Сидит за солнечным письменным столом со светящимися звёздами</string>
+    <string name="studio_notif_perm_denied">Разрешение на уведомления отклонено — включите его в настройках системы.</string>
+    <string name="studio_header_title">Магазин, Гардероб и Студия</string>
+    <string name="studio_header_sub">Тратьте Звёздные монеты на 3D-наряды, защиту серии и ИИ-арт</string>
+    <string name="studio_coins_cd">Монеты</string>
+    <string name="studio_live_preview_badge">Живой 3D-осмотр • %1$s</string>
+    <string name="studio_powerup_shop_title">Магазин усилений</string>
+    <string name="studio_freeze_held">В наличии: %1$d/10</string>
+    <string name="studio_outfits_title">3D-наряды</string>
+    <string name="studio_outfit_equipped">Надето</string>
+    <string name="studio_outfit_equip">Надеть</string>
+    <string name="studio_art_header_title">ИИ-студия стикеров и постеров</string>
+    <string name="studio_art_header_sub">Создавайте собственные иллюстрации ChibiPet с помощью Gemini Nano Banana</string>
+    <string name="studio_preset_1">Уютный стикер за учёбой в кафе с матча-латте</string>
+    <string name="studio_preset_1_short">Уютное кафе с матча</string>
+    <string name="studio_preset_2">Постер киберпанк-игровой комнаты с неоном</string>
+    <string name="studio_preset_2_short">Киберпанк-игровая</string>
+    <string name="studio_preset_3">Акварельный портрет на весеннем пикнике</string>
+    <string name="studio_preset_3_short">Весенний пикник акварелью</string>
+    <string name="studio_prompt_label">Идея наряда или сцены</string>
+    <string name="studio_remix_photo">Фото-ремикс</string>
+    <string name="studio_photo_ready">Фото готово</string>
+    <string name="studio_clear_photo_cd">Удалить исходное фото</string>
+    <string name="studio_generate_button">Создать</string>
+    <string name="studio_crafting_status">Создаём иллюстрацию (30–60 сек)…</string>
+    <string name="studio_generated_cd">Созданный арт ChibiPet</string>
+    <string name="studio_saved_vault_note">Автоматически сохранено в «Мою коллекцию стикеров» ниже!</string>
+    <string name="studio_clear_preview">Очистить превью</string>
+    <string name="studio_craft_offline_emblem">Создать эмблему Chibi (0 облачной квоты)</string>
+    <string name="studio_instant_emblem_button">Мгновенная карточка-эмблема (0 квоты)</string>
+    <string name="studio_vault_title">Моя коллекция стикеров (%1$d)</string>
+    <string name="studio_quota_card_title">Бесплатная ИИ-квота и Эко-защита</string>
+    <string name="studio_quota_eco_on_sub">Eco Lite ВКЛ • %1$s</string>
+    <string name="studio_quota_eco_off_sub">Авто-переход при 429 • %1$s</string>
+    <string name="studio_quota_over_limit_banner">Дневной лимит достигнут — включён режим Lite и функции без расхода квоты (%1$s).</string>
+    <string name="studio_quota_near_limit_banner">Использовано 80%%+ дневного ИИ-бюджета — рекомендуем режим Eco Lite для утроения запаса!</string>
+    <string name="studio_quota_pill_vision">Зрение</string>
+    <string name="studio_quota_pill_chat">Чат</string>
+    <string name="studio_quota_pill_studio">Студия</string>
+    <string name="studio_quota_reset_countdown">Сброс через %1$dч %2$dм</string>
+    <string name="studio_quota_value_receipt">Итог ИИ за сегодня: проверок %1$d • диалогов %2$d • артов %3$d</string>
+    <string name="studio_quota_failover_saves">Авто-спасений квоты: %1$d</string>
+    <string name="studio_quota_need_boost">Нужен дополнительный заряд?</string>
+    <string name="studio_quota_grace_claimed">Бонус уже получен сегодня</string>
+    <string name="studio_quota_claim_grace">+3 бесплатных кредита</string>
+    <string name="studio_reminders_title">Ежедневные напоминания</string>
+    <string name="studio_reminders_active_sub">Активно каждый день в %1$s</string>
+    <string name="studio_reminders_inactive_sub">Получайте дружеское напоминание о незавершённых привычках</string>
+    <string name="studio_send_test_notif">Отправить тестовое уведомление</string>
+    <string name="studio_signed_in_account">Аккаунт выполненного входа</string>
+    <string name="studio_google_account_fallback">Аккаунт Google</string>
+    <string name="studio_sign_out">Выйти</string>
+    <string name="studio_replay_onboarding">Повторить интерактивный тур и стартовый набор</string>
+    <string name="studio_app_language_title">Язык приложения</string>
+    <string name="studio_app_language_system">Системный по умолчанию</string>
+    <string name="studio_saved_sticker_title">Сохранённый стикер</string>
+    <string name="studio_share_sticker_chooser">Поделиться стикером ChibiPet</string>
+    <string name="studio_share_button">Поделиться</string>
+    <string name="studio_loaded_remix_msg">Стикер загружен как фото для ремикса!</string>
+    <string name="studio_remix_button">Ремикс</string>
+    <string name="studio_delete_sticker_cd">Удалить стикер</string>
+
+    <!-- Notifications & Glance Widget -->
+    <string name="notif_channel_name">Напоминания о привычках ChibiPet</string>
+    <string name="notif_channel_desc">Ежедневные ободряющие напоминания от вашего ChibiPet</string>
+    <string name="notif_title">%1$s • Проверка привычек</string>
+    <string name="notif_body_pending">%1$s болеет за вас! Осталось подтвердить квестов сегодня: %2$d.</string>
+    <string name="notif_body_all_done">%1$s передаёт привет! Нажмите, чтобы погладить 3D-питомца и продолжить серию.</string>
+    <string name="widget_pet_level">%1$s • Ур.%2$d</string>
+    <string name="widget_mood_streak">Настр. %1$d%% • Серия %2$dд</string>
+    <string name="widget_habits_today">%1$d / %2$d привычек сегодня</string>
+    <string name="widget_tap_open">Нажмите, чтобы открыть ChibiPet</string>
+    <string name="widget_snap_button">Фото</string>
+    <string name="widget_fallback_text">Виджет ChibiPet — нажмите, чтобы открыть</string>
+    <string name="coach_section_title">ИИ-тренер квестов</string>
+    <string name="coach_goal_hint">Ваша цель (напр., Лучше спать, Учеба)</string>
+    <string name="coach_goal_preset_energy">Утренняя бодрость</string>
+    <string name="coach_goal_preset_study">Фокус на учебе</string>
+    <string name="coach_goal_preset_calm">Вечерний покой</string>
+    <string name="coach_ask_ai_button">Спросить ИИ-тренера</string>
+    <string name="coach_local_plan_button">Локальный план (0 квоты)</string>
+    <string name="coach_add_all_button">Добавить все 3 квеста</string>
+    <string name="coach_use_quest">Выбрать</string>
+    <string name="chat_voice_on">Голос ВКЛ</string>
+    <string name="chat_voice_off">Голос</string>
+    <string name="chat_speak_cd">Озвучить ответ</string>
+</resources>

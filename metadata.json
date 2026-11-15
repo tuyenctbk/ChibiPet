@@ -1,0 +1,6 @@
+{
+  "name": "ChibiPet",
+  "description": "3D interactive virtual pet & habit tracker with Gemini Vision proof verification, AI companion chat, custom outfits, and Firestore cloud sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

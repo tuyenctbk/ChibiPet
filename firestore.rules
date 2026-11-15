@@ -1,0 +1,298 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidSpeciesColor(color) {
+      return color in ['mint', 'peach', 'lavender', 'lemon', 'berry'];
+    }
+
+    function isValidOutfit(outfit) {
+      return outfit in ['none', 'crown', 'bow', 'headphones', 'wizard', 'shades', 'cape'];
+    }
+
+    function isValidPetProfile(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.petName is string && data.petName.size() >= 1 && data.petName.size() <= 30 &&
+             isValidSpeciesColor(data.speciesColor) &&
+             isValidOutfit(data.equippedOutfit) &&
+             data.unlockedOutfits is list && data.unlockedOutfits.size() >= 1 && data.unlockedOutfits.size() <= 10 &&
+             data.unlockedOutfits[0] is string &&
+             data.level is int && data.level >= 1 && data.level <= 999 &&
+             data.xp is int && data.xp >= 0 && data.xp <= 1000000 &&
+             data.coins is int && data.coins >= 0 && data.coins <= 1000000 &&
+             data.happiness is int && data.happiness >= 0 && data.happiness <= 100 &&
+             data.energy is int && data.energy >= 0 && data.energy <= 100 &&
+             data.totalCompleted is int && data.totalCompleted >= 0 && data.totalCompleted <= 1000000 &&
+             (!('streakFreezes' in data) || (data.streakFreezes is int && data.streakFreezes >= 0 && data.streakFreezes <= 10)) &&
+             (!('lastDailyBonusDate' in data) || (data.lastDailyBonusDate is string && data.lastDailyBonusDate.size() <= 20)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidHabit(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.title is string && data.title.size() >= 1 && data.title.size() <= 80 &&
+             data.category in ['hydration', 'study', 'fitness', 'mindfulness', 'creative'] &&
+             data.xpReward is int && data.xpReward >= 5 && data.xpReward <= 500 &&
+             data.streakCount is int && data.streakCount >= 0 && data.streakCount <= 10000 &&
+             data.lastVerifiedDate is string && data.lastVerifiedDate.size() <= 20 &&
+             data.lastVerificationNote is string && data.lastVerificationNote.size() <= 300 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidChatMessage(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.sender in ['user', 'pet'] &&
+             data.text is string && data.text.size() >= 1 && data.text.size() <= 2000 &&
+             (!('habitTag' in data) || (data.habitTag is string && data.habitTag.size() <= 60)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidPetCard(data, cardId) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.buddyCode is string && data.buddyCode == cardId &&
+             data.petName is string && data.petName.size() >= 1 && data.petName.size() <= 30 &&
+             isValidSpeciesColor(data.speciesColor) &&
+             isValidOutfit(data.equippedOutfit) &&
+             data.level is int && data.level >= 1 && data.level <= 999 &&
+             data.totalCompleted is int && data.totalCompleted >= 0 && data.totalCompleted <= 1000000 &&
+             data.topStreak is int && data.topStreak >= 0 && data.topStreak <= 10000 &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidCheer(data, cardId) {
+      return data.fromUserId is string && data.fromUserId == request.auth.uid &&
+             data.toUserId is string &&
+             data.toUserId == get(/databases/$(database)/documents/petCards/$(cardId)).data.userId &&
+             data.fromUserId != data.toUserId &&
+             data.fromPetName is string && data.fromPetName.size() >= 1 && data.fromPetName.size() <= 30 &&
+             data.message is string && data.message.size() >= 1 && data.message.size() <= 120 &&
+             data.claimed is bool &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidFriendLink(data, friendCode) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.friendCode is string && data.friendCode == friendCode &&
+             data.friendUserId is string && data.friendUserId.size() >= 1 && data.friendUserId.size() <= 128 &&
+             data.friendPetName is string && data.friendPetName.size() >= 1 && data.friendPetName.size() <= 30 &&
+             isValidSpeciesColor(data.friendSpeciesColor) &&
+             isValidOutfit(data.friendOutfit) &&
+             data.friendLevel is int && data.friendLevel >= 1 && data.friendLevel <= 999 &&
+             data.friendTopStreak is int && data.friendTopStreak >= 0 && data.friendTopStreak <= 10000 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidUsageQuota(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.dateIso is string && data.dateIso.size() >= 8 && data.dateIso.size() <= 20 &&
+             data.visionUsed is int && data.visionUsed >= 0 && data.visionUsed <= 10000 &&
+             data.chatUsed is int && data.chatUsed >= 0 && data.chatUsed <= 10000 &&
+             data.studioUsed is int && data.studioUsed >= 0 && data.studioUsed <= 10000 &&
+             data.bonusGraceCredits is int && data.bonusGraceCredits >= 0 && data.bonusGraceCredits <= 100 &&
+             data.graceClaimed is bool &&
+             data.ecoLiteMode is bool &&
+             data.fallbackCascadeCount is int && data.fallbackCascadeCount >= 0 && data.fallbackCascadeCount <= 10000 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    match /users/{userId}/petProfile/{profileId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(profileId);
+      allow create: if isOwner(userId) &&
+                       isValidId(profileId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'petName', 'speciesColor', 'equippedOutfit', 'unlockedOutfits',
+                         'level', 'xp', 'coins', 'happiness', 'energy', 'totalCompleted',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'petName', 'speciesColor', 'equippedOutfit', 'unlockedOutfits',
+                         'level', 'xp', 'coins', 'happiness', 'energy', 'totalCompleted',
+                         'streakFreezes', 'lastDailyBonusDate', 'createdAt', 'updatedAt'
+                       ]) &&
+                       isValidPetProfile(incoming());
+      allow update: if isOwner(userId) &&
+                       isValidId(profileId) &&
+                       isValidPetProfile(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'petName', 'speciesColor', 'equippedOutfit', 'unlockedOutfits',
+                         'level', 'xp', 'coins', 'happiness', 'energy', 'totalCompleted',
+                         'streakFreezes', 'lastDailyBonusDate', 'updatedAt'
+                       ]);
+      allow delete: if isOwner(userId) && isValidId(profileId);
+    }
+
+    match /users/{userId}/habits/{habitId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(habitId);
+      allow create: if isOwner(userId) &&
+                       isValidId(habitId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'title', 'category', 'xpReward', 'streakCount',
+                         'lastVerifiedDate', 'lastVerificationNote', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'title', 'category', 'xpReward', 'streakCount',
+                         'lastVerifiedDate', 'lastVerificationNote', 'createdAt', 'updatedAt'
+                       ]) &&
+                       isValidHabit(incoming());
+      allow update: if isOwner(userId) &&
+                       isValidId(habitId) &&
+                       isValidHabit(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'title', 'category', 'xpReward', 'streakCount',
+                         'lastVerifiedDate', 'lastVerificationNote', 'updatedAt'
+                       ]);
+      allow delete: if isOwner(userId) && isValidId(habitId);
+    }
+
+    match /users/{userId}/chatMessages/{messageId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(messageId);
+      allow create: if isOwner(userId) &&
+                       isValidId(messageId) &&
+                       incoming().keys().hasAll(['userId', 'sender', 'text', 'createdAt']) &&
+                       incoming().keys().hasOnly(['userId', 'sender', 'text', 'habitTag', 'createdAt']) &&
+                       isValidChatMessage(incoming());
+      allow update: if false;
+      allow delete: if isOwner(userId) && isValidId(messageId);
+    }
+
+    match /users/{userId}/friends/{friendCode} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(friendCode);
+      allow create: if isOwner(userId) &&
+                       isValidId(friendCode) &&
+                       incoming().keys().hasAll([
+                         'userId', 'friendCode', 'friendUserId', 'friendPetName',
+                         'friendSpeciesColor', 'friendOutfit', 'friendLevel', 'friendTopStreak',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'friendCode', 'friendUserId', 'friendPetName',
+                         'friendSpeciesColor', 'friendOutfit', 'friendLevel', 'friendTopStreak',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       isValidFriendLink(incoming(), friendCode);
+      allow update: if isOwner(userId) &&
+                       isValidId(friendCode) &&
+                       isValidFriendLink(incoming(), friendCode) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'friendPetName', 'friendSpeciesColor', 'friendOutfit',
+                         'friendLevel', 'friendTopStreak', 'updatedAt'
+                       ]);
+      allow delete: if isOwner(userId) && isValidId(friendCode);
+    }
+
+    match /users/{userId}/usageQuota/{quotaId} {
+      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) && isValidId(quotaId);
+      allow create: if isOwner(userId) &&
+                       isValidId(quotaId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'dateIso', 'visionUsed', 'chatUsed', 'studioUsed',
+                         'bonusGraceCredits', 'graceClaimed', 'ecoLiteMode',
+                         'fallbackCascadeCount', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'dateIso', 'visionUsed', 'chatUsed', 'studioUsed',
+                         'bonusGraceCredits', 'graceClaimed', 'ecoLiteMode',
+                         'fallbackCascadeCount', 'createdAt', 'updatedAt'
+                       ]) &&
+                       isValidUsageQuota(incoming());
+      allow update: if isOwner(userId) &&
+                       isValidId(quotaId) &&
+                       isValidUsageQuota(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'dateIso', 'visionUsed', 'chatUsed', 'studioUsed',
+                         'bonusGraceCredits', 'graceClaimed', 'ecoLiteMode',
+                         'fallbackCascadeCount', 'updatedAt'
+                       ]);
+      allow delete: if isOwner(userId) && isValidId(quotaId);
+    }
+
+    match /petCards/{cardId} {
+      allow list: if false;
+      allow get: if isSignedIn() && isValidId(cardId);
+      allow create: if isSignedIn() &&
+                       isValidId(cardId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'buddyCode', 'petName', 'speciesColor', 'equippedOutfit',
+                         'level', 'totalCompleted', 'topStreak', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'buddyCode', 'petName', 'speciesColor', 'equippedOutfit',
+                         'level', 'totalCompleted', 'topStreak', 'updatedAt'
+                       ]) &&
+                       isValidPetCard(incoming(), cardId);
+      allow update: if isSignedIn() &&
+                       isValidId(cardId) &&
+                       existing().userId == request.auth.uid &&
+                       incoming().userId == existing().userId &&
+                       incoming().buddyCode == existing().buddyCode &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'petName', 'speciesColor', 'equippedOutfit',
+                         'level', 'totalCompleted', 'topStreak', 'updatedAt'
+                       ]) &&
+                       isValidPetCard(incoming(), cardId);
+      allow delete: if isSignedIn() && isValidId(cardId) && existing().userId == request.auth.uid;
+
+      match /cheers/{cheerId} {
+        allow list: if isSignedIn() && resource.data.toUserId == request.auth.uid;
+        allow get: if isSignedIn() && (resource.data.toUserId == request.auth.uid || resource.data.fromUserId == request.auth.uid);
+        allow create: if isSignedIn() &&
+                         isValidId(cheerId) &&
+                         incoming().keys().hasAll([
+                           'fromUserId', 'toUserId', 'fromPetName', 'message', 'claimed', 'createdAt'
+                         ]) &&
+                         incoming().keys().hasOnly([
+                           'fromUserId', 'toUserId', 'fromPetName', 'message', 'claimed', 'createdAt'
+                         ]) &&
+                         incoming().claimed == false &&
+                         isValidCheer(incoming(), cardId);
+        allow update: if isSignedIn() &&
+                         isValidId(cheerId) &&
+                         existing().toUserId == request.auth.uid &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['claimed']) &&
+                         incoming().claimed == true;
+        allow delete: if isSignedIn() && isValidId(cheerId) && existing().toUserId == request.auth.uid;
+      }
+    }
+  }
+}

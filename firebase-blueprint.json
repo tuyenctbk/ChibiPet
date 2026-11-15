@@ -1,0 +1,327 @@
+{
+  "entities": {
+    "PetProfile": {
+      "title": "PetProfile",
+      "description": "Stores the user's 3D ChibiPet state, stats, appearance, streak freezes, and unlocked outfits.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID"
+        },
+        "petName": {
+          "type": "string",
+          "description": "Custom name of the user's ChibiPet"
+        },
+        "speciesColor": {
+          "type": "string",
+          "enum": ["mint", "peach", "lavender", "lemon", "berry"],
+          "description": "Color palette theme of the 3D pet"
+        },
+        "equippedOutfit": {
+          "type": "string",
+          "enum": ["none", "crown", "bow", "headphones", "wizard", "shades", "cape"],
+          "description": "Currently equipped 3D accessory"
+        },
+        "unlockedOutfits": {
+          "type": "array",
+          "description": "List of unlocked 3D outfit keys"
+        },
+        "level": {
+          "type": "integer",
+          "description": "Current pet level"
+        },
+        "xp": {
+          "type": "integer",
+          "description": "Total earned experience points"
+        },
+        "coins": {
+          "type": "integer",
+          "description": "Spendable star coins earned from verified habits"
+        },
+        "happiness": {
+          "type": "integer",
+          "description": "Pet happiness score from 0 to 100"
+        },
+        "energy": {
+          "type": "integer",
+          "description": "Pet energy score from 0 to 100"
+        },
+        "totalCompleted": {
+          "type": "integer",
+          "description": "Total number of verified habit completions"
+        },
+        "streakFreezes": {
+          "type": "integer",
+          "description": "Owned streak freeze tokens (0-10) that protect missed habit days"
+        },
+        "lastDailyBonusDate": {
+          "type": "string",
+          "description": "ISO date (YYYY-MM-DD) when the daily all-quests sweep bonus was claimed"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when pet profile was created (clients must write FieldValue.serverTimestamp())"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when pet profile was last updated (clients must write FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "petName",
+        "speciesColor",
+        "equippedOutfit",
+        "unlockedOutfits",
+        "level",
+        "xp",
+        "coins",
+        "happiness",
+        "energy",
+        "totalCompleted",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A daily real-world habit tracked by the user and verified via Gemini Vision proof photos.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Short habit description"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["hydration", "study", "fitness", "mindfulness", "creative"],
+          "description": "Habit category icon and verification hint"
+        },
+        "xpReward": {
+          "type": "integer",
+          "description": "XP awarded per verified completion"
+        },
+        "streakCount": {
+          "type": "integer",
+          "description": "Consecutive or cumulative habit streak count"
+        },
+        "lastVerifiedDate": {
+          "type": "string",
+          "description": "ISO local date (YYYY-MM-DD) of last verified completion, or empty string"
+        },
+        "lastVerificationNote": {
+          "type": "string",
+          "description": "Latest Gemini Vision verification note"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when habit was created (clients must write FieldValue.serverTimestamp())"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when habit was updated (clients must write FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "category",
+        "xpReward",
+        "streakCount",
+        "lastVerifiedDate",
+        "lastVerificationNote",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Persistent conversation turn between the user and their ChibiPet companion.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID"
+        },
+        "sender": {
+          "type": "string",
+          "enum": ["user", "pet"],
+          "description": "Message author role"
+        },
+        "text": {
+          "type": "string",
+          "description": "Chat message body"
+        },
+        "habitTag": {
+          "type": "string",
+          "description": "Optional habit context tag for milestone messages"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when message was stored (clients must write FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "sender",
+        "text",
+        "createdAt"
+      ]
+    },
+    "PetCard": {
+      "title": "PetCard",
+      "description": "Shareable Buddy Card keyed by short buddy code for friend visits and playdates.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "buddyCode": { "type": "string" },
+        "petName": { "type": "string" },
+        "speciesColor": { "type": "string", "enum": ["mint", "peach", "lavender", "lemon", "berry"] },
+        "equippedOutfit": { "type": "string", "enum": ["none", "crown", "bow", "headphones", "wizard", "shades", "cape"] },
+        "level": { "type": "integer" },
+        "totalCompleted": { "type": "integer" },
+        "topStreak": { "type": "integer" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "buddyCode", "petName", "speciesColor", "equippedOutfit", "level", "totalCompleted", "topStreak", "updatedAt"]
+    },
+    "PetCheer": {
+      "title": "PetCheer",
+      "description": "Cheering boop sent by a friend to a user's PetCard.",
+      "type": "object",
+      "properties": {
+        "fromUserId": { "type": "string" },
+        "toUserId": { "type": "string" },
+        "fromPetName": { "type": "string" },
+        "message": { "type": "string" },
+        "claimed": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fromUserId", "toUserId", "fromPetName", "message", "claimed", "createdAt"]
+    },
+    "FriendLink": {
+      "title": "FriendLink",
+      "description": "Saved accountability friend reference under the user's private friends subcollection.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "friendCode": { "type": "string" },
+        "friendUserId": { "type": "string" },
+        "friendPetName": { "type": "string" },
+        "friendSpeciesColor": { "type": "string", "enum": ["mint", "peach", "lavender", "lemon", "berry"] },
+        "friendOutfit": { "type": "string", "enum": ["none", "crown", "bow", "headphones", "wizard", "shades", "cape"] },
+        "friendLevel": { "type": "integer" },
+        "friendTopStreak": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "friendCode", "friendUserId", "friendPetName", "friendSpeciesColor", "friendOutfit", "friendLevel", "friendTopStreak", "createdAt", "updatedAt"]
+    },
+    "UsageQuota": {
+      "title": "UsageQuota",
+      "description": "Tracks daily AI interactions (Vision, Chat, Studio), grace credits, Eco Lite preference, and quota reset dates in Firestore.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID"
+        },
+        "dateIso": {
+          "type": "string",
+          "description": "ISO local date (YYYY-MM-DD) for the active daily quota window"
+        },
+        "visionUsed": {
+          "type": "integer",
+          "description": "Number of Gemini Vision habit proof checks used today"
+        },
+        "chatUsed": {
+          "type": "integer",
+          "description": "Number of Gemini companion chat replies used today"
+        },
+        "studioUsed": {
+          "type": "integer",
+          "description": "Number of Nano Banana / Flash-Lite Image studio generations used today"
+        },
+        "bonusGraceCredits": {
+          "type": "integer",
+          "description": "Bonus grace credits added for the current day"
+        },
+        "graceClaimed": {
+          "type": "boolean",
+          "description": "Whether the one-time daily +3 grace credit boost was claimed today"
+        },
+        "ecoLiteMode": {
+          "type": "boolean",
+          "description": "Whether Eco Lite Mode (Flash-Lite preference) is enabled"
+        },
+        "fallbackCascadeCount": {
+          "type": "integer",
+          "description": "Count of automatic fallback cascades to Flash-Lite models today"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the quota ledger was created (clients must write FieldValue.serverTimestamp())"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the quota ledger was last updated (clients must write FieldValue.serverTimestamp())"
+        }
+      },
+      "required": [
+        "userId",
+        "dateIso",
+        "visionUsed",
+        "chatUsed",
+        "studioUsed",
+        "bonusGraceCredits",
+        "graceClaimed",
+        "ecoLiteMode",
+        "fallbackCascadeCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/petProfile/{profileId}": {
+      "schema": { "$ref": "#/entities/PetProfile" },
+      "description": "User's single ChibiPet profile document (id: main)."
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": { "$ref": "#/entities/Habit" },
+      "description": "User's tracked habits and Gemini Vision proof streaks."
+    },
+    "/users/{userId}/chatMessages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Persistent chat memory between the user and their ChibiPet."
+    },
+    "/users/{userId}/friends/{friendCode}": {
+      "schema": { "$ref": "#/entities/FriendLink" },
+      "description": "User's saved accountability friends."
+    },
+    "/users/{userId}/usageQuota/{quotaId}": {
+      "schema": { "$ref": "#/entities/UsageQuota" },
+      "description": "User's daily AI interaction quota ledger (id: daily)."
+    },
+    "/petCards/{cardId}": {
+      "schema": { "$ref": "#/entities/PetCard" },
+      "description": "Lookup-by-code Buddy Cards for friend playdates."
+    },
+    "/petCards/{cardId}/cheers/{cheerId}": {
+      "schema": { "$ref": "#/entities/PetCheer" },
+      "description": "Friend cheering boops sent to a Buddy Card."
+    }
+  }
+}
