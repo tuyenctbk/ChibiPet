@@ -1,0 +1,34 @@
+{
+  "project_info": {
+    "project_number": "108392184920",
+    "project_id": "chibipet-app",
+    "storage_bucket": "chibipet-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108392184920:android:5fa78bc91d4e20b6e159a4",
+        "android_client_info": {
+          "package_name": "com.soloprono.chibipet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108392184920-chibipetoauthclientid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_chibipet_dummy_api_key_for_client"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

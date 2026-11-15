@@ -128,6 +128,7 @@ private fun ChibiPetAppRoot() {
     ) {
         val context = LocalContext.current
         var currentUser by remember { mutableStateOf<FirebaseUser?>(Firebase.auth.currentUser) }
+        var isGuestMode by rememberSaveable { mutableStateOf(false) }
         var showSplash by rememberSaveable { mutableStateOf(true) }
         val onboardingSelection by OnboardingPreferences.observe(context).collectAsStateWithLifecycle()
         var onboardingApplyNonce by rememberSaveable { mutableIntStateOf(0) }
@@ -158,22 +159,26 @@ private fun ChibiPetAppRoot() {
                         onboardingApplyNonce += 1
                     }
                 )
-            } else if (user == null) {
+            } else if (user == null && !isGuestMode) {
                 AuthScreen(
                     preferredPetName = onboardingSelection.preferredPetName,
                     onReopenOnboarding = {
                         OnboardingPreferences.reopenOnboarding(context)
                     },
-                    onAuthSuccess = { currentUser = Firebase.auth.currentUser }
+                    onAuthSuccess = { currentUser = Firebase.auth.currentUser },
+                    onContinueAsGuest = { isGuestMode = true }
                 )
             } else {
-                key(user.uid) {
+                val effectiveUid = user?.uid ?: "guest_explorer_local"
+                val effectiveName = user?.displayName ?: stringResource(R.string.auth_guest_explorer_name)
+                key(effectiveUid) {
                     AuthenticatedChibiPetApp(
-                        currentUserId = user.uid,
-                        userDisplayName = user.displayName,
-                        userEmail = user.email,
+                        currentUserId = effectiveUid,
+                        userDisplayName = effectiveName,
+                        userEmail = user?.email,
                         onboardingApplyNonce = onboardingApplyNonce,
                         onReplayOnboarding = {
+                            isGuestMode = false
                             OnboardingPreferences.reopenOnboarding(context)
                         }
                     )

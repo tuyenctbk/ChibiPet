@@ -73,6 +73,9 @@
     <string name="auth_checking_session">Checking session…</string>
     <string name="auth_signing_in">Signing in…</string>
     <string name="auth_sign_in_google">Sign in with Google</string>
+    <string name="auth_continue_guest">Continue as Guest Explorer</string>
+    <string name="auth_entering_guest">Entering Guest Mode…</string>
+    <string name="auth_guest_explorer_name">Guest Explorer</string>
     <string name="auth_customize_tour">Customize Starter Buddy &amp; Interactive Tour</string>
     <string name="auth_error_missing_client_id">Google Sign-In configuration missing: default_web_client_id not found</string>
     <string name="auth_error_unexpected_credential">Unexpected credential type returned.</string>

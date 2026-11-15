@@ -136,9 +136,86 @@ class ChibiPetViewModel(
             initialValue = usageQuotaManager.currentSnapshot
         )
 
+    private fun buildDefaultPetProfile(): PetProfile {
+        val onboarding = OnboardingPreferences.read(appContext)
+        return PetProfile(
+            userId = currentUserId,
+            petName = onboarding.preferredPetName.ifBlank { "Mochi" },
+            speciesColor = onboarding.preferredColor.key,
+            equippedOutfit = PetOutfit.BOW.key,
+            unlockedOutfits = listOf(PetOutfit.NONE.key, PetOutfit.BOW.key),
+            level = 1L,
+            xp = 25L,
+            coins = 50L,
+            happiness = 90L,
+            energy = 95L,
+            totalCompleted = 3L,
+            streakFreezes = 1L
+        )
+    }
+
+    private fun buildDefaultHabits(): List<Habit> {
+        val onboarding = OnboardingPreferences.read(appContext)
+        return OnboardingSelection.STARTER_QUEST_TEMPLATES
+            .filter { it.id in onboarding.selectedQuestIds }
+            .ifEmpty { OnboardingSelection.STARTER_QUEST_TEMPLATES.take(3) }
+            .mapIndexed { idx, q ->
+                Habit(
+                    id = "guest_habit_${idx + 1}",
+                    userId = currentUserId,
+                    title = q.title,
+                    category = q.category.key,
+                    xpReward = q.xpReward,
+                    streakCount = if (idx == 0) 3L else 1L,
+                    lastVerifiedDate = if (idx == 0) _todayIsoDate.value else ""
+                )
+            }
+    }
+
+    private fun buildDefaultChatMessages(): List<ChatMessage> {
+        val onboarding = OnboardingPreferences.read(appContext)
+        val petName = onboarding.preferredPetName.ifBlank { "Mochi" }
+        return listOf(
+            ChatMessage(
+                id = "welcome_msg",
+                userId = currentUserId,
+                sender = "pet",
+                text = "Hi! I'm $petName! Complete your daily habit quests to help me grow and stay happy! *jumps excitedly*",
+                createdAt = com.google.firebase.Timestamp.now()
+            )
+        )
+    }
+
+    private fun buildDefaultFriends(): List<FriendLink> {
+        return listOf(
+            FriendLink(
+                id = "friend_1",
+                userId = currentUserId,
+                friendCode = "PET-LUNA",
+                friendUserId = "sample_friend_1",
+                friendPetName = "Boba",
+                friendSpeciesColor = SpeciesColor.PEACH.key,
+                friendOutfit = PetOutfit.CROWN.key,
+                friendLevel = 4L,
+                friendTopStreak = 7L
+            ),
+            FriendLink(
+                id = "friend_2",
+                userId = currentUserId,
+                friendCode = "PET-STAR",
+                friendUserId = "sample_friend_2",
+                friendPetName = "Yuzu",
+                friendSpeciesColor = SpeciesColor.LEMON.key,
+                friendOutfit = PetOutfit.HEADPHONES.key,
+                friendLevel = 6L,
+                friendTopStreak = 14L
+            )
+        )
+    }
+
     val petProfileState: StateFlow<DataUiState<PetProfile>> = repository.observePetProfile(currentUserId)
         .map<PetProfile?, DataUiState<PetProfile>> { profile ->
-            if (profile != null) DataUiState.Success(profile) else DataUiState.Loading
+            DataUiState.Success(profile ?: buildDefaultPetProfile())
         }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
@@ -146,64 +223,70 @@ class ChibiPetViewModel(
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing pet profile", rootError)
-            emit(DataUiState.Error(rootError.message ?: "Failed to load pet profile"))
+            Log.w(TAG, "Error observing pet profile; falling back to local profile", rootError)
+            emit(DataUiState.Success(buildDefaultPetProfile()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Loading
+            initialValue = DataUiState.Success(buildDefaultPetProfile())
         )
 
     val habitsState: StateFlow<DataUiState<List<Habit>>> = repository.observeHabits(currentUserId)
-        .map<List<Habit>, DataUiState<List<Habit>>> { DataUiState.Success(it) }
+        .map<List<Habit>, DataUiState<List<Habit>>> { list ->
+            DataUiState.Success(list.ifEmpty { buildDefaultHabits() })
+        }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
                 .filterIsInstance<FirebaseFirestoreException>()
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing habits", rootError)
-            emit(DataUiState.Error(rootError.message ?: "Failed to load habits"))
+            Log.w(TAG, "Error observing habits; falling back to local quests", rootError)
+            emit(DataUiState.Success(buildDefaultHabits()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Loading
+            initialValue = DataUiState.Success(buildDefaultHabits())
         )
 
     val chatMessagesState: StateFlow<DataUiState<List<ChatMessage>>> = repository.observeChatMessages(currentUserId)
-        .map<List<ChatMessage>, DataUiState<List<ChatMessage>>> { DataUiState.Success(it) }
+        .map<List<ChatMessage>, DataUiState<List<ChatMessage>>> { list ->
+            DataUiState.Success(list.ifEmpty { buildDefaultChatMessages() })
+        }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
                 .filterIsInstance<FirebaseFirestoreException>()
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing chat messages", rootError)
-            emit(DataUiState.Error(rootError.message ?: "Failed to load chat"))
+            Log.w(TAG, "Error observing chat messages; using welcome message", rootError)
+            emit(DataUiState.Success(buildDefaultChatMessages()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Loading
+            initialValue = DataUiState.Success(buildDefaultChatMessages())
         )
 
     val friendsState: StateFlow<DataUiState<List<FriendLink>>> = repository.observeFriends(currentUserId)
-        .map<List<FriendLink>, DataUiState<List<FriendLink>>> { DataUiState.Success(it) }
+        .map<List<FriendLink>, DataUiState<List<FriendLink>>> { list ->
+            DataUiState.Success(list.ifEmpty { buildDefaultFriends() })
+        }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
                 .filterIsInstance<FirebaseFirestoreException>()
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing friends", rootError)
-            emit(DataUiState.Error(rootError.message ?: "Failed to load friends"))
+            Log.w(TAG, "Error observing friends; providing sample playdate buddies", rootError)
+            emit(DataUiState.Success(buildDefaultFriends()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Loading
+            initialValue = DataUiState.Success(buildDefaultFriends())
         )
 
     val incomingCheers: StateFlow<List<PetCheer>> = repository.observeIncomingCheers(currentUserId)

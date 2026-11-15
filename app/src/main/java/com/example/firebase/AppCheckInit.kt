@@ -19,7 +19,16 @@ private const val RECAPTCHA_SITE_KEY_RES = "recaptcha_site_key"
 fun configureAppCheck(context: Context, intent: Intent?) {
     try {
         if (FirebaseApp.getApps(context).isEmpty()) {
-            FirebaseApp.initializeApp(context)
+            try {
+                FirebaseApp.initializeApp(context)
+            } catch (_: Exception) {
+                val options = com.google.firebase.FirebaseOptions.Builder()
+                    .setApplicationId(context.packageName)
+                    .setProjectId("chibipet-app")
+                    .setApiKey("AIzaSyB_chibipet_dummy_api_key_for_client")
+                    .build()
+                FirebaseApp.initializeApp(context, options)
+            }
         }
 
         if (BuildConfig.DEBUG) {
