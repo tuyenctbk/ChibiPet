@@ -138,18 +138,19 @@ class ChibiPetViewModel(
 
     private fun buildDefaultPetProfile(): PetProfile {
         val onboarding = OnboardingPreferences.read(appContext)
+        val outfitKey = onboarding.preferredOutfit.key
         return PetProfile(
             userId = currentUserId,
             petName = onboarding.preferredPetName.ifBlank { "Mochi" },
             speciesColor = onboarding.preferredColor.key,
-            equippedOutfit = PetOutfit.BOW.key,
-            unlockedOutfits = listOf(PetOutfit.NONE.key, PetOutfit.BOW.key),
+            equippedOutfit = outfitKey,
+            unlockedOutfits = listOf(PetOutfit.NONE.key, outfitKey).distinct(),
             level = 1L,
-            xp = 25L,
-            coins = 50L,
-            happiness = 90L,
-            energy = 95L,
-            totalCompleted = 3L,
+            xp = 0L,
+            coins = 20L,
+            happiness = 85L,
+            energy = 90L,
+            totalCompleted = 0L,
             streakFreezes = 1L
         )
     }
@@ -160,57 +161,21 @@ class ChibiPetViewModel(
             .filter { it.id in onboarding.selectedQuestIds }
             .ifEmpty { OnboardingSelection.STARTER_QUEST_TEMPLATES.take(3) }
             .mapIndexed { idx, q ->
+                val localizedTitle = try {
+                    appContext.getString(q.titleRes)
+                } catch (_: Exception) {
+                    q.title
+                }
                 Habit(
-                    id = "guest_habit_${idx + 1}",
+                    id = "quest_${q.id}",
                     userId = currentUserId,
-                    title = q.title,
+                    title = localizedTitle,
                     category = q.category.key,
                     xpReward = q.xpReward,
-                    streakCount = if (idx == 0) 3L else 1L,
-                    lastVerifiedDate = if (idx == 0) _todayIsoDate.value else ""
+                    streakCount = 0L,
+                    lastVerifiedDate = ""
                 )
             }
-    }
-
-    private fun buildDefaultChatMessages(): List<ChatMessage> {
-        val onboarding = OnboardingPreferences.read(appContext)
-        val petName = onboarding.preferredPetName.ifBlank { "Mochi" }
-        return listOf(
-            ChatMessage(
-                id = "welcome_msg",
-                userId = currentUserId,
-                sender = "pet",
-                text = "Hi! I'm $petName! Complete your daily habit quests to help me grow and stay happy! *jumps excitedly*",
-                createdAt = com.google.firebase.Timestamp.now()
-            )
-        )
-    }
-
-    private fun buildDefaultFriends(): List<FriendLink> {
-        return listOf(
-            FriendLink(
-                id = "friend_1",
-                userId = currentUserId,
-                friendCode = "PET-LUNA",
-                friendUserId = "sample_friend_1",
-                friendPetName = "Boba",
-                friendSpeciesColor = SpeciesColor.PEACH.key,
-                friendOutfit = PetOutfit.CROWN.key,
-                friendLevel = 4L,
-                friendTopStreak = 7L
-            ),
-            FriendLink(
-                id = "friend_2",
-                userId = currentUserId,
-                friendCode = "PET-STAR",
-                friendUserId = "sample_friend_2",
-                friendPetName = "Yuzu",
-                friendSpeciesColor = SpeciesColor.LEMON.key,
-                friendOutfit = PetOutfit.HEADPHONES.key,
-                friendLevel = 6L,
-                friendTopStreak = 14L
-            )
-        )
     }
 
     val petProfileState: StateFlow<DataUiState<PetProfile>> = repository.observePetProfile(currentUserId)
@@ -253,7 +218,7 @@ class ChibiPetViewModel(
 
     val chatMessagesState: StateFlow<DataUiState<List<ChatMessage>>> = repository.observeChatMessages(currentUserId)
         .map<List<ChatMessage>, DataUiState<List<ChatMessage>>> { list ->
-            DataUiState.Success(list.ifEmpty { buildDefaultChatMessages() })
+            DataUiState.Success(list)
         }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
@@ -261,18 +226,18 @@ class ChibiPetViewModel(
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing chat messages; using welcome message", rootError)
-            emit(DataUiState.Success(buildDefaultChatMessages()))
+            Log.w(TAG, "Error observing chat messages", rootError)
+            emit(DataUiState.Success(emptyList()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Success(buildDefaultChatMessages())
+            initialValue = DataUiState.Success(emptyList())
         )
 
     val friendsState: StateFlow<DataUiState<List<FriendLink>>> = repository.observeFriends(currentUserId)
         .map<List<FriendLink>, DataUiState<List<FriendLink>>> { list ->
-            DataUiState.Success(list.ifEmpty { buildDefaultFriends() })
+            DataUiState.Success(list)
         }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
@@ -280,13 +245,13 @@ class ChibiPetViewModel(
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing friends; providing sample playdate buddies", rootError)
-            emit(DataUiState.Success(buildDefaultFriends()))
+            Log.w(TAG, "Error observing friends", rootError)
+            emit(DataUiState.Success(emptyList()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Success(buildDefaultFriends())
+            initialValue = DataUiState.Success(emptyList())
         )
 
     val incomingCheers: StateFlow<List<PetCheer>> = repository.observeIncomingCheers(currentUserId)

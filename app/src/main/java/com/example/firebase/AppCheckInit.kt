@@ -21,13 +21,24 @@ fun configureAppCheck(context: Context, intent: Intent?) {
         if (FirebaseApp.getApps(context).isEmpty()) {
             try {
                 FirebaseApp.initializeApp(context)
-            } catch (_: Exception) {
-                val options = com.google.firebase.FirebaseOptions.Builder()
-                    .setApplicationId(context.packageName)
-                    .setProjectId("chibipet-app")
-                    .setApiKey("AIzaSyB_chibipet_dummy_api_key_for_client")
-                    .build()
-                FirebaseApp.initializeApp(context, options)
+            } catch (initErr: Exception) {
+                val apiKeyRes = context.resources.getIdentifier("google_api_key", "string", context.packageName)
+                val appIdRes = context.resources.getIdentifier("google_app_id", "string", context.packageName)
+                val projIdRes = context.resources.getIdentifier("project_id", "string", context.packageName)
+                val apiKey = if (apiKeyRes != 0) context.getString(apiKeyRes) else ""
+                val appId = if (appIdRes != 0) context.getString(appIdRes) else context.packageName
+                val projId = if (projIdRes != 0) context.getString(projIdRes) else "chibipet-app"
+
+                if (apiKey.isNotBlank()) {
+                    val options = com.google.firebase.FirebaseOptions.Builder()
+                        .setApplicationId(appId)
+                        .setProjectId(projId)
+                        .setApiKey(apiKey)
+                        .build()
+                    FirebaseApp.initializeApp(context, options)
+                } else {
+                    Log.w(TAG, "FirebaseApp initialization deferred: missing google-services configuration", initErr)
+                }
             }
         }
 

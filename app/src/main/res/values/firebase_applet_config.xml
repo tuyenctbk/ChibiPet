@@ -2,5 +2,5 @@
 <resources>
     <string name="firestore_database_id" translatable="false">ai-studio-android-chibipet-be48891c-6d28-4fcb-8452-65b631bcd16a</string>
     <string name="recaptcha_site_key" translatable="false">6LfsQSAuAAAAADuh0lv82l-9U1KGr0Gsq_D9dmc4</string>
-    <string name="default_web_client_id" translatable="false"></string>
+    <string name="default_web_client_id" translatable="false">108392184920-chibipetoauthclientid.apps.googleusercontent.com</string>
 </resources>
