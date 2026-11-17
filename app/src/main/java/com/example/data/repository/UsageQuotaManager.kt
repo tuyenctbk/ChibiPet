@@ -148,6 +148,23 @@ class UsageQuotaManager(
         userId: String,
         todayIsoDate: String = computeTodayIso()
     ): Flow<AiQuotaSnapshot> = flow {
+        val fbUid = auth.currentUser?.uid
+        if (fbUid.isNullOrBlank() || fbUid != userId) {
+            emitAll(
+                combine(
+                    _latestSnapshotCache,
+                    _cooldownUntilMillis,
+                    _lastQuotaWarning
+                ) { cached, cooldownUntil, warning ->
+                    cached.copy(
+                        dateIso = todayIsoDate,
+                        cooldownUntilMillis = cooldownUntil,
+                        lastQuotaWarning = warning
+                    )
+                }
+            )
+            return@flow
+        }
         val docRef = quotaDocRef(userId)
         val firestoreFlow = docRef.snapshots()
             .map { snapshot ->
@@ -199,11 +216,8 @@ class UsageQuotaManager(
     suspend fun ensureOrResetDailyQuota(
         todayIsoDate: String = computeTodayIso()
     ): Result<AiQuotaSnapshot> {
-        val uid = try {
-            requireUserId()
-        } catch (e: Exception) {
-            return Result.failure(e)
-        }
+        val uid = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+            ?: return Result.success(_latestSnapshotCache.value.copy(dateIso = todayIsoDate))
         val docRef = quotaDocRef(uid)
         return try {
             val snap = docRef.get().await()
@@ -331,28 +345,41 @@ class UsageQuotaManager(
         todayIsoDate: String = computeTodayIso(),
         enforceHardCap: Boolean = false
     ): Result<AiQuotaSnapshot> {
-        val uid = try {
-            requireUserId()
-        } catch (e: Exception) {
-            return Result.failure(e)
+        val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate)
+            .getOrElse { _latestSnapshotCache.value.copy(dateIso = todayIsoDate) }
+        val check = checkQuotaLimit(feature, baseSnapshot, enforceHardCap = enforceHardCap)
+        if (!check.allowed) {
+            return Result.failure(
+                AiQuotaExceededException(
+                    check.message ?: "${feature.displayLabel} daily limit reached."
+                )
+            )
         }
+
+        val nextVision = baseSnapshot.visionUsedToday + if (feature == AiFeatureType.VISION) 1 else 0
+        val nextChat = baseSnapshot.chatUsedToday + if (feature == AiFeatureType.CHAT) 1 else 0
+        val nextStudio = baseSnapshot.studioUsedToday + if (feature == AiFeatureType.STUDIO) 1 else 0
+        val nextCascade = baseSnapshot.fallbackCascadeCountToday + if (usedFallbackLite) 1 else 0
+
+        when (feature) {
+            AiFeatureType.VISION -> localMirror?.recordVisionCall(usedFallbackLite)
+            AiFeatureType.CHAT -> localMirror?.recordChatCall(usedFallbackLite)
+            AiFeatureType.STUDIO -> localMirror?.recordStudioCall(usedFallbackLite)
+        }
+
+        val updated = baseSnapshot.copy(
+            dateIso = todayIsoDate,
+            visionUsedToday = nextVision,
+            chatUsedToday = nextChat,
+            studioUsedToday = nextStudio,
+            fallbackCascadeCountToday = nextCascade
+        )
+        _latestSnapshotCache.value = updated
+
+        val uid = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+            ?: return Result.success(updated)
         val docRef = quotaDocRef(uid)
         return try {
-            val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate).getOrThrow()
-            val check = checkQuotaLimit(feature, baseSnapshot, enforceHardCap = enforceHardCap)
-            if (!check.allowed) {
-                return Result.failure(
-                    AiQuotaExceededException(
-                        check.message ?: "${feature.displayLabel} daily limit reached."
-                    )
-                )
-            }
-
-            val nextVision = baseSnapshot.visionUsedToday + if (feature == AiFeatureType.VISION) 1 else 0
-            val nextChat = baseSnapshot.chatUsedToday + if (feature == AiFeatureType.CHAT) 1 else 0
-            val nextStudio = baseSnapshot.studioUsedToday + if (feature == AiFeatureType.STUDIO) 1 else 0
-            val nextCascade = baseSnapshot.fallbackCascadeCountToday + if (usedFallbackLite) 1 else 0
-
             val updates = mutableMapOf<String, Any>(
                 "dateIso" to todayIsoDate,
                 "visionUsed" to nextVision.toLong(),
@@ -362,22 +389,6 @@ class UsageQuotaManager(
                 "updatedAt" to FieldValue.serverTimestamp()
             )
             docRef.update(updates).await()
-
-            // Mirror locally for instant offline/startup reads
-            when (feature) {
-                AiFeatureType.VISION -> localMirror?.recordVisionCall(usedFallbackLite)
-                AiFeatureType.CHAT -> localMirror?.recordChatCall(usedFallbackLite)
-                AiFeatureType.STUDIO -> localMirror?.recordStudioCall(usedFallbackLite)
-            }
-
-            val updated = baseSnapshot.copy(
-                dateIso = todayIsoDate,
-                visionUsedToday = nextVision,
-                chatUsedToday = nextChat,
-                studioUsedToday = nextStudio,
-                fallbackCascadeCountToday = nextCascade
-            )
-            _latestSnapshotCache.value = updated
             Result.success(updated)
         } catch (e: CancellationException) {
             throw e
@@ -397,18 +408,22 @@ class UsageQuotaManager(
         feature: AiFeatureType,
         todayIsoDate: String = computeTodayIso()
     ): Result<AiQuotaSnapshot> {
-        val uid = try {
-            requireUserId()
-        } catch (e: Exception) {
-            return Result.failure(e)
-        }
+        val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate)
+            .getOrElse { _latestSnapshotCache.value.copy(dateIso = todayIsoDate) }
+        val nextVision = (baseSnapshot.visionUsedToday - if (feature == AiFeatureType.VISION) 1 else 0).coerceAtLeast(0)
+        val nextChat = (baseSnapshot.chatUsedToday - if (feature == AiFeatureType.CHAT) 1 else 0).coerceAtLeast(0)
+        val nextStudio = (baseSnapshot.studioUsedToday - if (feature == AiFeatureType.STUDIO) 1 else 0).coerceAtLeast(0)
+        val updated = baseSnapshot.copy(
+            visionUsedToday = nextVision,
+            chatUsedToday = nextChat,
+            studioUsedToday = nextStudio
+        )
+        _latestSnapshotCache.value = updated
+
+        val uid = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+            ?: return Result.success(updated)
         val docRef = quotaDocRef(uid)
         return try {
-            val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate).getOrThrow()
-            val nextVision = (baseSnapshot.visionUsedToday - if (feature == AiFeatureType.VISION) 1 else 0).coerceAtLeast(0)
-            val nextChat = (baseSnapshot.chatUsedToday - if (feature == AiFeatureType.CHAT) 1 else 0).coerceAtLeast(0)
-            val nextStudio = (baseSnapshot.studioUsedToday - if (feature == AiFeatureType.STUDIO) 1 else 0).coerceAtLeast(0)
-
             docRef.update(
                 mapOf(
                     "visionUsed" to nextVision.toLong(),
@@ -417,13 +432,6 @@ class UsageQuotaManager(
                     "updatedAt" to FieldValue.serverTimestamp()
                 )
             ).await()
-
-            val updated = baseSnapshot.copy(
-                visionUsedToday = nextVision,
-                chatUsedToday = nextChat,
-                studioUsedToday = nextStudio
-            )
-            _latestSnapshotCache.value = updated
             Result.success(updated)
         } catch (e: CancellationException) {
             throw e
@@ -440,18 +448,26 @@ class UsageQuotaManager(
     suspend fun claimDailyGraceCredits(
         todayIsoDate: String = computeTodayIso()
     ): Result<Boolean> {
-        val uid = try {
-            requireUserId()
-        } catch (e: Exception) {
-            return Result.failure(e)
+        val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate)
+            .getOrElse { _latestSnapshotCache.value.copy(dateIso = todayIsoDate) }
+        if (baseSnapshot.graceClaimedToday) {
+            return Result.success(false)
         }
+        val nextBonus = (baseSnapshot.bonusGraceCreditsToday + GRACE_CREDIT_INCREMENT).coerceAtMost(100)
+        _cooldownUntilMillis.value = 0L
+        _lastQuotaWarning.value = null
+        localMirror?.claimDailyGraceCredits()
+        _latestSnapshotCache.value = baseSnapshot.copy(
+            bonusGraceCreditsToday = nextBonus,
+            graceClaimedToday = true,
+            cooldownUntilMillis = 0L,
+            lastQuotaWarning = null
+        )
+
+        val uid = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+            ?: return Result.success(true)
         val docRef = quotaDocRef(uid)
         return try {
-            val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate).getOrThrow()
-            if (baseSnapshot.graceClaimedToday) {
-                return Result.success(false)
-            }
-            val nextBonus = (baseSnapshot.bonusGraceCreditsToday + GRACE_CREDIT_INCREMENT).coerceAtMost(100)
             docRef.update(
                 mapOf(
                     "bonusGraceCredits" to nextBonus.toLong(),
@@ -459,17 +475,6 @@ class UsageQuotaManager(
                     "updatedAt" to FieldValue.serverTimestamp()
                 )
             ).await()
-
-            _cooldownUntilMillis.value = 0L
-            _lastQuotaWarning.value = null
-            localMirror?.claimDailyGraceCredits()
-
-            _latestSnapshotCache.value = baseSnapshot.copy(
-                bonusGraceCreditsToday = nextBonus,
-                graceClaimedToday = true,
-                cooldownUntilMillis = 0L,
-                lastQuotaWarning = null
-            )
             Result.success(true)
         } catch (e: CancellationException) {
             throw e
@@ -486,23 +491,22 @@ class UsageQuotaManager(
         enabled: Boolean,
         todayIsoDate: String = computeTodayIso()
     ): Result<AiQuotaSnapshot> {
-        val uid = try {
-            requireUserId()
-        } catch (e: Exception) {
-            return Result.failure(e)
-        }
+        val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate)
+            .getOrElse { _latestSnapshotCache.value.copy(dateIso = todayIsoDate) }
+        localMirror?.setEcoLiteMode(enabled)
+        val updated = baseSnapshot.copy(ecoLiteModeEnabled = enabled)
+        _latestSnapshotCache.value = updated
+
+        val uid = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+            ?: return Result.success(updated)
         val docRef = quotaDocRef(uid)
         return try {
-            val baseSnapshot = ensureOrResetDailyQuota(todayIsoDate).getOrThrow()
             docRef.update(
                 mapOf(
                     "ecoLiteMode" to enabled,
                     "updatedAt" to FieldValue.serverTimestamp()
                 )
             ).await()
-            localMirror?.setEcoLiteMode(enabled)
-            val updated = baseSnapshot.copy(ecoLiteModeEnabled = enabled)
-            _latestSnapshotCache.value = updated
             Result.success(updated)
         } catch (e: CancellationException) {
             throw e

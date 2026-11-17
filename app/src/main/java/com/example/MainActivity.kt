@@ -67,6 +67,10 @@ import com.example.data.local.AppLanguageManager
 import com.example.data.local.OnboardingPreferences
 import com.example.firebase.configureAppCheck
 import com.example.ui.auth.AuthScreen
+import com.example.ui.auth.AuthSessionManager
+import com.example.ui.auth.AuthSessionState
+import com.example.ui.auth.AuthenticatedGoogleUser
+import com.example.ui.auth.findActivity
 import com.example.ui.auth.signOutUser
 import com.example.ui.components.SplashOverlay
 import com.example.ui.screens.ChatScreen
@@ -127,15 +131,26 @@ private fun ChibiPetAppRoot() {
         LocalConfiguration provides localizedContext.resources.configuration
     ) {
         val context = LocalContext.current
+        val authSessionState by AuthSessionManager.observe(context).collectAsStateWithLifecycle()
         var currentUser by remember { mutableStateOf<FirebaseUser?>(Firebase.auth.currentUser) }
-        var isGuestMode by rememberSaveable { mutableStateOf(false) }
         var showSplash by rememberSaveable { mutableStateOf(true) }
         val onboardingSelection by OnboardingPreferences.observe(context).collectAsStateWithLifecycle()
         var onboardingApplyNonce by rememberSaveable { mutableIntStateOf(0) }
 
         DisposableEffect(Unit) {
             val listener = FirebaseAuth.AuthStateListener { auth ->
-                currentUser = auth.currentUser
+                val fbUser = auth.currentUser
+                currentUser = fbUser
+                if (fbUser != null) {
+                    AuthSessionManager.setAuthenticated(
+                        context,
+                        AuthenticatedGoogleUser(
+                            uid = fbUser.uid,
+                            displayName = fbUser.displayName,
+                            email = fbUser.email
+                        )
+                    )
+                }
             }
             Firebase.auth.addAuthStateListener(listener)
             onDispose {
@@ -145,6 +160,9 @@ private fun ChibiPetAppRoot() {
 
         Box(modifier = Modifier.fillMaxSize()) {
             val user = currentUser
+            val sessionUser = (authSessionState as? AuthSessionState.Authenticated)?.user
+            val isGuestMode = authSessionState is AuthSessionState.Guest
+            val isAuthenticated = user != null || sessionUser != null || isGuestMode
             if (!onboardingSelection.hasCompletedOnboarding) {
                 OnboardingScreen(
                     initialSelection = onboardingSelection,
@@ -159,27 +177,41 @@ private fun ChibiPetAppRoot() {
                         onboardingApplyNonce += 1
                     }
                 )
-            } else if (user == null && !isGuestMode) {
+            } else if (!isAuthenticated) {
                 AuthScreen(
                     preferredPetName = onboardingSelection.preferredPetName,
                     onReopenOnboarding = {
                         OnboardingPreferences.reopenOnboarding(context)
                     },
-                    onAuthSuccess = { currentUser = Firebase.auth.currentUser },
-                    onContinueAsGuest = { isGuestMode = true }
+                    onAuthSuccess = { signedInUser ->
+                        AuthSessionManager.setAuthenticated(context, signedInUser)
+                        currentUser = Firebase.auth.currentUser
+                    },
+                    onContinueAsGuest = {
+                        AuthSessionManager.setGuestMode(context)
+                    }
                 )
             } else {
-                val effectiveUid = user?.uid ?: "guest_explorer_local"
-                val effectiveName = user?.displayName ?: stringResource(R.string.auth_guest_explorer_name)
+                val effectiveUid = user?.uid
+                    ?: sessionUser?.uid
+                    ?: "guest_explorer_local"
+                val effectiveName = user?.displayName?.takeIf { it.isNotBlank() }
+                    ?: sessionUser?.displayName?.takeIf { it.isNotBlank() }
+                    ?: stringResource(R.string.auth_guest_explorer_name)
+                val effectiveEmail = user?.email?.takeIf { it.isNotBlank() }
+                    ?: sessionUser?.email?.takeIf { it.isNotBlank() }
                 key(effectiveUid) {
                     AuthenticatedChibiPetApp(
                         currentUserId = effectiveUid,
                         userDisplayName = effectiveName,
-                        userEmail = user?.email,
+                        userEmail = effectiveEmail,
                         onboardingApplyNonce = onboardingApplyNonce,
                         onReplayOnboarding = {
-                            isGuestMode = false
                             OnboardingPreferences.reopenOnboarding(context)
+                        },
+                        onSignOut = {
+                            AuthSessionManager.clearSession(context)
+                            currentUser = null
                         }
                     )
                 }
@@ -199,9 +231,11 @@ private fun AuthenticatedChibiPetApp(
     userDisplayName: String?,
     userEmail: String?,
     onboardingApplyNonce: Int,
-    onReplayOnboarding: () -> Unit
+    onReplayOnboarding: () -> Unit,
+    onSignOut: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val activityContext = remember(context) { context.findActivity() ?: context }
     val databaseId = remember(context) {
         context.applicationContext.getString(R.string.firestore_database_id)
     }
@@ -221,6 +255,7 @@ private fun AuthenticatedChibiPetApp(
             viewModel.applyOnboardingCustomization(
                 petName = selection.preferredPetName,
                 speciesColor = selection.preferredColor,
+                outfit = selection.preferredOutfit,
                 selectedQuestIds = selection.selectedQuestIds
             )
         }
@@ -259,7 +294,7 @@ private fun AuthenticatedChibiPetApp(
     var selectedTab by rememberSaveable { mutableStateOf(ChibiTab.PET) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    val credentialManager = remember { CredentialManager.create(context) }
+    val credentialManager = remember(activityContext) { CredentialManager.create(activityContext) }
 
     LaunchedEffect(bannerMessage) {
         val msg = bannerMessage
@@ -418,7 +453,12 @@ private fun AuthenticatedChibiPetApp(
                             onReplayOnboarding = onReplayOnboarding,
                             onShowMessage = viewModel::showActionMessage,
                             onSignOutClick = {
-                                signOutUser(credentialManager, scope)
+                                signOutUser(
+                                    credentialManager = credentialManager,
+                                    scope = scope,
+                                    context = context,
+                                    onSignOutComplete = onSignOut
+                                )
                             },
                             modifier = Modifier.fillMaxSize()
                         )

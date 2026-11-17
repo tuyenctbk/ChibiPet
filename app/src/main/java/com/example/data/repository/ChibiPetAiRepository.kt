@@ -433,44 +433,7 @@ class ChibiPetAiRepository {
         }
     }
 
-    /**
-     * Generates a rich, zero-token in-character reply grounded in the user's real live Firestore stats
-     * when cloud AI chat quota is temporarily cooling down.
-     */
-    fun buildLocalReflexReply(
-        userMessage: String,
-        petProfile: PetProfile,
-        habits: List<Habit>,
-        todayIsoDate: String
-    ): String {
-        val completedToday = habits.count { it.isCompletedOn(todayIsoDate) }
-        val pending = habits.filterNot { it.isCompletedOn(todayIsoDate) }
-        val topStreak = habits.maxOfOrNull { it.streakCount } ?: 0L
-        val lower = userMessage.lowercase(Locale.US)
 
-        return when {
-            completedToday == habits.size && habits.isNotEmpty() ->
-                "*happy ear wiggle!* You finished all ${habits.size} quests today and unlocked our Daily Sweep Chest! My mood is ${petProfile.happiness}% and I'm so proud of our ${topStreak}-day top streak!"
-            "next" in lower || "habit" in lower || "todo" in lower -> {
-                val nextHabit = pending.firstOrNull()
-                if (nextHabit != null) {
-                    "Let's tackle \"${nextHabit.title}\" next for +${nextHabit.xpReward} XP! Snap a quick photo when you're done and I'll do my victory backflip!"
-                } else {
-                    "We've already crushed every quest on our list today! Time to relax or try on outfits in the Boutique!"
-                }
-            }
-            "boost" in lower || "cheer" in lower || "tired" in lower ->
-                "*nuzzles your hand* You've already completed ${petProfile.totalCompleted} verified habits with me at Level ${petProfile.level}! Take a deep breath—even one small step today keeps our spark glowing!"
-            else -> {
-                val remainingNote = if (pending.isNotEmpty()) {
-                    "We have ${pending.size} quest(s) left today (like \"${pending.first().title}\")."
-                } else {
-                    "All of today's quests are complete!"
-                }
-                "*boops your screen!* I'm resting my cloud antenna for a moment (Eco Reflex Mode), but I'm right here with you at Lv.${petProfile.level}! $remainingNote"
-            }
-        }
-    }
 
     /**
      * Renders a high-resolution 800x800 collectible ChibiPet Emblem Sticker on-device using Canvas
@@ -685,7 +648,7 @@ class ChibiPetAiRepository {
             Result.success(plan)
         } catch (e: TimeoutCancellationException) {
             Log.e(TAG, "Quest coach timed out", e)
-            Result.failure(Exception("AI Quest Coach timed out. Tap 'Instant Local Plan' for zero-wait suggestions!"))
+            Result.failure(Exception("AI Quest Coach timed out. Please try again or retry with Flash-Lite."))
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
@@ -693,7 +656,7 @@ class ChibiPetAiRepository {
             if (AiQuotaManager.isQuotaOrRateLimitError(e)) {
                 Result.failure(
                     AiQuotaExceededException(
-                        "Cloud AI quota reached for this minute. Tap 'Instant Local Plan (0 Quota)' below to generate your custom quest pack immediately!",
+                        "Cloud AI quota reached for this minute. You can retry with Flash-Lite or create a custom quest below.",
                         e
                     )
                 )
@@ -703,130 +666,7 @@ class ChibiPetAiRepository {
         }
     }
 
-    /**
-     * Zero-Quota On-Device Smart Quest Planner: Analyzes the user's goal keywords and current habits
-     * to synthesize 3 non-duplicate, category-balanced quests when cloud AI quota is exhausted or offline.
-     */
-    fun buildLocalSmartQuestPlan(
-        userGoal: String,
-        petProfile: PetProfile,
-        existingHabits: List<Habit>
-    ): SmartQuestCoachPlan {
-        val cleanGoal = userGoal.trim().ifEmpty { "Balanced Daily Routine" }
-        val lower = cleanGoal.lowercase(Locale.US)
-        val existingTitlesLower = existingHabits.map { it.title.lowercase(Locale.US) }.toSet()
 
-        val candidates: List<SuggestedQuest> = when {
-            "sleep" in lower || "calm" in lower || "stress" in lower || "night" in lower || "relax" in lower -> listOf(
-                SuggestedQuest(
-                    title = "Brew herbal tea & dim screens 30m before bed",
-                    category = HabitCategory.MINDFULNESS,
-                    xpReward = 35L,
-                    reason = "Signals your nervous system to wind down for deeper rest."
-                ),
-                SuggestedQuest(
-                    title = "Write 3 gratitude lines in evening journal",
-                    category = HabitCategory.MINDFULNESS,
-                    xpReward = 20L,
-                    reason = "Clears mental clutter before sleep."
-                ),
-                SuggestedQuest(
-                    title = "Morning glass of water by the window",
-                    category = HabitCategory.HYDRATION,
-                    xpReward = 20L,
-                    reason = "Rehydrates your body and anchors your circadian rhythm."
-                )
-            )
-            "study" in lower || "exam" in lower || "learn" in lower || "read" in lower || "focus" in lower || "work" in lower -> listOf(
-                SuggestedQuest(
-                    title = "25-minute Pomodoro deep study sprint",
-                    category = HabitCategory.STUDY,
-                    xpReward = 60L,
-                    reason = "High-focus block without phone distractions."
-                ),
-                SuggestedQuest(
-                    title = "Read 10 pages & summarize 1 key takeaway",
-                    category = HabitCategory.STUDY,
-                    xpReward = 35L,
-                    reason = "Active recall strengthens long-term memory."
-                ),
-                SuggestedQuest(
-                    title = "Keep a full water bottle on study desk",
-                    category = HabitCategory.HYDRATION,
-                    xpReward = 20L,
-                    reason = "Steady hydration prevents afternoon focus dips."
-                )
-            )
-            "fit" in lower || "run" in lower || "gym" in lower || "walk" in lower || "energy" in lower || "workout" in lower -> listOf(
-                SuggestedQuest(
-                    title = "15-minute brisk outdoor walk or jog",
-                    category = HabitCategory.FITNESS,
-                    xpReward = 35L,
-                    reason = "Boosts circulation, mood, and daily stamina."
-                ),
-                SuggestedQuest(
-                    title = "10-minute full-body stretch & mobility flow",
-                    category = HabitCategory.FITNESS,
-                    xpReward = 20L,
-                    reason = "Releases posture tension and protects joints."
-                ),
-                SuggestedQuest(
-                    title = "Post-movement electrolyte or water refill",
-                    category = HabitCategory.HYDRATION,
-                    xpReward = 20L,
-                    reason = "Replenishes hydration after active movement."
-                )
-            )
-            "art" in lower || "draw" in lower || "music" in lower || "write" in lower || "creat" in lower -> listOf(
-                SuggestedQuest(
-                    title = "15-minute daily sketch, instrument, or craft session",
-                    category = HabitCategory.CREATIVE,
-                    xpReward = 35L,
-                    reason = "Builds creative muscle memory through daily play."
-                ),
-                SuggestedQuest(
-                    title = "Capture 1 inspiring idea or doodle in notebook",
-                    category = HabitCategory.CREATIVE,
-                    xpReward = 20L,
-                    reason = "Lowers perfectionism and keeps inspiration flowing."
-                ),
-                SuggestedQuest(
-                    title = "5-minute mindful breathing before creating",
-                    category = HabitCategory.MINDFULNESS,
-                    xpReward = 20L,
-                    reason = "Quiets inner critic for joyful creative flow."
-                )
-            )
-            else -> listOf(
-                SuggestedQuest(
-                    title = "Drink 1 full glass of water after waking up",
-                    category = HabitCategory.HYDRATION,
-                    xpReward = 20L,
-                    reason = "Easy 2-minute keystone win to start the day."
-                ),
-                SuggestedQuest(
-                    title = "20-minute focused progress on \"$cleanGoal\"",
-                    category = HabitCategory.STUDY,
-                    xpReward = 60L,
-                    reason = "Dedicated daily block directly advancing your goal."
-                ),
-                SuggestedQuest(
-                    title = "10-minute outdoor walk & stretch break",
-                    category = HabitCategory.FITNESS,
-                    xpReward = 35L,
-                    reason = "Refreshes physical and mental energy."
-                )
-            )
-        }
-
-        val filtered = candidates.filter { it.title.lowercase(Locale.US) !in existingTitlesLower }
-        return SmartQuestCoachPlan(
-            goalSummary = cleanGoal,
-            coachMessage = "*happy ear wiggle!* ${petProfile.petName} crafted this instant Eco Coach plan for \"$cleanGoal\" (0 Cloud Quota used)!",
-            quests = filtered.ifEmpty { candidates },
-            isLocalFallback = true
-        )
-    }
 
     private fun scaleBitmapForAi(bitmap: Bitmap, maxDimension: Int): Bitmap {
         val width = bitmap.width

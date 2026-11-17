@@ -24,7 +24,14 @@ class ChibiPetRepositoryRuleTest : FirestoreEmulatorTestBase() {
         val repository = ChibiPetRepository(firestore)
 
         val initResult = withTimeout(DEFAULT_TIMEOUT_MS) {
-            repository.ensureInitializedForUser("Alice")
+            repository.ensureInitializedForUser(
+                displayName = "Alice",
+                initialQuests = listOf(
+                    Triple("Morning Hydration", HabitCategory.HYDRATION.key, 25L),
+                    Triple("Deep Work Block", HabitCategory.STUDY.key, 40L),
+                    Triple("Evening Stretch", HabitCategory.FITNESS.key, 35L)
+                )
+            )
         }
         assertTrue(initResult.isSuccess)
 
@@ -39,7 +46,7 @@ class ChibiPetRepositoryRuleTest : FirestoreEmulatorTestBase() {
         val habits = withTimeout(FLOW_TIMEOUT_MS) {
             repository.observeHabits(uid).first { it.isNotEmpty() }
         }
-        assertTrue(habits.size >= 3)
+        assertEquals(3, habits.size)
     }
 
     @Test

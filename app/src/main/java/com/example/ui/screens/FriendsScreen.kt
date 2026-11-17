@@ -172,7 +172,7 @@ fun FriendsScreen(
                                 }
                                 IconButton(
                                     onClick = {
-                                        val petName = profile?.petName ?: "Mochi"
+                                        val petName = profile?.petName ?: context.getString(R.string.default_pet_name)
                                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                                             type = "text/plain"
                                             putExtra(
@@ -319,7 +319,7 @@ fun FriendsScreen(
                                 friend = friend,
                                 onVisitClick = { visitingFriend = friend },
                                 onCheerClick = {
-                                    val myName = profile?.petName ?: "Mochi"
+                                    val myName = profile?.petName ?: context.getString(R.string.default_pet_name)
                                     onSendCheer(
                                         friend,
                                         context.getString(R.string.friends_default_cheer_msg, myName)
@@ -341,7 +341,7 @@ fun FriendsScreen(
             friend = friend,
             onDismiss = { visitingFriend = null },
             onSendCheer = {
-                val myName = profile?.petName ?: "Mochi"
+                val myName = profile?.petName ?: context.getString(R.string.default_pet_name)
                 onSendCheer(
                     friend,
                     context.getString(R.string.friends_visit_cheer_msg, myName)

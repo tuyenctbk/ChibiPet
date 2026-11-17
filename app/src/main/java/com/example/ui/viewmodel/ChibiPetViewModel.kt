@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.R
 import com.example.data.local.AiQuotaManager
 import com.example.data.local.AiQuotaSnapshot
 import com.example.data.local.OnboardingPreferences
@@ -139,9 +140,10 @@ class ChibiPetViewModel(
     private fun buildDefaultPetProfile(): PetProfile {
         val onboarding = OnboardingPreferences.read(appContext)
         val outfitKey = onboarding.preferredOutfit.key
+        val defaultName = appContext.getString(R.string.default_pet_name)
         return PetProfile(
             userId = currentUserId,
-            petName = onboarding.preferredPetName.ifBlank { "Mochi" },
+            petName = onboarding.preferredPetName.ifBlank { defaultName },
             speciesColor = onboarding.preferredColor.key,
             equippedOutfit = outfitKey,
             unlockedOutfits = listOf(PetOutfit.NONE.key, outfitKey).distinct(),
@@ -153,29 +155,6 @@ class ChibiPetViewModel(
             totalCompleted = 0L,
             streakFreezes = 1L
         )
-    }
-
-    private fun buildDefaultHabits(): List<Habit> {
-        val onboarding = OnboardingPreferences.read(appContext)
-        return OnboardingSelection.STARTER_QUEST_TEMPLATES
-            .filter { it.id in onboarding.selectedQuestIds }
-            .ifEmpty { OnboardingSelection.STARTER_QUEST_TEMPLATES.take(3) }
-            .mapIndexed { idx, q ->
-                val localizedTitle = try {
-                    appContext.getString(q.titleRes)
-                } catch (_: Exception) {
-                    q.title
-                }
-                Habit(
-                    id = "quest_${q.id}",
-                    userId = currentUserId,
-                    title = localizedTitle,
-                    category = q.category.key,
-                    xpReward = q.xpReward,
-                    streakCount = 0L,
-                    lastVerifiedDate = ""
-                )
-            }
     }
 
     val petProfileState: StateFlow<DataUiState<PetProfile>> = repository.observePetProfile(currentUserId)
@@ -199,7 +178,7 @@ class ChibiPetViewModel(
 
     val habitsState: StateFlow<DataUiState<List<Habit>>> = repository.observeHabits(currentUserId)
         .map<List<Habit>, DataUiState<List<Habit>>> { list ->
-            DataUiState.Success(list.ifEmpty { buildDefaultHabits() })
+            DataUiState.Success(list)
         }
         .catch { error ->
             val firestoreError = generateSequence(error) { it.cause }
@@ -207,13 +186,13 @@ class ChibiPetViewModel(
                 .firstOrNull()
             if (firestoreError == null && error is CancellationException) throw error
             val rootError = firestoreError ?: error
-            Log.w(TAG, "Error observing habits; falling back to local quests", rootError)
-            emit(DataUiState.Success(buildDefaultHabits()))
+            Log.w(TAG, "Error observing habits", rootError)
+            emit(DataUiState.Success(emptyList()))
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = DataUiState.Success(buildDefaultHabits())
+            initialValue = DataUiState.Success(emptyList())
         )
 
     val chatMessagesState: StateFlow<DataUiState<List<ChatMessage>>> = repository.observeChatMessages(currentUserId)
@@ -317,6 +296,7 @@ class ChibiPetViewModel(
     private var lastSyncedCardDigest: String = ""
     private var isPurchasingOrCareBusy: Boolean = false
     private var lastSnackMillis: Long = 0L
+    private var isInitializationCompleted: Boolean = false
 
     init {
         viewModelScope.launch {
@@ -327,13 +307,20 @@ class ChibiPetViewModel(
             val onboarding = OnboardingPreferences.read(this@ChibiPetViewModel.appContext)
             val chosenQuests = OnboardingSelection.STARTER_QUEST_TEMPLATES
                 .filter { it.id in onboarding.selectedQuestIds }
-                .map { Triple(it.title, it.category.key, it.xpReward) }
+                .map { template ->
+                    val localizedTitle = runCatching {
+                        this@ChibiPetViewModel.appContext.getString(template.titleRes)
+                    }.getOrNull()?.takeIf { it.isNotBlank() } ?: template.title
+                    Triple(localizedTitle, template.category.key, template.xpReward)
+                }
             repository.ensureInitializedForUser(
                 displayName = userDisplayName,
                 initialPetName = onboarding.preferredPetName,
                 initialColor = onboarding.preferredColor,
+                initialOutfit = onboarding.preferredOutfit,
                 initialQuests = chosenQuests
             ).onSuccess {
+                isInitializationCompleted = true
                 if (onboarding.hasCompletedOnboarding) {
                     OnboardingPreferences.markAppliedForUser(
                         this@ChibiPetViewModel.appContext,
@@ -341,8 +328,10 @@ class ChibiPetViewModel(
                     )
                 }
             }.onFailure { err ->
+                isInitializationCompleted = true
                 Log.e(TAG, "Failed to initialize user data", err)
-                _actionBannerMessage.value = err.localizedMessage ?: "Failed to initialize pet profile."
+                _actionBannerMessage.value = err.localizedMessage
+                    ?: this@ChibiPetViewModel.appContext.getString(R.string.vm_err_init_profile)
             }
         }
 
@@ -381,13 +370,16 @@ class ChibiPetViewModel(
                     repository.syncMyPetCard(profile, topStreak)
                 }
 
-                if (lastReconciledDate != today && habits.isNotEmpty()) {
+                if (isInitializationCompleted && lastReconciledDate != today && habits.isNotEmpty()) {
                     lastReconciledDate = today
                     repository.reconcileDailyStreaks(profile, habits, today)
                         .onSuccess { protected ->
                             if (protected.isNotEmpty()) {
                                 _actionBannerMessage.value =
-                                    "Streak Freeze saved ${protected.joinToString(", ")}!"
+                                    this@ChibiPetViewModel.appContext.getString(
+                                        R.string.vm_streak_freeze_saved,
+                                        protected.joinToString(", ")
+                                    )
                             }
                         }
                 }
@@ -398,21 +390,34 @@ class ChibiPetViewModel(
     fun applyOnboardingCustomization(
         petName: String,
         speciesColor: SpeciesColor,
+        outfit: PetOutfit = PetOutfit.BOW,
         selectedQuestIds: Set<String>
     ) {
         viewModelScope.launch {
-            repository.updatePetAppearance(petName = petName, speciesColor = speciesColor)
+            repository.updatePetAppearance(
+                petName = petName,
+                speciesColor = speciesColor,
+                equippedOutfit = outfit
+            )
             val existingHabits = (habitsState.value as? DataUiState.Success)?.data.orEmpty()
             val existingTitlesLower = existingHabits.map { it.title.lowercase(Locale.US) }.toSet()
-            val templatesToAdd = OnboardingSelection.STARTER_QUEST_TEMPLATES.filter {
-                it.id in selectedQuestIds && it.title.lowercase(Locale.US) !in existingTitlesLower
+            val templatesToAdd = OnboardingSelection.STARTER_QUEST_TEMPLATES.filter { template ->
+                val localizedTitle = runCatching { appContext.getString(template.titleRes) }.getOrNull() ?: template.title
+                template.id in selectedQuestIds &&
+                    template.title.lowercase(Locale.US) !in existingTitlesLower &&
+                    localizedTitle.lowercase(Locale.US) !in existingTitlesLower
             }
             for (template in templatesToAdd) {
-                repository.createHabit(template.title, template.category, template.xpReward)
+                val localizedTitle = runCatching { appContext.getString(template.titleRes) }
+                    .getOrNull()?.takeIf { it.isNotBlank() } ?: template.title
+                repository.createHabit(localizedTitle, template.category, template.xpReward)
             }
             OnboardingPreferences.markAppliedForUser(appContext, currentUserId)
             _celebrationTick.value += 1
-            _actionBannerMessage.value = "Welcome! ${petName.trim().ifEmpty { "Mochi" }} is ready for your quests!"
+            _actionBannerMessage.value = appContext.getString(
+                R.string.vm_welcome_ready_quests,
+                petName.trim().ifEmpty { appContext.getString(R.string.default_pet_name) }
+            )
         }
     }
 
@@ -420,9 +425,9 @@ class ChibiPetViewModel(
         viewModelScope.launch {
             usageQuotaManager.setEcoLiteMode(enabled, _todayIsoDate.value)
             _actionBannerMessage.value = if (enabled) {
-                "Eco Lite Mode ON: Using Gemini Flash-Lite to stretch Free-Tier quota 3×!"
+                appContext.getString(R.string.vm_eco_lite_on)
             } else {
-                "Standard AI Mode restored (auto-cascades to Flash-Lite if rate-limited)."
+                appContext.getString(R.string.vm_eco_lite_off)
             }
         }
     }
@@ -432,13 +437,14 @@ class ChibiPetViewModel(
             usageQuotaManager.claimDailyGraceCredits(_todayIsoDate.value)
                 .onSuccess { claimed ->
                     _actionBannerMessage.value = if (claimed) {
-                        "+3 Daily Grace Credits synced to your cloud quota!"
+                        appContext.getString(R.string.vm_grace_claimed_success)
                     } else {
-                        "Today's +3 Grace Credits were already claimed. Resets at midnight!"
+                        appContext.getString(R.string.vm_grace_already_claimed)
                     }
                 }
                 .onFailure { err ->
-                    _actionBannerMessage.value = err.localizedMessage ?: "Could not claim grace credits."
+                    _actionBannerMessage.value = err.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_claim_grace)
                 }
         }
     }
@@ -485,15 +491,15 @@ class ChibiPetViewModel(
         if (isPurchasingOrCareBusy) return
         val now = System.currentTimeMillis()
         if (now - lastSnackMillis < 8_000L) {
-            _actionBannerMessage.value = "${profile.petName} is still munching! Wait a few seconds."
+            _actionBannerMessage.value = appContext.getString(R.string.vm_snack_still_munching, profile.petName)
             return
         }
         if (profile.happiness >= 100L && profile.energy >= 100L) {
-            _actionBannerMessage.value = "${profile.petName} is already 100% full and happy!"
+            _actionBannerMessage.value = appContext.getString(R.string.vm_snack_already_full, profile.petName)
             return
         }
         if (profile.coins < SNACK_COST_COINS) {
-            _actionBannerMessage.value = "Need $SNACK_COST_COINS Star Coins for a Berry Treat! Verify a habit first."
+            _actionBannerMessage.value = appContext.getString(R.string.vm_snack_need_coins, SNACK_COST_COINS.toInt())
             return
         }
         viewModelScope.launch {
@@ -507,10 +513,14 @@ class ChibiPetViewModel(
                 ).onSuccess {
                     lastSnackMillis = System.currentTimeMillis()
                     _celebrationTick.value += 1
-                    _actionBannerMessage.value =
-                        "Yum! ${profile.petName} munched a Berry Treat (-$SNACK_COST_COINS Coins, +Mood & Energy)"
+                    _actionBannerMessage.value = appContext.getString(
+                        R.string.vm_snack_munched_success,
+                        profile.petName,
+                        SNACK_COST_COINS.toInt()
+                    )
                 }.onFailure { err ->
-                    _actionBannerMessage.value = err.localizedMessage ?: "Could not give treat."
+                    _actionBannerMessage.value = err.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_give_treat)
                 }
             } finally {
                 isPurchasingOrCareBusy = false
@@ -528,12 +538,15 @@ class ChibiPetViewModel(
                     .onSuccess {
                         _celebrationTick.value += 1
                         _actionBannerMessage.value = when (item) {
-                            ShopConsumable.STREAK_FREEZE -> "Added 1 Streak Freeze to your pouch!"
-                            ShopConsumable.GOLDEN_ELIXIR -> "${profile.petName}'s Mood & Energy are 100%!"
+                            ShopConsumable.STREAK_FREEZE ->
+                                appContext.getString(R.string.vm_bought_streak_freeze)
+                            ShopConsumable.GOLDEN_ELIXIR ->
+                                appContext.getString(R.string.vm_bought_golden_elixir, profile.petName)
                         }
                     }
                     .onFailure { err ->
-                        _actionBannerMessage.value = err.localizedMessage ?: "Purchase failed."
+                        _actionBannerMessage.value = err.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_purchase_failed)
                     }
             } finally {
                 isPurchasingOrCareBusy = false
@@ -594,11 +607,19 @@ class ChibiPetViewModel(
                                 )
                                 val rewardSummary = when {
                                     outcome.dailyBonusClaimed ->
-                                        "+${outcome.xpEarned} XP & +${outcome.coinsEarned} Coins (includes Daily Sweep Chest!)"
+                                        appContext.getString(
+                                            R.string.vm_reward_summary_sweep,
+                                            outcome.xpEarned.toInt(),
+                                            outcome.coinsEarned.toInt()
+                                        )
                                     outcome.xpEarned > 0L ->
-                                        "+${outcome.xpEarned} XP & +${outcome.coinsEarned} Coins"
+                                        appContext.getString(
+                                            R.string.vm_reward_summary_normal,
+                                            outcome.xpEarned.toInt(),
+                                            outcome.coinsEarned.toInt()
+                                        )
                                     else ->
-                                        "Extra photo check-in for \"${habit.title}\"!"
+                                        appContext.getString(R.string.vm_reward_summary_extra, habit.title)
                                 }
                                 repository.addChatMessage(
                                     sender = "pet",
@@ -609,7 +630,8 @@ class ChibiPetViewModel(
                             onFailure = { dbErr ->
                                 _proofState.value = ProofVerificationState.Error(
                                     habit = habit,
-                                    message = dbErr.localizedMessage ?: "Failed to save habit progress."
+                                    message = dbErr.localizedMessage
+                                        ?: appContext.getString(R.string.vm_err_save_habit_progress)
                                 )
                             }
                         )
@@ -628,7 +650,8 @@ class ChibiPetViewModel(
                     }
                     _proofState.value = ProofVerificationState.Error(
                         habit = habit,
-                        message = aiErr.localizedMessage ?: "Photo verification failed.",
+                        message = aiErr.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_photo_verify_failed),
                         isQuotaError = isQuota,
                         previewBitmap = bitmap
                     )
@@ -651,8 +674,8 @@ class ChibiPetViewModel(
             val honorResult = HabitVerificationResult(
                 verified = true,
                 confidence = 100,
-                detectedItem = "Honor Pledge Check-In (AI Quota Saver)",
-                petReaction = "I trust you 100%! Thanks for keeping our \"${habit.title}\" streak alive while my cloud scanner rests!"
+                detectedItem = appContext.getString(R.string.vm_honor_pledge_detected),
+                petReaction = appContext.getString(R.string.vm_honor_pledge_reaction, habit.title)
             )
             val completionRes = repository.recordVerifiedHabitCompletion(
                 profile = profile,
@@ -672,16 +695,22 @@ class ChibiPetViewModel(
                         coinsEarned = outcome.coinsEarned,
                         xpEarned = outcome.xpEarned
                     )
+                    val rewardSummary = appContext.getString(
+                        R.string.vm_reward_summary_normal,
+                        outcome.xpEarned.toInt(),
+                        outcome.coinsEarned.toInt()
+                    )
                     repository.addChatMessage(
                         sender = "pet",
-                        text = "${honorResult.petReaction} (+${outcome.xpEarned} XP & +${outcome.coinsEarned} Coins)",
+                        text = "${honorResult.petReaction} ($rewardSummary)",
                         habitTag = habit.category
                     )
                 },
                 onFailure = { dbErr ->
                     _proofState.value = ProofVerificationState.Error(
                         habit = habit,
-                        message = dbErr.localizedMessage ?: "Failed to record Honor Pledge check-in."
+                        message = dbErr.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_honor_pledge_failed)
                     )
                 }
             )
@@ -691,12 +720,17 @@ class ChibiPetViewModel(
     fun addHabit(title: String, category: HabitCategory, xpReward: Long) {
         viewModelScope.launch {
             repository.createHabit(title, category, xpReward)
-                .onSuccess { _actionBannerMessage.value = "Added quest: ${title.trim()}" }
-                .onFailure { _actionBannerMessage.value = it.localizedMessage ?: "Could not create habit." }
+                .onSuccess {
+                    _actionBannerMessage.value = appContext.getString(R.string.vm_added_quest, title.trim())
+                }
+                .onFailure {
+                    _actionBannerMessage.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_create_habit)
+                }
         }
     }
 
-    fun requestSmartQuestCoach(goalPrompt: String) {
+    fun requestSmartQuestCoach(goalPrompt: String, forceLiteModel: Boolean = false) {
         refreshCurrentDate()
         val currentToday = _todayIsoDate.value
         val profile = (petProfileState.value as? DataUiState.Success)?.data ?: PetProfile()
@@ -705,7 +739,7 @@ class ChibiPetViewModel(
             feature = AiFeatureType.CHAT,
             snapshot = aiQuotaSnapshot.value
         )
-        val preferLite = quotaCheck.preferLiteModel
+        val preferLite = forceLiteModel || quotaCheck.preferLiteModel
 
         viewModelScope.launch {
             _questCoachState.value = QuestCoachUiState.Loading
@@ -731,12 +765,13 @@ class ChibiPetViewModel(
                     if (isQuota) {
                         usageQuotaManager.recordRateLimitHit(
                             cooldownSeconds = 20,
-                            reason = "Quest Coach hit cloud rate limit; local coach plan available.",
+                            reason = "Quest Coach hit cloud rate limit.",
                             todayIsoDate = currentToday
                         )
                     }
                     _questCoachState.value = QuestCoachUiState.Error(
-                        message = err.localizedMessage ?: "Could not generate quest plan.",
+                        message = err.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_quest_plan),
                         isQuotaError = isQuota,
                         goalPrompt = goalPrompt
                     )
@@ -746,14 +781,7 @@ class ChibiPetViewModel(
     }
 
     fun requestLocalSmartQuestCoach(goalPrompt: String) {
-        val profile = (petProfileState.value as? DataUiState.Success)?.data ?: PetProfile()
-        val existingHabits = (habitsState.value as? DataUiState.Success)?.data.orEmpty()
-        val localPlan = aiRepository.buildLocalSmartQuestPlan(
-            userGoal = goalPrompt,
-            petProfile = profile,
-            existingHabits = existingHabits
-        )
-        _questCoachState.value = QuestCoachUiState.Success(localPlan)
+        requestSmartQuestCoach(goalPrompt, forceLiteModel = true)
     }
 
     fun addSuggestedQuests(quests: List<SuggestedQuest>) {
@@ -766,7 +794,7 @@ class ChibiPetViewModel(
             }
             if (addedCount > 0) {
                 _celebrationTick.value += 1
-                _actionBannerMessage.value = "Added $addedCount coached quest(s) to your daily list!"
+                _actionBannerMessage.value = appContext.getString(R.string.vm_added_coached_quests, addedCount)
             }
             _questCoachState.value = QuestCoachUiState.Idle
         }
@@ -779,15 +807,26 @@ class ChibiPetViewModel(
     fun deleteHabit(habitId: String) {
         viewModelScope.launch {
             repository.deleteHabit(habitId)
-                .onFailure { _actionBannerMessage.value = it.localizedMessage ?: "Could not delete habit." }
+                .onFailure {
+                    _actionBannerMessage.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_delete_habit)
+                }
         }
     }
 
     fun updatePetNameAndColor(newName: String, color: SpeciesColor) {
         viewModelScope.launch {
             repository.updatePetAppearance(petName = newName, speciesColor = color)
-                .onSuccess { _actionBannerMessage.value = "Updated ${newName.trim().ifEmpty { "pet" }}'s look!" }
-                .onFailure { _actionBannerMessage.value = it.localizedMessage ?: "Failed to update pet." }
+                .onSuccess {
+                    _actionBannerMessage.value = appContext.getString(
+                        R.string.vm_updated_pet_look,
+                        newName.trim().ifEmpty { appContext.getString(R.string.default_pet_name) }
+                    )
+                }
+                .onFailure {
+                    _actionBannerMessage.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_update_pet)
+                }
         }
     }
 
@@ -800,10 +839,13 @@ class ChibiPetViewModel(
                 repository.unlockAndEquipOutfit(profile, outfit)
                     .onSuccess {
                         _celebrationTick.value += 1
-                        _actionBannerMessage.value = "Equipped ${outfit.label}!"
+                        val outfitLabel = runCatching { appContext.getString(outfit.labelRes) }
+                            .getOrNull() ?: outfit.label
+                        _actionBannerMessage.value = appContext.getString(R.string.vm_equipped_outfit, outfitLabel)
                     }
                     .onFailure { err ->
-                        _actionBannerMessage.value = err.localizedMessage ?: "Could not equip outfit."
+                        _actionBannerMessage.value = err.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_equip_outfit)
                     }
             } finally {
                 isPurchasingOrCareBusy = false
@@ -811,7 +853,7 @@ class ChibiPetViewModel(
         }
     }
 
-    fun sendChatMessage(userText: String) {
+    fun sendChatMessage(userText: String, forceLiteModel: Boolean = false) {
         refreshCurrentDate()
         val currentToday = _todayIsoDate.value
         val trimmed = userText.trim()
@@ -823,7 +865,7 @@ class ChibiPetViewModel(
             feature = AiFeatureType.CHAT,
             snapshot = aiQuotaSnapshot.value
         )
-        val preferLite = quotaCheck.preferLiteModel
+        val preferLite = forceLiteModel || quotaCheck.preferLiteModel
 
         viewModelScope.launch {
             _chatError.value = null
@@ -832,12 +874,15 @@ class ChibiPetViewModel(
             _isChatSending.value = true
             _streamingPetReply.value = ""
 
-            val saveUserMsg = repository.addChatMessage(sender = "user", text = trimmed)
-            if (saveUserMsg.isFailure) {
-                _isChatSending.value = false
-                _streamingPetReply.value = null
-                _chatError.value = saveUserMsg.exceptionOrNull()?.localizedMessage ?: "Could not send message."
-                return@launch
+            if (!forceLiteModel) {
+                val saveUserMsg = repository.addChatMessage(sender = "user", text = trimmed)
+                if (saveUserMsg.isFailure) {
+                    _isChatSending.value = false
+                    _streamingPetReply.value = null
+                    _chatError.value = saveUserMsg.exceptionOrNull()?.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_send_message)
+                    return@launch
+                }
             }
 
             try {
@@ -877,7 +922,8 @@ class ChibiPetViewModel(
                         todayIsoDate = currentToday
                     )
                 }
-                _chatError.value = e.localizedMessage ?: "ChibiPet couldn't reply right now."
+                _chatError.value = e.localizedMessage
+                    ?: appContext.getString(R.string.vm_err_chat_reply)
             } finally {
                 _streamingPetReply.value = null
                 _isChatSending.value = false
@@ -886,24 +932,9 @@ class ChibiPetViewModel(
     }
 
     fun sendLocalReflexChatReply() {
-        val profile = (petProfileState.value as? DataUiState.Success)?.data ?: return
-        val habits = (habitsState.value as? DataUiState.Success)?.data.orEmpty()
-        val prompt = _lastUserChatPrompt.value.ifBlank { "How am I doing today?" }
-        viewModelScope.launch {
-            val reflexText = aiRepository.buildLocalReflexReply(
-                userMessage = prompt,
-                petProfile = profile,
-                habits = habits,
-                todayIsoDate = _todayIsoDate.value
-            )
-            repository.addChatMessage(
-                sender = "pet",
-                text = reflexText,
-                habitTag = "eco_reflex"
-            )
-            _chatError.value = null
-            _isChatQuotaExceeded.value = false
-            _celebrationTick.value += 1
+        val prompt = _lastUserChatPrompt.value.trim()
+        if (prompt.isNotEmpty()) {
+            sendChatMessage(prompt, forceLiteModel = true)
         }
     }
 
@@ -911,7 +942,10 @@ class ChibiPetViewModel(
         val messages = (chatMessagesState.value as? DataUiState.Success)?.data.orEmpty()
         viewModelScope.launch {
             repository.clearChatHistory(messages)
-                .onFailure { _chatError.value = it.localizedMessage ?: "Failed to clear chat." }
+                .onFailure {
+                    _chatError.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_clear_chat)
+                }
         }
     }
 
@@ -958,7 +992,8 @@ class ChibiPetViewModel(
                         )
                     }
                     _studioState.value = StudioArtState.Error(
-                        message = err.localizedMessage ?: "Image generation failed.",
+                        message = err.localizedMessage
+                            ?: appContext.getString(R.string.vm_err_image_gen),
                         isQuotaError = isQuota,
                         promptUsed = cleanPrompt
                     )
@@ -979,7 +1014,7 @@ class ChibiPetViewModel(
             runCatching { stickerStore.saveSticker(bmp, "$cleanPrompt (Emblem)") }
                 .onFailure { Log.w(TAG, "Could not persist emblem sticker", it) }
             _celebrationTick.value += 1
-            _actionBannerMessage.value = "Crafted Chibi Collectible Emblem Sticker (0 Cloud Quota used)!"
+            _actionBannerMessage.value = appContext.getString(R.string.vm_crafted_emblem_banner)
         }
     }
 
@@ -994,7 +1029,7 @@ class ChibiPetViewModel(
     fun deleteSticker(sticker: SavedSticker) {
         viewModelScope.launch {
             stickerStore.deleteSticker(sticker)
-            _actionBannerMessage.value = "Removed sticker from vault"
+            _actionBannerMessage.value = appContext.getString(R.string.vm_removed_sticker)
         }
     }
 
@@ -1004,10 +1039,11 @@ class ChibiPetViewModel(
             _isFriendBusy.value = true
             repository.addFriendByCode(code)
                 .onSuccess { friend ->
-                    _actionBannerMessage.value = "Added ${friend.friendPetName} to Playdates!"
+                    _actionBannerMessage.value = appContext.getString(R.string.vm_added_friend, friend.friendPetName)
                 }
                 .onFailure { err ->
-                    _actionBannerMessage.value = err.localizedMessage ?: "Could not add buddy."
+                    _actionBannerMessage.value = err.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_add_friend)
                 }
             _isFriendBusy.value = false
         }
@@ -1019,8 +1055,13 @@ class ChibiPetViewModel(
         viewModelScope.launch {
             _isFriendBusy.value = true
             repository.refreshFriends(friends)
-                .onSuccess { _actionBannerMessage.value = "Refreshed friends' streaks!" }
-                .onFailure { _actionBannerMessage.value = it.localizedMessage ?: "Refresh failed." }
+                .onSuccess {
+                    _actionBannerMessage.value = appContext.getString(R.string.vm_refreshed_friends)
+                }
+                .onFailure {
+                    _actionBannerMessage.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_refresh_friends)
+                }
             _isFriendBusy.value = false
         }
     }
@@ -1028,7 +1069,10 @@ class ChibiPetViewModel(
     fun removeFriend(friendCode: String) {
         viewModelScope.launch {
             repository.removeFriend(friendCode)
-                .onFailure { _actionBannerMessage.value = it.localizedMessage ?: "Could not remove friend." }
+                .onFailure {
+                    _actionBannerMessage.value = it.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_remove_friend)
+                }
         }
     }
 
@@ -1041,9 +1085,10 @@ class ChibiPetViewModel(
                 myPetName = profile.petName,
                 message = message
             ).onSuccess {
-                _actionBannerMessage.value = "Sent a cheer to ${friend.friendPetName}!"
+                _actionBannerMessage.value = appContext.getString(R.string.vm_sent_cheer, friend.friendPetName)
             }.onFailure { err ->
-                _actionBannerMessage.value = err.localizedMessage ?: "Could not send cheer."
+                _actionBannerMessage.value = err.localizedMessage
+                    ?: appContext.getString(R.string.vm_err_send_cheer)
             }
         }
     }
@@ -1054,10 +1099,11 @@ class ChibiPetViewModel(
             repository.claimCheer(cheer.id, profile)
                 .onSuccess {
                     _celebrationTick.value += 1
-                    _actionBannerMessage.value = "Claimed cheer from ${cheer.fromPetName}! (+5 Mood)"
+                    _actionBannerMessage.value = appContext.getString(R.string.vm_claimed_cheer, cheer.fromPetName)
                 }
                 .onFailure { err ->
-                    _actionBannerMessage.value = err.localizedMessage ?: "Could not claim cheer."
+                    _actionBannerMessage.value = err.localizedMessage
+                        ?: appContext.getString(R.string.vm_err_claim_cheer)
                 }
         }
     }
@@ -1067,9 +1113,9 @@ class ChibiPetViewModel(
             HabitReminderManager.setReminderEnabled(appContext, enabled, hour, minute)
             val label = ReminderSettings(enabled, hour, minute).formattedTime
             _actionBannerMessage.value = if (enabled) {
-                "Daily pet reminder set for $label"
+                appContext.getString(R.string.vm_reminder_set, label)
             } else {
-                "Daily reminders paused"
+                appContext.getString(R.string.vm_reminder_paused)
             }
         }
     }
@@ -1080,13 +1126,13 @@ class ChibiPetViewModel(
         val pending = habits.count { !it.isCompletedOn(_todayIsoDate.value) }
         val posted = HabitReminderManager.postPetReminderNotification(
             context = appContext,
-            petName = profile?.petName ?: "Mochi",
+            petName = profile?.petName ?: appContext.getString(R.string.default_pet_name),
             pendingCount = pending
         )
         _actionBannerMessage.value = if (posted) {
-            "Test pet notification sent!"
+            appContext.getString(R.string.vm_test_notif_sent)
         } else {
-            "Enable notification permission to receive reminders."
+            appContext.getString(R.string.vm_test_notif_perm_needed)
         }
     }
 
@@ -1108,7 +1154,7 @@ class ChibiPetViewModel(
                 val db = FirebaseFirestore.getInstance(databaseId)
                 ChibiPetViewModel(
                     appContext = appCtx,
-                    repository = ChibiPetRepository(db),
+                    repository = ChibiPetRepository(db, appCtx),
                     usageQuotaManager = UsageQuotaManager(db, appCtx),
                     aiRepository = ChibiPetAiRepository(),
                     currentUserId = currentUserId,

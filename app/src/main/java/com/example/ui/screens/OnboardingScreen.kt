@@ -100,13 +100,12 @@ fun OnboardingScreen(
     val pagerState = rememberPagerState(pageCount = { 4 })
     val scope = rememberCoroutineScope()
 
+    val defaultPetName = stringResource(R.string.default_pet_name)
     var petName by rememberSaveable { mutableStateOf(initialSelection.preferredPetName) }
     var selectedColorKey by rememberSaveable { mutableStateOf(initialSelection.preferredColor.key) }
     var previewOutfitKey by rememberSaveable { mutableStateOf(initialSelection.preferredOutfit.key) }
     var selectedQuestIds by remember {
-        mutableStateOf(
-            initialSelection.selectedQuestIds.ifEmpty { OnboardingSelection.DEFAULT_QUEST_IDS }
-        )
+        mutableStateOf(initialSelection.selectedQuestIds)
     }
     var celebrationTick by remember { mutableIntStateOf(0) }
 
@@ -169,7 +168,7 @@ fun OnboardingScreen(
                     TextButton(
                         onClick = {
                             onFinishOnboarding(
-                                petName.trim().ifEmpty { "Mochi" },
+                                petName.trim().ifEmpty { defaultPetName },
                                 selectedColor,
                                 PetOutfit.BOW,
                                 selectedQuestIds
@@ -193,7 +192,7 @@ fun OnboardingScreen(
             ) { page ->
                 when (page) {
                     0 -> OnboardingPageMeet3DBuddy(
-                        petName = petName.ifBlank { "Mochi" },
+                        petName = petName.ifBlank { defaultPetName },
                         selectedColor = selectedColor,
                         previewOutfit = previewOutfit,
                         celebrationTick = celebrationTick,
@@ -211,7 +210,7 @@ fun OnboardingScreen(
                         selectedQuestIds = selectedQuestIds,
                         onToggleQuest = { questId ->
                             selectedQuestIds = if (questId in selectedQuestIds) {
-                                if (selectedQuestIds.size > 1) selectedQuestIds - questId else selectedQuestIds
+                                selectedQuestIds - questId
                             } else {
                                 selectedQuestIds + questId
                             }
@@ -288,7 +287,7 @@ fun OnboardingScreen(
                             }
                         } else {
                             onFinishOnboarding(
-                                petName.trim().ifEmpty { "Mochi" },
+                                petName.trim().ifEmpty { defaultPetName },
                                 selectedColor,
                                 PetOutfit.BOW,
                                 selectedQuestIds
@@ -305,7 +304,7 @@ fun OnboardingScreen(
                         text = if (pagerState.currentPage < 3) {
                             stringResource(R.string.onboarding_next)
                         } else {
-                            stringResource(R.string.onboarding_adopt_start, petName.trim().ifEmpty { "Mochi" })
+                            stringResource(R.string.onboarding_adopt_start, petName.trim().ifEmpty { defaultPetName })
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
@@ -618,24 +617,13 @@ private fun OnboardingPageCustomizeAdoption(
                     value = petName,
                     onValueChange = onPetNameChange,
                     label = { Text(stringResource(R.string.onboarding_p4_name_label)) },
+                    placeholder = { Text(stringResource(R.string.default_pet_name)) },
                     singleLine = true,
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("onboarding_pet_name_input")
                 )
-
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    listOf("Mochi", "Boba", "Kumo", "Yuzu", "Poko").forEach { suggestion ->
-                        AssistChip(
-                            onClick = { onPetNameChange(suggestion) },
-                            label = { Text(suggestion) }
-                        )
-                    }
-                }
 
                 Text(
                     text = stringResource(R.string.onboarding_p4_coat_title),

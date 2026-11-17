@@ -2,7 +2,10 @@ package com.example.data.local
 
 import android.app.LocaleManager
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.AssetManager
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -91,6 +94,10 @@ object AppLanguageManager {
         val config = Configuration(baseContext.resources.configuration)
         config.setLocale(locale)
         config.setLayoutDirection(locale)
-        return baseContext.createConfigurationContext(config)
+        val configContext = baseContext.createConfigurationContext(config)
+        return object : ContextWrapper(baseContext) {
+            override fun getResources(): Resources = configContext.resources
+            override fun getAssets(): AssetManager = configContext.assets
+        }
     }
 }

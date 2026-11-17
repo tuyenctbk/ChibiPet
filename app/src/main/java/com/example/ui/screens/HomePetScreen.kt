@@ -436,7 +436,7 @@ fun HomePetScreen(
                     Text(
                         stringResource(
                             R.string.dialog_verify_body,
-                            profile?.petName ?: "Mochi",
+                            profile?.petName ?: stringResource(R.string.default_pet_name),
                             hint
                         )
                     )
@@ -513,7 +513,7 @@ fun HomePetScreen(
     liveCameraHabit?.let { habit ->
         CameraXProofDialog(
             habit = habit,
-            petName = profile?.petName ?: "Mochi",
+            petName = profile?.petName ?: stringResource(R.string.default_pet_name),
             onDismiss = { liveCameraHabit = null },
             onCaptured = { bitmap ->
                 liveCameraHabit = null
@@ -529,7 +529,7 @@ fun HomePetScreen(
     if (proofState !is ProofVerificationState.Idle) {
         ProofVerificationDialog(
             state = proofState,
-            petName = profile?.petName ?: "Mochi",
+            petName = profile?.petName ?: stringResource(R.string.default_pet_name),
             onRetryWithLite = onRetryWithLiteModel,
             onHonorPledgeCheckIn = onHonorPledgeCheckIn,
             onDismiss = onDismissProofDialog
@@ -1340,41 +1340,22 @@ private fun AddHabitDialog(
                                 )
                             }
                         }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        FilledTonalButton(
+                            onClick = {
+                                onRequestQuestCoach(coachGoal.ifBlank { presetEnergy })
+                            },
+                            enabled = questCoachState !is QuestCoachUiState.Loading,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("ai_coach_suggest_button")
                         ) {
-                            FilledTonalButton(
-                                onClick = {
-                                    onRequestQuestCoach(coachGoal.ifBlank { presetEnergy })
-                                },
-                                enabled = questCoachState !is QuestCoachUiState.Loading,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .testTag("ai_coach_suggest_button")
-                            ) {
-                                if (questCoachState is QuestCoachUiState.Loading) {
-                                    CircularProgressIndicator(
-                                        modifier = Modifier.size(16.dp),
-                                        strokeWidth = 2.dp
-                                    )
-                                } else {
-                                    Text(stringResource(R.string.coach_ask_ai_button), maxLines = 1)
-                                }
-                            }
-                            OutlinedButton(
-                                onClick = {
-                                    onRequestLocalQuestCoach(coachGoal.ifBlank { presetEnergy })
-                                },
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .testTag("ai_coach_local_fallback_button")
-                            ) {
-                                Text(
-                                    stringResource(R.string.coach_local_plan_button),
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                            if (questCoachState is QuestCoachUiState.Loading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(16.dp),
+                                    strokeWidth = 2.dp
                                 )
+                            } else {
+                                Text(stringResource(R.string.coach_ask_ai_button), maxLines = 1)
                             }
                         }
 
@@ -1406,7 +1387,11 @@ private fun AddHabitDialog(
                                                     fontWeight = FontWeight.SemiBold
                                                 )
                                                 Text(
-                                                    text = "${stringResource(quest.category.labelRes)} • +${quest.xpReward} XP",
+                                                    text = stringResource(
+                                                        R.string.onboarding_p4_quest_meta,
+                                                        stringResource(quest.category.labelRes),
+                                                        quest.xpReward.toInt()
+                                                    ),
                                                     style = MaterialTheme.typography.labelSmall,
                                                     color = MaterialTheme.colorScheme.primary
                                                 )
@@ -1433,11 +1418,21 @@ private fun AddHabitDialog(
                                 }
                             }
                             is QuestCoachUiState.Error -> {
-                                Text(
-                                    text = questCoachState.message,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.error
-                                )
+                                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Text(
+                                        text = questCoachState.message,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                    OutlinedButton(
+                                        onClick = {
+                                            onRequestLocalQuestCoach(coachGoal.ifBlank { presetEnergy })
+                                        },
+                                        modifier = Modifier.testTag("ai_coach_local_fallback_button")
+                                    ) {
+                                        Text(stringResource(R.string.dialog_proof_retry_lite))
+                                    }
+                                }
                             }
                             else -> Unit
                         }

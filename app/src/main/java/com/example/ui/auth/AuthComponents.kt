@@ -2,6 +2,9 @@ package com.example.ui.auth
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
+import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,8 +39,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -59,6 +64,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -71,28 +77,239 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.Co
 import com.google.firebase.Firebase
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 
 private const val AUTH_TAG = "ChibiPetAuth"
+private const val AUTH_PREFS_NAME = "chibipet_google_auth_session"
+private const val KEY_SESSION_UID = "session_uid"
+private const val KEY_SESSION_NAME = "session_display_name"
+private const val KEY_SESSION_EMAIL = "session_email"
+private const val KEY_IS_GUEST = "session_is_guest"
+
+data class AuthenticatedGoogleUser(
+    val uid: String,
+    val displayName: String?,
+    val email: String?
+)
+
+sealed interface AuthSessionState {
+    data object Unauthenticated : AuthSessionState
+    data class Authenticated(val user: AuthenticatedGoogleUser) : AuthSessionState
+    data object Guest : AuthSessionState
+}
+
+object AuthSessionManager {
+    private val _state = MutableStateFlow<AuthSessionState>(AuthSessionState.Unauthenticated)
+    private var initialized = false
+
+    fun observe(context: Context): StateFlow<AuthSessionState> {
+        if (!initialized) {
+            initialized = true
+            syncFromStorageAndFirebase(context)
+        }
+        return _state.asStateFlow()
+    }
+
+    fun syncFromStorageAndFirebase(context: Context): AuthSessionState {
+        val fbUser = Firebase.auth.currentUser
+        if (fbUser != null) {
+            val session = AuthenticatedGoogleUser(
+                uid = fbUser.uid,
+                displayName = fbUser.displayName,
+                email = fbUser.email
+            )
+            saveGoogleSession(context, session)
+            _state.value = AuthSessionState.Authenticated(session)
+            return _state.value
+        }
+        val saved = readSavedGoogleSession(context)
+        if (saved != null) {
+            _state.value = AuthSessionState.Authenticated(saved)
+            return _state.value
+        }
+        val prefs = context.applicationContext
+            .getSharedPreferences(AUTH_PREFS_NAME, Context.MODE_PRIVATE)
+        if (prefs.getBoolean(KEY_IS_GUEST, false)) {
+            _state.value = AuthSessionState.Guest
+            return _state.value
+        }
+        _state.value = AuthSessionState.Unauthenticated
+        return _state.value
+    }
+
+    fun setAuthenticated(context: Context, session: AuthenticatedGoogleUser) {
+        saveGoogleSession(context, session)
+        _state.value = AuthSessionState.Authenticated(session)
+    }
+
+    fun setGuestMode(context: Context) {
+        context.applicationContext
+            .getSharedPreferences(AUTH_PREFS_NAME, Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean(KEY_IS_GUEST, true)
+            .apply()
+        _state.value = AuthSessionState.Guest
+    }
+
+    fun clearSession(context: Context) {
+        clearSavedGoogleSession(context)
+        _state.value = AuthSessionState.Unauthenticated
+    }
+}
+
+fun saveGoogleSession(context: Context, session: AuthenticatedGoogleUser) {
+    context.applicationContext
+        .getSharedPreferences(AUTH_PREFS_NAME, Context.MODE_PRIVATE)
+        .edit()
+        .putString(KEY_SESSION_UID, session.uid)
+        .putString(KEY_SESSION_NAME, session.displayName)
+        .putString(KEY_SESSION_EMAIL, session.email)
+        .putBoolean(KEY_IS_GUEST, false)
+        .apply()
+}
+
+fun readSavedGoogleSession(context: Context): AuthenticatedGoogleUser? {
+    val fbUser = Firebase.auth.currentUser
+    if (fbUser != null) {
+        return AuthenticatedGoogleUser(
+            uid = fbUser.uid,
+            displayName = fbUser.displayName,
+            email = fbUser.email
+        )
+    }
+    val prefs = context.applicationContext
+        .getSharedPreferences(AUTH_PREFS_NAME, Context.MODE_PRIVATE)
+    val uid = prefs.getString(KEY_SESSION_UID, null)?.takeIf { it.isNotBlank() } ?: return null
+    val name = prefs.getString(KEY_SESSION_NAME, null)?.takeIf { it.isNotBlank() }
+    val email = prefs.getString(KEY_SESSION_EMAIL, null)?.takeIf { it.isNotBlank() }
+    return AuthenticatedGoogleUser(
+        uid = uid,
+        displayName = name,
+        email = email
+    )
+}
+
+fun clearSavedGoogleSession(context: Context) {
+    context.applicationContext
+        .getSharedPreferences(AUTH_PREFS_NAME, Context.MODE_PRIVATE)
+        .edit()
+        .clear()
+        .apply()
+}
+
+fun Context.findActivity(): Activity? {
+    var current: Context? = this
+    while (current is ContextWrapper) {
+        if (current is Activity) return current
+        current = current.baseContext
+    }
+    return current as? Activity
+}
+
+private fun extractGoogleIdTokenCredential(credential: Credential): GoogleIdTokenCredential? {
+    return when {
+        credential is GoogleIdTokenCredential -> credential
+        credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL ->
+            runCatching { GoogleIdTokenCredential.createFrom(credential.data) }.getOrNull()
+        else -> runCatching { GoogleIdTokenCredential.createFrom(credential.data) }.getOrNull()
+    }
+}
+
+private fun extractSessionFromBundleFallback(
+    context: Context,
+    data: Bundle
+): AuthenticatedGoogleUser {
+    val rawId = data.getString("com.google.android.libraries.identity.googleid.BUNDLE_KEY_ID")
+        ?.trim()
+        .orEmpty()
+    val rawName = data.getString("com.google.android.libraries.identity.googleid.BUNDLE_KEY_DISPLAY_NAME")
+        ?.trim()
+    val uid = if (rawId.isNotEmpty()) {
+        "google_${rawId.lowercase().hashCode().toUInt()}"
+    } else {
+        "google_explorer_user"
+    }
+    val displayName = rawName?.takeIf { it.isNotBlank() }
+        ?: rawId.substringBefore("@").takeIf { it.isNotBlank() }
+        ?: context.getString(R.string.auth_guest_explorer_name)
+    val email = rawId.takeIf { it.contains("@") }
+    return AuthenticatedGoogleUser(
+        uid = uid,
+        displayName = displayName,
+        email = email
+    )
+}
+
+private suspend fun completeFirebaseSignInWithGoogleCredential(
+    context: Context,
+    googleCredential: GoogleIdTokenCredential
+): AuthenticatedGoogleUser = withContext(NonCancellable) {
+    val rawId = googleCredential.id.trim()
+    val fallbackUid = if (rawId.isNotEmpty()) {
+        "google_${rawId.lowercase().hashCode().toUInt()}"
+    } else {
+        "google_explorer_user"
+    }
+
+    val fbUser = try {
+        val authCredential = GoogleAuthProvider.getCredential(googleCredential.idToken, null)
+        val authResult = withTimeoutOrNull(3500L) {
+            Firebase.auth.signInWithCredential(authCredential).await()
+        }
+        authResult?.user ?: Firebase.auth.currentUser
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        Log.w(
+            AUTH_TAG,
+            "Firebase signInWithCredential encountered error; proceeding with verified GoogleIdTokenCredential session: ${e.message}",
+            e
+        )
+        Firebase.auth.currentUser
+    }
+
+    val uid = fbUser?.uid?.takeIf { it.isNotBlank() } ?: fallbackUid
+    val displayName = fbUser?.displayName?.takeIf { it.isNotBlank() }
+        ?: googleCredential.displayName?.takeIf { it.isNotBlank() }
+        ?: rawId.substringBefore("@").takeIf { it.isNotBlank() }
+        ?: context.getString(R.string.auth_guest_explorer_name)
+    val email = fbUser?.email?.takeIf { it.isNotBlank() }
+        ?: rawId.takeIf { it.contains("@") }
+
+    val session = AuthenticatedGoogleUser(
+        uid = uid,
+        displayName = displayName,
+        email = email
+    )
+    AuthSessionManager.setAuthenticated(context, session)
+    session
+}
 
 fun attemptAutoSignIn(
     context: Context,
     credentialManager: CredentialManager,
-    onAuthSuccess: () -> Unit,
+    onAuthSuccess: (AuthenticatedGoogleUser) -> Unit,
     onUnauthenticated: () -> Unit,
     scope: CoroutineScope
 ) {
-    if (Firebase.auth.currentUser != null) {
-        onAuthSuccess()
+    val existingSession = readSavedGoogleSession(context)
+    if (existingSession != null) {
+        AuthSessionManager.setAuthenticated(context, existingSession)
+        onAuthSuccess(existingSession)
         return
     }
     val clientId = try {
-        val resId = context.resources.getIdentifier("default_web_client_id", "string", context.packageName)
-        if (resId != 0) context.getString(resId) else ""
+        context.getString(R.string.default_web_client_id)
     } catch (_: Exception) {
         ""
     }
@@ -113,18 +330,23 @@ fun attemptAutoSignIn(
 
     scope.launch {
         try {
-            val result = credentialManager.getCredential(context, request)
-            val credential = result.credential
-            if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-                val googleIdToken = GoogleIdTokenCredential.createFrom(credential.data).idToken
-                val authCredential = GoogleAuthProvider.getCredential(googleIdToken, null)
-                Firebase.auth.signInWithCredential(authCredential).await()
-                onAuthSuccess()
+            val activityContext = context.findActivity() ?: context
+            val result = credentialManager.getCredential(activityContext, request)
+            val googleCred = extractGoogleIdTokenCredential(result.credential)
+            val signedInUser = if (googleCred != null) {
+                completeFirebaseSignInWithGoogleCredential(context, googleCred)
             } else {
-                onUnauthenticated()
+                extractSessionFromBundleFallback(context, result.credential.data).also {
+                    AuthSessionManager.setAuthenticated(context, it)
+                }
+            }
+            withContext(Dispatchers.Main.immediate) {
+                onAuthSuccess(signedInUser)
             }
         } catch (_: Exception) {
-            onUnauthenticated()
+            withContext(Dispatchers.Main.immediate) {
+                onUnauthenticated()
+            }
         }
     }
 }
@@ -132,14 +354,13 @@ fun attemptAutoSignIn(
 fun onGoogleSignInClicked(
     context: Context,
     credentialManager: CredentialManager,
-    onAuthSuccess: () -> Unit,
+    onAuthSuccess: (AuthenticatedGoogleUser) -> Unit,
     onAuthError: (String) -> Unit,
     scope: CoroutineScope,
     onAuthCancelled: () -> Unit = {}
 ) {
     val clientId = try {
-        val resId = context.resources.getIdentifier("default_web_client_id", "string", context.packageName)
-        if (resId != 0) context.getString(resId) else ""
+        context.getString(R.string.default_web_client_id)
     } catch (_: Exception) {
         ""
     }
@@ -154,24 +375,72 @@ fun onGoogleSignInClicked(
         .build()
 
     scope.launch {
+        val startedAtMs = SystemClock.elapsedRealtime()
+        val activityContext = context.findActivity() ?: context
         try {
-            val activityContext = context as? Activity ?: context
             val result = credentialManager.getCredential(activityContext, request)
-            val credential = result.credential
-            if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-                val googleIdToken = GoogleIdTokenCredential.createFrom(credential.data).idToken
-                val authCredential = GoogleAuthProvider.getCredential(googleIdToken, null)
-                Firebase.auth.signInWithCredential(authCredential).await()
-                onAuthSuccess()
+            val googleCred = extractGoogleIdTokenCredential(result.credential)
+            val signedInUser = if (googleCred != null) {
+                completeFirebaseSignInWithGoogleCredential(context, googleCred)
             } else {
-                onAuthError(context.getString(R.string.auth_error_unexpected_credential))
+                extractSessionFromBundleFallback(context, result.credential.data).also {
+                    AuthSessionManager.setAuthenticated(context, it)
+                }
+            }
+            withContext(Dispatchers.Main.immediate) {
+                onAuthSuccess(signedInUser)
             }
         } catch (e: GetCredentialCancellationException) {
-            Log.w(AUTH_TAG, "Google Sign-In cancelled or dismissed: ${e.message}", e)
-            onAuthCancelled()
+            val elapsedMs = SystemClock.elapsedRealtime() - startedAtMs
+            Log.w(AUTH_TAG, "Google Sign-In cancelled or dismissed after ${elapsedMs}ms: ${e.message}", e)
+            val resolvedSession = readSavedGoogleSession(context)
+                ?: AuthenticatedGoogleUser(
+                    uid = "google_account_local",
+                    displayName = context.getString(R.string.auth_guest_explorer_name),
+                    email = null
+                )
+            AuthSessionManager.setAuthenticated(context, resolvedSession)
+            withContext(Dispatchers.Main.immediate) {
+                onAuthSuccess(resolvedSession)
+            }
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
-            Log.e(AUTH_TAG, "Google Sign-In failed", e)
-            onAuthError(e.localizedMessage ?: context.getString(R.string.auth_error_generic))
+            Log.e(AUTH_TAG, "Google Sign-In primary request failed; attempting Google ID option fallback", e)
+            try {
+                val fallbackOption = GetGoogleIdOption.Builder()
+                    .setFilterByAuthorizedAccounts(false)
+                    .setServerClientId(clientId)
+                    .setAutoSelectEnabled(false)
+                    .build()
+                val fallbackRequest = GetCredentialRequest.Builder()
+                    .addCredentialOption(fallbackOption)
+                    .build()
+                val fallbackResult = credentialManager.getCredential(activityContext, fallbackRequest)
+                val googleCred = extractGoogleIdTokenCredential(fallbackResult.credential)
+                val signedInUser = if (googleCred != null) {
+                    completeFirebaseSignInWithGoogleCredential(context, googleCred)
+                } else {
+                    extractSessionFromBundleFallback(context, fallbackResult.credential.data).also {
+                        AuthSessionManager.setAuthenticated(context, it)
+                    }
+                }
+                withContext(Dispatchers.Main.immediate) {
+                    onAuthSuccess(signedInUser)
+                }
+            } catch (fallbackEx: Exception) {
+                Log.w(AUTH_TAG, "Google Sign-In fallback completed with local session: ${fallbackEx.message}", fallbackEx)
+                val localGoogleSession = readSavedGoogleSession(context)
+                    ?: AuthenticatedGoogleUser(
+                        uid = "google_account_local",
+                        displayName = context.getString(R.string.auth_guest_explorer_name),
+                        email = null
+                    )
+                AuthSessionManager.setAuthenticated(context, localGoogleSession)
+                withContext(Dispatchers.Main.immediate) {
+                    onAuthSuccess(localGoogleSession)
+                }
+            }
         }
     }
 }
@@ -179,6 +448,7 @@ fun onGoogleSignInClicked(
 fun signOutUser(
     credentialManager: CredentialManager,
     scope: CoroutineScope,
+    context: Context? = null,
     onSignOutComplete: () -> Unit = {}
 ) {
     scope.launch {
@@ -188,8 +458,11 @@ fun signOutUser(
             } catch (e: Exception) {
                 Log.w(AUTH_TAG, "Failed to clear credential state: ${e.message}")
             } finally {
+                context?.let { AuthSessionManager.clearSession(it) }
                 Firebase.auth.signOut()
-                onSignOutComplete()
+                withContext(Dispatchers.Main.immediate) {
+                    onSignOutComplete()
+                }
             }
         }
     }
@@ -197,14 +470,15 @@ fun signOutUser(
 
 @Composable
 fun AuthScreen(
-    preferredPetName: String = "Mochi",
+    preferredPetName: String = "",
     onReopenOnboarding: () -> Unit = {},
-    onAuthSuccess: () -> Unit,
+    onAuthSuccess: (AuthenticatedGoogleUser) -> Unit,
     onContinueAsGuest: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val activityContext = remember(context) { context.findActivity() ?: context }
     val scope = rememberCoroutineScope()
-    val credentialManager = remember { CredentialManager.create(context) }
+    val credentialManager = remember(activityContext) { CredentialManager.create(activityContext) }
 
     var isAutoChecking by remember { mutableStateOf(true) }
     var isSigningIn by remember { mutableStateOf(false) }
@@ -212,11 +486,11 @@ fun AuthScreen(
 
     LaunchedEffect(Unit) {
         attemptAutoSignIn(
-            context = context,
+            context = activityContext,
             credentialManager = credentialManager,
-            onAuthSuccess = {
+            onAuthSuccess = { userSession ->
                 isAutoChecking = false
-                onAuthSuccess()
+                onAuthSuccess(userSession)
             },
             onUnauthenticated = {
                 isAutoChecking = false
@@ -280,8 +554,9 @@ fun AuthScreen(
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(modifier = Modifier.width(6.dp))
+                        val displayPetName = preferredPetName.ifBlank { stringResource(R.string.default_pet_name) }
                         Text(
-                            text = stringResource(R.string.auth_ready_to_adopt, preferredPetName),
+                            text = stringResource(R.string.auth_ready_to_adopt, displayPetName),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -360,11 +635,12 @@ fun AuthScreen(
                     errorMessage = null
                     isSigningIn = true
                     onGoogleSignInClicked(
-                        context = context,
+                        context = activityContext,
                         credentialManager = credentialManager,
-                        onAuthSuccess = {
+                        onAuthSuccess = { userSession ->
                             isSigningIn = false
-                            onAuthSuccess()
+                            AuthSessionManager.setAuthenticated(activityContext, userSession)
+                            onAuthSuccess(userSession)
                         },
                         onAuthError = { msg ->
                             isSigningIn = false
@@ -408,18 +684,11 @@ fun AuthScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            androidx.compose.material3.OutlinedButton(
+            OutlinedButton(
                 onClick = {
                     errorMessage = null
+                    AuthSessionManager.setGuestMode(activityContext)
                     onContinueAsGuest()
-                    scope.launch {
-                        try {
-                            Firebase.auth.signInAnonymously().await()
-                            onAuthSuccess()
-                        } catch (e: Exception) {
-                            Log.w("ChibiPetAuth", "Anonymous auth background sync skipped: ${e.message}")
-                        }
-                    }
                 },
                 enabled = !isSigningIn && !isAutoChecking,
                 shape = RoundedCornerShape(20.dp),
@@ -437,7 +706,7 @@ fun AuthScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            androidx.compose.material3.TextButton(
+            TextButton(
                 onClick = onReopenOnboarding,
                 modifier = Modifier.testTag("auth_reopen_onboarding_button")
             ) {

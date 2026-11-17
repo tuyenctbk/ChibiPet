@@ -16,12 +16,12 @@ data class StarterQuestTemplate(
     @StringRes val titleRes: Int,
     val category: HabitCategory,
     val xpReward: Long,
-    val defaultSelected: Boolean = true
+    val defaultSelected: Boolean = false
 )
 
 data class OnboardingSelection(
     val hasCompletedOnboarding: Boolean = false,
-    val preferredPetName: String = "Mochi",
+    val preferredPetName: String = "",
     val preferredColor: SpeciesColor = SpeciesColor.MINT,
     val preferredOutfit: PetOutfit = PetOutfit.BOW,
     val selectedQuestIds: Set<String> = DEFAULT_QUEST_IDS,
@@ -35,7 +35,7 @@ data class OnboardingSelection(
                 titleRes = R.string.starter_quest_hydrate,
                 category = HabitCategory.HYDRATION,
                 xpReward = 25L,
-                defaultSelected = true
+                defaultSelected = false
             ),
             StarterQuestTemplate(
                 id = "focus_study",
@@ -43,15 +43,15 @@ data class OnboardingSelection(
                 titleRes = R.string.starter_quest_study,
                 category = HabitCategory.STUDY,
                 xpReward = 40L,
-                defaultSelected = true
+                defaultSelected = false
             ),
             StarterQuestTemplate(
                 id = "move_stretch",
                 title = "Move & Stretch",
                 titleRes = R.string.starter_quest_fitness,
-                category = HabitCategory.FITNESS,
                 xpReward = 35L,
-                defaultSelected = true
+                category = HabitCategory.FITNESS,
+                defaultSelected = false
             ),
             StarterQuestTemplate(
                 id = "mindful_breathe",
@@ -71,10 +71,7 @@ data class OnboardingSelection(
             )
         )
 
-        val DEFAULT_QUEST_IDS: Set<String> = STARTER_QUEST_TEMPLATES
-            .filter { it.defaultSelected }
-            .map { it.id }
-            .toSet()
+        val DEFAULT_QUEST_IDS: Set<String> = emptySet()
     }
 }
 
@@ -101,21 +98,16 @@ object OnboardingPreferences {
     fun read(context: Context): OnboardingSelection {
         val prefs = context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val completed = prefs.getBoolean(KEY_COMPLETED, false)
-        val petName = prefs.getString(KEY_PET_NAME, "Mochi")?.takeIf { it.isNotBlank() } ?: "Mochi"
+        val petName = prefs.getString(KEY_PET_NAME, "")?.trim().orEmpty()
         val colorKey = prefs.getString(KEY_SPECIES_COLOR, SpeciesColor.MINT.key) ?: SpeciesColor.MINT.key
         val outfitKey = prefs.getString(KEY_EQUIPPED_OUTFIT, PetOutfit.BOW.key) ?: PetOutfit.BOW.key
-        val storedQuests = prefs.getStringSet(KEY_SELECTED_QUESTS, null)
-        val questIds = if (storedQuests.isNullOrEmpty()) {
-            OnboardingSelection.DEFAULT_QUEST_IDS
-        } else {
-            storedQuests
-        }
+        val storedQuests = prefs.getStringSet(KEY_SELECTED_QUESTS, null) ?: emptySet()
         return OnboardingSelection(
             hasCompletedOnboarding = completed,
             preferredPetName = petName,
             preferredColor = SpeciesColor.fromKey(colorKey),
             preferredOutfit = PetOutfit.fromKey(outfitKey),
-            selectedQuestIds = questIds
+            selectedQuestIds = storedQuests
         )
     }
 
@@ -126,15 +118,15 @@ object OnboardingPreferences {
         outfit: PetOutfit = PetOutfit.BOW,
         selectedQuestIds: Set<String>
     ) {
-        val cleanName = petName.trim().take(30).ifEmpty { "Mochi" }
-        val validQuests = selectedQuestIds.ifEmpty { OnboardingSelection.DEFAULT_QUEST_IDS }
+        val defaultName = context.getString(R.string.default_pet_name)
+        val cleanName = petName.trim().take(30).ifEmpty { defaultName }
         val prefs = context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit()
             .putBoolean(KEY_COMPLETED, true)
             .putString(KEY_PET_NAME, cleanName)
             .putString(KEY_SPECIES_COLOR, speciesColor.key)
             .putString(KEY_EQUIPPED_OUTFIT, outfit.key)
-            .putStringSet(KEY_SELECTED_QUESTS, validQuests)
+            .putStringSet(KEY_SELECTED_QUESTS, selectedQuestIds)
             .apply()
         _state.value = read(context)
     }

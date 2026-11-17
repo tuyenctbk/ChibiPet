@@ -18,16 +18,17 @@ import com.example.data.model.buddyCodeForUid
 import com.example.data.remote.OperationType
 import com.example.data.remote.handleFirestoreError
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.snapshots
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
@@ -36,24 +37,146 @@ import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 class ChibiPetRepository(
-    private val db: FirebaseFirestore
+    private val db: FirebaseFirestore,
+    context: Context? = null
 ) {
     constructor(context: Context) : this(
         FirebaseFirestore.getInstance(
             context.applicationContext.getString(R.string.firestore_database_id)
-        )
+        ),
+        context.applicationContext
     )
 
+    private val appContext: Context? = context?.applicationContext
     private val auth = Firebase.auth
 
+    private val localProfileFlow = MutableStateFlow<PetProfile?>(null)
+    private val localHabitsFlow = MutableStateFlow<List<Habit>>(emptyList())
+    private val localChatMessagesFlow = MutableStateFlow<List<ChatMessage>>(emptyList())
+    private val localFriendsFlow = MutableStateFlow<List<FriendLink>>(emptyList())
+
+    private fun currentFirebaseUid(): String? = auth.currentUser?.uid?.takeIf { it.isNotBlank() }
+
+    private fun isLocalOnlySession(userId: String): Boolean {
+        return currentFirebaseUid() == null &&
+            (userId == "guest_explorer_local" || userId.startsWith("google_"))
+    }
+
     private fun requireUserId(): String {
-        return auth.currentUser?.uid ?: "guest_explorer_local"
+        return currentFirebaseUid() ?: "guest_explorer_local"
+    }
+
+    private fun loadLocalStateIfNeeded(userId: String) {
+        val ctx = appContext ?: return
+        val prefs = ctx.getSharedPreferences("chibipet_local_repo_$userId", Context.MODE_PRIVATE)
+        if (localProfileFlow.value == null && prefs.contains("petName")) {
+            val unlockedSet = prefs.getStringSet("unlockedOutfits", null)
+                ?.toList()
+                ?.ifEmpty { listOf(PetOutfit.NONE.key, PetOutfit.BOW.key) }
+                ?: listOf(PetOutfit.NONE.key, PetOutfit.BOW.key)
+            localProfileFlow.value = PetProfile(
+                id = MAIN_PROFILE_ID,
+                userId = userId,
+                petName = prefs.getString("petName", null)
+                    ?.takeIf { it.isNotBlank() }
+                    ?: ctx.getString(R.string.default_pet_name),
+                speciesColor = prefs.getString("speciesColor", SpeciesColor.MINT.key) ?: SpeciesColor.MINT.key,
+                equippedOutfit = prefs.getString("equippedOutfit", PetOutfit.BOW.key) ?: PetOutfit.BOW.key,
+                unlockedOutfits = unlockedSet,
+                level = prefs.getLong("level", 1L),
+                xp = prefs.getLong("xp", 0L),
+                coins = prefs.getLong("coins", 50L),
+                happiness = prefs.getLong("happiness", 85L),
+                energy = prefs.getLong("energy", 90L),
+                totalCompleted = prefs.getLong("totalCompleted", 0L),
+                streakFreezes = prefs.getLong("streakFreezes", 1L),
+                lastDailyBonusDate = prefs.getString("lastDailyBonusDate", "") ?: "",
+                createdAt = Timestamp.now(),
+                updatedAt = Timestamp.now()
+            )
+        }
+        if (localHabitsFlow.value.isEmpty()) {
+            val rawHabits = prefs.getString("habits_json", null)
+            if (!rawHabits.isNullOrBlank()) {
+                runCatching {
+                    val arr = org.json.JSONArray(rawHabits)
+                    val list = mutableListOf<Habit>()
+                    for (i in 0 until arr.length()) {
+                        val obj = arr.getJSONObject(i)
+                        list.add(
+                            Habit(
+                                id = obj.optString("id", "local_habit_${i + 1}"),
+                                userId = userId,
+                                title = obj.optString("title", "Daily Quest"),
+                                category = obj.optString("category", HabitCategory.HYDRATION.key),
+                                xpReward = obj.optLong("xpReward", 30L),
+                                streakCount = obj.optLong("streakCount", 0L),
+                                lastVerifiedDate = obj.optString("lastVerifiedDate", ""),
+                                lastVerificationNote = obj.optString("lastVerificationNote", ""),
+                                createdAt = Timestamp.now(),
+                                updatedAt = Timestamp.now()
+                            )
+                        )
+                    }
+                    if (list.isNotEmpty()) {
+                        localHabitsFlow.value = list
+                    }
+                }
+            }
+        }
+    }
+
+    private fun persistLocalProfile(profile: PetProfile) {
+        val ctx = appContext ?: return
+        val uid = profile.userId.ifBlank { requireUserId() }
+        val prefs = ctx.getSharedPreferences("chibipet_local_repo_$uid", Context.MODE_PRIVATE)
+        prefs.edit()
+            .putString("petName", profile.petName)
+            .putString("speciesColor", profile.speciesColor)
+            .putString("equippedOutfit", profile.equippedOutfit)
+            .putStringSet("unlockedOutfits", profile.unlockedOutfits.toSet())
+            .putLong("level", profile.level)
+            .putLong("xp", profile.xp)
+            .putLong("coins", profile.coins)
+            .putLong("happiness", profile.happiness)
+            .putLong("energy", profile.energy)
+            .putLong("totalCompleted", profile.totalCompleted)
+            .putLong("streakFreezes", profile.streakFreezes)
+            .putString("lastDailyBonusDate", profile.lastDailyBonusDate)
+            .apply()
+    }
+
+    private fun persistLocalHabits(userId: String, habits: List<Habit>) {
+        val ctx = appContext ?: return
+        val uid = userId.ifBlank { requireUserId() }
+        val prefs = ctx.getSharedPreferences("chibipet_local_repo_$uid", Context.MODE_PRIVATE)
+        val arr = org.json.JSONArray()
+        habits.forEach { h ->
+            arr.put(
+                org.json.JSONObject().apply {
+                    put("id", h.id)
+                    put("title", h.title)
+                    put("category", h.category)
+                    put("xpReward", h.xpReward)
+                    put("streakCount", h.streakCount)
+                    put("lastVerifiedDate", h.lastVerifiedDate)
+                    put("lastVerificationNote", h.lastVerificationNote)
+                }
+            )
+        }
+        prefs.edit().putString("habits_json", arr.toString()).apply()
     }
 
     fun observePetProfile(userId: String): Flow<PetProfile?> = flow {
+        if (isLocalOnlySession(userId)) {
+            loadLocalStateIfNeeded(userId)
+            emitAll(localProfileFlow)
+            return@flow
+        }
         val docRef = db.collection("users").document(userId)
             .collection("petProfile").document(MAIN_PROFILE_ID)
         emitAll(
@@ -80,6 +203,11 @@ class ChibiPetRepository(
     }
 
     fun observeHabits(userId: String): Flow<List<Habit>> = flow {
+        if (isLocalOnlySession(userId)) {
+            loadLocalStateIfNeeded(userId)
+            emitAll(localHabitsFlow)
+            return@flow
+        }
         val colRef = db.collection("users").document(userId).collection("habits")
         emitAll(
             colRef.orderBy("createdAt", Query.Direction.ASCENDING)
@@ -102,6 +230,10 @@ class ChibiPetRepository(
     }
 
     fun observeChatMessages(userId: String): Flow<List<ChatMessage>> = flow {
+        if (isLocalOnlySession(userId)) {
+            emitAll(localChatMessagesFlow)
+            return@flow
+        }
         val colRef = db.collection("users").document(userId).collection("chatMessages")
         emitAll(
             colRef.orderBy("createdAt", Query.Direction.ASCENDING)
@@ -124,6 +256,10 @@ class ChibiPetRepository(
     }
 
     fun observeFriends(userId: String): Flow<List<FriendLink>> = flow {
+        if (isLocalOnlySession(userId)) {
+            emitAll(localFriendsFlow)
+            return@flow
+        }
         val colRef = db.collection("users").document(userId).collection("friends")
         emitAll(
             colRef.orderBy("createdAt", Query.Direction.ASCENDING)
@@ -146,6 +282,10 @@ class ChibiPetRepository(
     }
 
     fun observeIncomingCheers(userId: String): Flow<List<PetCheer>> = flow {
+        if (isLocalOnlySession(userId)) {
+            emit(emptyList())
+            return@flow
+        }
         val code = buddyCodeForUid(userId)
         val colRef = db.collection("petCards").document(code).collection("cheers")
         emitAll(
@@ -172,16 +312,62 @@ class ChibiPetRepository(
 
     suspend fun ensureInitializedForUser(
         displayName: String?,
-        initialPetName: String = "Mochi",
+        initialPetName: String = "",
         initialColor: SpeciesColor = SpeciesColor.MINT,
-        initialQuests: List<Triple<String, String, Long>> = listOf(
-            Triple("Drink Water (500ml)", HabitCategory.HYDRATION.key, 25L),
-            Triple("Focus Study Session", HabitCategory.STUDY.key, 40L),
-            Triple("Move & Stretch", HabitCategory.FITNESS.key, 35L)
-        )
+        initialOutfit: PetOutfit = PetOutfit.BOW,
+        initialQuests: List<Triple<String, String, Long>> = emptyList()
     ): Result<Unit> = runCatching {
-        val uid = requireUserId()
-        val cleanPetName = initialPetName.trim().take(30).ifEmpty { "Mochi" }
+        val fallbackName = appContext?.getString(R.string.default_pet_name) ?: "Mochi"
+        val cleanPetName = initialPetName.trim().take(30).ifEmpty { fallbackName }
+        val initialUnlocked = listOf(PetOutfit.NONE.key, PetOutfit.BOW.key, initialOutfit.key).distinct()
+        val fbUid = currentFirebaseUid()
+        if (fbUid == null) {
+            val localUid = requireUserId()
+            loadLocalStateIfNeeded(localUid)
+            if (localProfileFlow.value == null) {
+                val createdProfile = PetProfile(
+                    id = MAIN_PROFILE_ID,
+                    userId = localUid,
+                    petName = cleanPetName,
+                    speciesColor = initialColor.key,
+                    equippedOutfit = initialOutfit.key,
+                    unlockedOutfits = initialUnlocked,
+                    level = 1L,
+                    xp = 0L,
+                    coins = 50L,
+                    happiness = 85L,
+                    energy = 90L,
+                    totalCompleted = 0L,
+                    streakFreezes = 1L,
+                    lastDailyBonusDate = "",
+                    createdAt = Timestamp.now(),
+                    updatedAt = Timestamp.now()
+                )
+                localProfileFlow.value = createdProfile
+                persistLocalProfile(createdProfile)
+            }
+            if (localHabitsFlow.value.isEmpty() && initialQuests.isNotEmpty()) {
+                val createdHabits = initialQuests.mapIndexed { idx, (title, category, xp) ->
+                    Habit(
+                        id = "local_habit_${idx + 1}",
+                        userId = localUid,
+                        title = title,
+                        category = category,
+                        xpReward = xp,
+                        streakCount = 0L,
+                        lastVerifiedDate = "",
+                        lastVerificationNote = "",
+                        createdAt = Timestamp.now(),
+                        updatedAt = Timestamp.now()
+                    )
+                }
+                localHabitsFlow.value = createdHabits
+                persistLocalHabits(localUid, createdHabits)
+            }
+            return@runCatching
+        }
+
+        val uid = fbUid
         val profileRef = db.collection("users").document(uid)
             .collection("petProfile").document(MAIN_PROFILE_ID)
         val profileSnap = try {
@@ -198,8 +384,8 @@ class ChibiPetRepository(
                 "userId" to uid,
                 "petName" to cleanPetName,
                 "speciesColor" to initialColor.key,
-                "equippedOutfit" to PetOutfit.BOW.key,
-                "unlockedOutfits" to listOf(PetOutfit.NONE.key, PetOutfit.BOW.key),
+                "equippedOutfit" to initialOutfit.key,
+                "unlockedOutfits" to initialUnlocked,
                 "level" to 1L,
                 "xp" to 0L,
                 "coins" to 50L,
@@ -220,50 +406,38 @@ class ChibiPetRepository(
                 throw e
             }
 
-            val starterHabits = initialQuests.ifEmpty {
-                listOf(
-                    Triple("Drink Water (500ml)", HabitCategory.HYDRATION.key, 25L),
-                    Triple("Focus Study Session", HabitCategory.STUDY.key, 40L),
-                    Triple("Move & Stretch", HabitCategory.FITNESS.key, 35L)
-                )
-            }
-            val habitsCol = db.collection("users").document(uid).collection("habits")
-            for ((title, category, xp) in starterHabits) {
-                val habitRef = habitsCol.document()
-                val payload = mapOf(
-                    "userId" to uid,
-                    "title" to title,
-                    "category" to category,
-                    "xpReward" to xp,
-                    "streakCount" to 0L,
-                    "lastVerifiedDate" to "",
-                    "lastVerificationNote" to "",
-                    "createdAt" to FieldValue.serverTimestamp(),
-                    "updatedAt" to FieldValue.serverTimestamp()
-                )
-                try {
-                    habitRef.set(payload).await()
-                } catch (e: CancellationException) {
-                    throw e
-                } catch (e: Exception) {
-                    handleFirestoreError(e, OperationType.CREATE, habitRef.path)
-                    throw e
+            if (initialQuests.isNotEmpty()) {
+                val habitsCol = db.collection("users").document(uid).collection("habits")
+                for ((title, category, xp) in initialQuests) {
+                    val habitRef = habitsCol.document()
+                    val payload = mapOf(
+                        "userId" to uid,
+                        "title" to title,
+                        "category" to category,
+                        "xpReward" to xp,
+                        "streakCount" to 0L,
+                        "lastVerifiedDate" to "",
+                        "lastVerificationNote" to "",
+                        "createdAt" to FieldValue.serverTimestamp(),
+                        "updatedAt" to FieldValue.serverTimestamp()
+                    )
+                    try {
+                        habitRef.set(payload).await()
+                    } catch (e: CancellationException) {
+                        throw e
+                    } catch (e: Exception) {
+                        handleFirestoreError(e, OperationType.CREATE, habitRef.path)
+                        throw e
+                    }
                 }
             }
-
-            val firstName = displayName?.substringBefore(" ")?.takeIf { it.isNotBlank() } ?: "friend"
-            addChatMessage(
-                sender = "pet",
-                text = "Yay, $firstName! I'm $cleanPetName, your pocket 3D buddy! Snap a proof photo of your water bottle, study desk, or workout gear to help me level up!",
-                habitTag = "welcome"
-            ).getOrThrow()
 
             syncMyPetCard(
                 profile = PetProfile(
                     userId = uid,
                     petName = cleanPetName,
                     speciesColor = initialColor.key,
-                    equippedOutfit = PetOutfit.BOW.key,
+                    equippedOutfit = initialOutfit.key,
                     level = 1L,
                     totalCompleted = 0L
                 ),
@@ -273,13 +447,15 @@ class ChibiPetRepository(
     }
 
     suspend fun syncMyPetCard(profile: PetProfile, topStreak: Long): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val uid = currentFirebaseUid() ?: return@runCatching
         val code = buddyCodeForUid(uid)
         val cardRef = db.collection("petCards").document(code)
         val payload = mapOf(
             "userId" to uid,
             "buddyCode" to code,
-            "petName" to profile.petName.take(30).ifBlank { "Mochi" },
+            "petName" to profile.petName.take(30).ifBlank {
+                appContext?.getString(R.string.default_pet_name) ?: "Mochi"
+            },
             "speciesColor" to SpeciesColor.fromKey(profile.speciesColor).key,
             "equippedOutfit" to PetOutfit.fromKey(profile.equippedOutfit).key,
             "level" to profile.level.coerceIn(1L, 999L),
@@ -298,11 +474,12 @@ class ChibiPetRepository(
     }
 
     suspend fun addFriendByCode(rawCode: String): Result<FriendLink> = runCatching {
-        val uid = requireUserId()
         val code = rawCode.trim().uppercase(Locale.US)
         require(code.matches(Regex("^[A-Z0-9_\\-]{4,32}$"))) {
             "Enter a valid Buddy Code (e.g. PET-A1B2C3)."
         }
+        val uid = currentFirebaseUid()
+            ?: throw IllegalStateException("Sign in with Google to connect with friends by Buddy Code.")
         val myCode = buddyCodeForUid(uid)
         require(code != myCode) { "That's your own Buddy Code! Share it with a friend instead." }
 
@@ -376,7 +553,7 @@ class ChibiPetRepository(
     }
 
     suspend fun refreshFriends(friends: List<FriendLink>): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val uid = currentFirebaseUid() ?: return@runCatching
         for (friend in friends) {
             val cardRef = db.collection("petCards").document(friend.friendCode)
             val cardSnap = try {
@@ -410,7 +587,11 @@ class ChibiPetRepository(
     }
 
     suspend fun removeFriend(friendCode: String): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val uid = currentFirebaseUid()
+        if (uid == null) {
+            localFriendsFlow.value = localFriendsFlow.value.filterNot { it.friendCode == friendCode }
+            return@runCatching
+        }
         val friendRef = db.collection("users").document(uid).collection("friends").document(friendCode)
         try {
             friendRef.delete().await()
@@ -428,7 +609,8 @@ class ChibiPetRepository(
         myPetName: String,
         message: String
     ): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val uid = currentFirebaseUid()
+            ?: throw IllegalStateException("Sign in with Google to send cheers to friends.")
         val cheerRef = db.collection("petCards").document(friendCode)
             .collection("cheers").document()
         val payload = mapOf(
@@ -450,7 +632,7 @@ class ChibiPetRepository(
     }
 
     suspend fun claimCheer(cheerId: String, profile: PetProfile): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val uid = currentFirebaseUid() ?: return@runCatching
         val code = buddyCodeForUid(uid)
         val cheerRef = db.collection("petCards").document(code)
             .collection("cheers").document(cheerId)
@@ -480,35 +662,72 @@ class ChibiPetRepository(
         speciesColor: SpeciesColor? = null,
         equippedOutfit: PetOutfit? = null
     ): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        val cleanName = petName?.trim()?.takeIf { it.isNotEmpty() }?.take(30)
+        val currentLocal = localProfileFlow.value
+        if (currentLocal != null) {
+            val updatedUnlocked = if (equippedOutfit != null) {
+                (currentLocal.unlockedOutfits + equippedOutfit.key).distinct()
+            } else {
+                currentLocal.unlockedOutfits
+            }
+            val updated = currentLocal.copy(
+                petName = cleanName ?: currentLocal.petName,
+                speciesColor = speciesColor?.key ?: currentLocal.speciesColor,
+                equippedOutfit = equippedOutfit?.key ?: currentLocal.equippedOutfit,
+                unlockedOutfits = updatedUnlocked,
+                updatedAt = Timestamp.now()
+            )
+            localProfileFlow.value = updated
+            persistLocalProfile(updated)
+        }
+        val uid = currentFirebaseUid() ?: return@runCatching
         val profileRef = db.collection("users").document(uid)
             .collection("petProfile").document(MAIN_PROFILE_ID)
         val updates = mutableMapOf<String, Any>(
             "updatedAt" to FieldValue.serverTimestamp()
         )
-        petName?.trim()?.takeIf { it.isNotEmpty() }?.let { updates["petName"] = it.take(30) }
+        cleanName?.let { updates["petName"] = it }
         speciesColor?.let { updates["speciesColor"] = it.key }
-        equippedOutfit?.let { updates["equippedOutfit"] = it.key }
+        equippedOutfit?.let {
+            updates["equippedOutfit"] = it.key
+            updates["unlockedOutfits"] = FieldValue.arrayUnion(it.key)
+        }
 
         try {
-            profileRef.set(updates, SetOptions.merge()).await()
+            profileRef.update(updates).await()
         } catch (e: CancellationException) {
             throw e
+        } catch (e: FirebaseFirestoreException) {
+            if (e.code != FirebaseFirestoreException.Code.NOT_FOUND) {
+                handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+                throw e
+            }
         } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to update profile remotely; applying locally", e)
+            handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+            throw e
         }
     }
 
     suspend fun unlockAndEquipOutfit(profile: PetProfile, outfit: PetOutfit): Result<Unit> = runCatching {
-        val uid = requireUserId()
-        val profileRef = db.collection("users").document(uid)
-            .collection("petProfile").document(MAIN_PROFILE_ID)
         val alreadyUnlocked = outfit.key in profile.unlockedOutfits
         if (!alreadyUnlocked && profile.coins < outfit.costCoins) {
             throw IllegalStateException("Not enough Star Coins! Complete more habits to earn ${outfit.costCoins} coins.")
         }
         val newCoins = if (alreadyUnlocked) profile.coins else (profile.coins - outfit.costCoins)
         val newUnlocked = if (alreadyUnlocked) profile.unlockedOutfits else (profile.unlockedOutfits + outfit.key)
+
+        val updatedLocal = profile.copy(
+            coins = newCoins,
+            unlockedOutfits = newUnlocked,
+            equippedOutfit = outfit.key,
+            updatedAt = Timestamp.now()
+        )
+        localProfileFlow.value = updatedLocal
+        persistLocalProfile(updatedLocal)
+
+        val uid = currentFirebaseUid() ?: return@runCatching
+        val profileRef = db.collection("users").document(uid)
+            .collection("petProfile").document(MAIN_PROFILE_ID)
         val updates = mapOf(
             "coins" to newCoins,
             "unlockedOutfits" to newUnlocked,
@@ -516,18 +735,16 @@ class ChibiPetRepository(
             "updatedAt" to FieldValue.serverTimestamp()
         )
         try {
-            profileRef.set(updates, SetOptions.merge()).await()
+            profileRef.update(updates).await()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to update outfit remotely; applying locally", e)
+            handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+            throw e
         }
     }
 
     suspend fun purchaseConsumable(profile: PetProfile, item: ShopConsumable): Result<Unit> = runCatching {
-        val uid = requireUserId()
-        val profileRef = db.collection("users").document(uid)
-            .collection("petProfile").document(MAIN_PROFILE_ID)
         if (profile.coins < item.costCoins) {
             throw IllegalStateException("Need ${item.costCoins} Star Coins to buy ${item.label}.")
         }
@@ -536,6 +753,13 @@ class ChibiPetRepository(
                 if (profile.streakFreezes >= 10L) {
                     throw IllegalStateException("You already hold the maximum of 10 Streak Freezes!")
                 }
+                val updatedLocal = profile.copy(
+                    coins = profile.coins - item.costCoins,
+                    streakFreezes = profile.streakFreezes + 1L,
+                    updatedAt = Timestamp.now()
+                )
+                localProfileFlow.value = updatedLocal
+                persistLocalProfile(updatedLocal)
                 mapOf(
                     "coins" to (profile.coins - item.costCoins),
                     "streakFreezes" to (profile.streakFreezes + 1L),
@@ -543,6 +767,14 @@ class ChibiPetRepository(
                 )
             }
             ShopConsumable.GOLDEN_ELIXIR -> {
+                val updatedLocal = profile.copy(
+                    coins = profile.coins - item.costCoins,
+                    happiness = 100L,
+                    energy = 100L,
+                    updatedAt = Timestamp.now()
+                )
+                localProfileFlow.value = updatedLocal
+                persistLocalProfile(updatedLocal)
                 mapOf(
                     "coins" to (profile.coins - item.costCoins),
                     "happiness" to 100L,
@@ -551,34 +783,45 @@ class ChibiPetRepository(
                 )
             }
         }
+        val uid = currentFirebaseUid() ?: return@runCatching
+        val profileRef = db.collection("users").document(uid)
+            .collection("petProfile").document(MAIN_PROFILE_ID)
         try {
-            profileRef.set(updates, SetOptions.merge()).await()
+            profileRef.update(updates).await()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to purchase consumable remotely; applying locally", e)
+            handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+            throw e
         }
     }
 
     suspend fun boostPetCare(profile: PetProfile, happinessDelta: Long, energyDelta: Long): Result<Unit> = runCatching {
-        val uid = requireUserId()
-        val profileRef = db.collection("users").document(uid)
-            .collection("petProfile").document(MAIN_PROFILE_ID)
         val newHappiness = (profile.happiness + happinessDelta).coerceIn(0L, 100L)
         val newEnergy = (profile.energy + energyDelta).coerceIn(0L, 100L)
+        val updatedLocal = profile.copy(
+            happiness = newHappiness,
+            energy = newEnergy,
+            updatedAt = Timestamp.now()
+        )
+        localProfileFlow.value = updatedLocal
+        persistLocalProfile(updatedLocal)
+        val uid = currentFirebaseUid() ?: return@runCatching
+        val profileRef = db.collection("users").document(uid)
+            .collection("petProfile").document(MAIN_PROFILE_ID)
         try {
-            profileRef.set(
+            profileRef.update(
                 mapOf(
                     "happiness" to newHappiness,
                     "energy" to newEnergy,
                     "updatedAt" to FieldValue.serverTimestamp()
-                ),
-                SetOptions.merge()
+                )
             ).await()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to boost pet care remotely; applying locally", e)
+            handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+            throw e
         }
     }
 
@@ -588,29 +831,37 @@ class ChibiPetRepository(
         happinessDelta: Long,
         energyDelta: Long
     ): Result<Unit> = runCatching {
-        val uid = requireUserId()
         if (profile.coins < coinCost) {
             throw IllegalStateException("Need $coinCost Star Coins for a Berry Treat!")
         }
-        val profileRef = db.collection("users").document(uid)
-            .collection("petProfile").document(MAIN_PROFILE_ID)
         val newCoins = (profile.coins - coinCost).coerceAtLeast(0L)
         val newHappiness = (profile.happiness + happinessDelta).coerceIn(0L, 100L)
         val newEnergy = (profile.energy + energyDelta).coerceIn(0L, 100L)
+        val updatedLocal = profile.copy(
+            coins = newCoins,
+            happiness = newHappiness,
+            energy = newEnergy,
+            updatedAt = Timestamp.now()
+        )
+        localProfileFlow.value = updatedLocal
+        persistLocalProfile(updatedLocal)
+        val uid = currentFirebaseUid() ?: return@runCatching
+        val profileRef = db.collection("users").document(uid)
+            .collection("petProfile").document(MAIN_PROFILE_ID)
         try {
-            profileRef.set(
+            profileRef.update(
                 mapOf(
                     "coins" to newCoins,
                     "happiness" to newHappiness,
                     "energy" to newEnergy,
                     "updatedAt" to FieldValue.serverTimestamp()
-                ),
-                SetOptions.merge()
+                )
             ).await()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to boost pet snack remotely; applying locally", e)
+            handleFirestoreError(e, OperationType.UPDATE, profileRef.path)
+            throw e
         }
     }
 
@@ -619,15 +870,36 @@ class ChibiPetRepository(
         category: HabitCategory,
         xpReward: Long = 30L
     ): Result<String> = runCatching {
-        val uid = requireUserId()
         val cleanTitle = title.trim().take(80)
         require(cleanTitle.isNotEmpty()) { "Habit title cannot be empty" }
+        val coercedXp = xpReward.coerceIn(5L, 500L)
+        val uid = currentFirebaseUid()
+        if (uid == null) {
+            val localUid = requireUserId()
+            val localId = "local_${UUID.randomUUID().toString().take(8)}"
+            val newHabit = Habit(
+                id = localId,
+                userId = localUid,
+                title = cleanTitle,
+                category = category.key,
+                xpReward = coercedXp,
+                streakCount = 0L,
+                lastVerifiedDate = "",
+                lastVerificationNote = "",
+                createdAt = Timestamp.now(),
+                updatedAt = Timestamp.now()
+            )
+            val updatedList = localHabitsFlow.value + newHabit
+            localHabitsFlow.value = updatedList
+            persistLocalHabits(localUid, updatedList)
+            return@runCatching localId
+        }
         val habitRef = db.collection("users").document(uid).collection("habits").document()
         val payload = mapOf(
             "userId" to uid,
             "title" to cleanTitle,
             "category" to category.key,
-            "xpReward" to xpReward.coerceIn(5L, 500L),
+            "xpReward" to coercedXp,
             "streakCount" to 0L,
             "lastVerifiedDate" to "",
             "lastVerificationNote" to "",
@@ -646,8 +918,11 @@ class ChibiPetRepository(
     }
 
     suspend fun deleteHabit(habitId: String): Result<Unit> = runCatching {
-        val uid = requireUserId()
         require(habitId.isNotBlank()) { "Habit ID must not be blank" }
+        val updatedList = localHabitsFlow.value.filterNot { it.id == habitId }
+        localHabitsFlow.value = updatedList
+        persistLocalHabits(requireUserId(), updatedList)
+        val uid = currentFirebaseUid() ?: return@runCatching
         val habitRef = db.collection("users").document(uid).collection("habits").document(habitId)
         try {
             habitRef.delete().await()
@@ -664,10 +939,47 @@ class ChibiPetRepository(
         habits: List<Habit>,
         todayIsoDate: String
     ): Result<List<String>> = runCatching {
-        val uid = requireUserId()
         val yesterdayIso = shiftIsoDate(todayIsoDate, -1) ?: return@runCatching emptyList()
         var availableFreezes = profile.streakFreezes
         val protectedTitles = mutableListOf<String>()
+        val freezeNote = appContext?.getString(R.string.repo_streak_freeze_note) ?: "Protected by Streak Freeze"
+        val uid = currentFirebaseUid()
+        if (uid == null) {
+            var changed = false
+            val updatedHabits = habits.map { habit ->
+                val gap = if (habit.streakCount <= 0L || habit.lastVerifiedDate.isBlank()) null
+                else daysBetweenIsoDates(habit.lastVerifiedDate, todayIsoDate)
+                when {
+                    gap == 2L && availableFreezes > 0L -> {
+                        availableFreezes -= 1L
+                        changed = true
+                        protectedTitles.add(habit.title)
+                        habit.copy(
+                            lastVerifiedDate = yesterdayIso,
+                            lastVerificationNote = freezeNote,
+                            updatedAt = Timestamp.now()
+                        )
+                    }
+                    gap != null && gap >= 2L -> {
+                        changed = true
+                        habit.copy(streakCount = 0L, updatedAt = Timestamp.now())
+                    }
+                    else -> habit
+                }
+            }
+            if (changed) {
+                localHabitsFlow.value = updatedHabits
+                val updatedProfile = profile.copy(
+                    streakFreezes = availableFreezes,
+                    updatedAt = Timestamp.now()
+                )
+                localProfileFlow.value = updatedProfile
+                persistLocalHabits(profile.userId, updatedHabits)
+                persistLocalProfile(updatedProfile)
+            }
+            return@runCatching protectedTitles
+        }
+
         val batch = db.batch()
         var hasChanges = false
 
@@ -683,7 +995,7 @@ class ChibiPetRepository(
                     habitRef,
                     mapOf(
                         "lastVerifiedDate" to yesterdayIso,
-                        "lastVerificationNote" to "Protected by Streak Freeze",
+                        "lastVerificationNote" to freezeNote,
                         "updatedAt" to FieldValue.serverTimestamp()
                     )
                 )
@@ -731,11 +1043,6 @@ class ChibiPetRepository(
         todayIsoDate: String,
         verificationNote: String
     ): Result<HabitCompletionOutcome> = runCatching {
-        val uid = requireUserId()
-        val habitRef = db.collection("users").document(uid).collection("habits").document(habit.id)
-        val profileRef = db.collection("users").document(uid)
-            .collection("petProfile").document(MAIN_PROFILE_ID)
-
         val alreadyCompletedToday = habit.lastVerifiedDate == todayIsoDate
         val gap = if (habit.lastVerifiedDate.isBlank()) null else daysBetweenIsoDates(habit.lastVerifiedDate, todayIsoDate)
         var remainingFreezes = profile.streakFreezes
@@ -779,41 +1086,68 @@ class ChibiPetRepository(
         val newTotal = if (alreadyCompletedToday) profile.totalCompleted else (profile.totalCompleted + 1L)
         val newBonusDate = if (claimDailySweepBonus) todayIsoDate else profile.lastDailyBonusDate
 
-        val batch = db.batch()
-        batch.set(
-            habitRef,
-            mapOf(
-                "id" to habit.id,
-                "title" to habit.title,
-                "category" to habit.category,
-                "streakCount" to newStreak,
-                "lastVerifiedDate" to todayIsoDate,
-                "lastVerificationNote" to cleanNote,
-                "updatedAt" to FieldValue.serverTimestamp()
-            ),
-            SetOptions.merge()
+        val updatedHabit = habit.copy(
+            streakCount = newStreak,
+            lastVerifiedDate = todayIsoDate,
+            lastVerificationNote = cleanNote,
+            updatedAt = Timestamp.now()
         )
-        batch.set(
-            profileRef,
-            mapOf(
-                "level" to newLevel,
-                "xp" to newXp,
-                "coins" to newCoins,
-                "happiness" to newHappiness,
-                "energy" to newEnergy,
-                "totalCompleted" to newTotal,
-                "streakFreezes" to remainingFreezes,
-                "lastDailyBonusDate" to newBonusDate,
-                "updatedAt" to FieldValue.serverTimestamp()
-            ),
-            SetOptions.merge()
+        val currentList = localHabitsFlow.value.ifEmpty { allHabits }
+        val updatedHabitsList = currentList.map { if (it.id == habit.id) updatedHabit else it }
+        localHabitsFlow.value = updatedHabitsList
+        val updatedProfile = profile.copy(
+            level = newLevel,
+            xp = newXp,
+            coins = newCoins,
+            happiness = newHappiness,
+            energy = newEnergy,
+            totalCompleted = newTotal,
+            streakFreezes = remainingFreezes,
+            lastDailyBonusDate = newBonusDate,
+            updatedAt = Timestamp.now()
         )
-        try {
-            batch.commit().await()
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Log.w("ChibiPetRepository", "Failed to commit habit completion remotely; applying locally", e)
+        localProfileFlow.value = updatedProfile
+        persistLocalHabits(profile.userId, updatedHabitsList)
+        persistLocalProfile(updatedProfile)
+
+        val uid = currentFirebaseUid()
+        if (uid != null) {
+            val habitRef = db.collection("users").document(uid).collection("habits").document(habit.id)
+            val profileRef = db.collection("users").document(uid)
+                .collection("petProfile").document(MAIN_PROFILE_ID)
+
+            val batch = db.batch()
+            batch.update(
+                habitRef,
+                mapOf(
+                    "streakCount" to newStreak,
+                    "lastVerifiedDate" to todayIsoDate,
+                    "lastVerificationNote" to cleanNote,
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+            )
+            batch.update(
+                profileRef,
+                mapOf(
+                    "level" to newLevel,
+                    "xp" to newXp,
+                    "coins" to newCoins,
+                    "happiness" to newHappiness,
+                    "energy" to newEnergy,
+                    "totalCompleted" to newTotal,
+                    "streakFreezes" to remainingFreezes,
+                    "lastDailyBonusDate" to newBonusDate,
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+            )
+            try {
+                batch.commit().await()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                handleFirestoreError(e, OperationType.WRITE, habitRef.path)
+                throw e
+            }
         }
         HabitCompletionOutcome(
             leveledUp = leveledUp,
@@ -828,9 +1162,22 @@ class ChibiPetRepository(
         text: String,
         habitTag: String? = null
     ): Result<String> = runCatching {
-        val uid = requireUserId()
         val cleanText = text.trim().take(2000)
         require(cleanText.isNotEmpty()) { "Chat message cannot be empty" }
+        val uid = currentFirebaseUid()
+        if (uid == null) {
+            val localId = "msg_${UUID.randomUUID().toString().take(8)}"
+            val msg = ChatMessage(
+                id = localId,
+                userId = requireUserId(),
+                sender = sender,
+                text = cleanText,
+                habitTag = habitTag?.trim()?.take(60),
+                createdAt = Timestamp.now()
+            )
+            localChatMessagesFlow.value = localChatMessagesFlow.value + msg
+            return@runCatching localId
+        }
         val msgRef = db.collection("users").document(uid).collection("chatMessages").document()
         val payload = buildMap<String, Any> {
             put("userId", uid)
@@ -853,7 +1200,8 @@ class ChibiPetRepository(
     }
 
     suspend fun clearChatHistory(messages: List<ChatMessage>): Result<Unit> = runCatching {
-        val uid = requireUserId()
+        localChatMessagesFlow.value = emptyList()
+        val uid = currentFirebaseUid() ?: return@runCatching
         val validMessages = messages.filter { it.id.isNotBlank() }
         if (validMessages.isEmpty()) return@runCatching
         val colRef = db.collection("users").document(uid).collection("chatMessages")

@@ -54,7 +54,7 @@ class ChibiPetWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
             val prefs = currentState<Preferences>()
-            val petName = prefs[KEY_PET_NAME] ?: "Mochi"
+            val petName = prefs[KEY_PET_NAME] ?: context.getString(R.string.default_pet_name)
             val level = prefs[KEY_LEVEL] ?: 1L
             val mood = prefs[KEY_MOOD] ?: 85L
             val completed = prefs[KEY_COMPLETED_TODAY] ?: 0

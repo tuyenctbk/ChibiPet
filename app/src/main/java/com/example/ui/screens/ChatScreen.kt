@@ -84,7 +84,7 @@ fun ChatScreen(
     val context = LocalContext.current
     val profile = (petProfileState as? DataUiState.Success)?.data
     val messages = (chatMessagesState as? DataUiState.Success)?.data.orEmpty()
-    val petName = profile?.petName ?: "Mochi"
+    val petName = profile?.petName ?: stringResource(R.string.default_pet_name)
     var draft by remember { mutableStateOf("") }
     var voiceEnabled by rememberSaveable { mutableStateOf(false) }
     var ttsReady by remember { mutableStateOf(false) }
@@ -315,7 +315,7 @@ fun ChatScreen(
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(Modifier.width(6.dp))
-                                Text(stringResource(R.string.chat_quick_reflex))
+                                Text(stringResource(R.string.dialog_proof_retry_lite))
                             }
                         }
                     }

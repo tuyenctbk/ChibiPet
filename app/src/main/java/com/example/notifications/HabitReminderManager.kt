@@ -119,8 +119,9 @@ object HabitReminderManager {
             hour = prefs[KEY_HOUR] ?: 20,
             minute = prefs[KEY_MINUTE] ?: 0
         )
-        val petName = prefs[KEY_PET_NAME] ?: "Mochi"
-        val pending = prefs[KEY_PENDING_COUNT] ?: 1
+        val appContext = context.applicationContext
+        val petName = prefs[KEY_PET_NAME] ?: appContext.getString(R.string.default_pet_name)
+        val pending = prefs[KEY_PENDING_COUNT] ?: 0
         return Triple(settings, petName, pending)
     }
 

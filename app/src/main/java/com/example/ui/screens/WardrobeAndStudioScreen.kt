@@ -125,7 +125,7 @@ fun WardrobeAndStudioScreen(
     val context = LocalContext.current
     val profile = (petProfileState as? DataUiState.Success)?.data
     val defaultPrompt = stringResource(R.string.studio_default_prompt)
-    var artPrompt by remember { mutableStateOf(defaultPrompt) }
+    var artPrompt by remember { mutableStateOf("") }
     var referenceBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var inspectedSticker by remember { mutableStateOf<SavedSticker?>(null) }
     val selectedLanguageTag by AppLanguageManager.observeLanguageTag(context)
@@ -397,6 +397,7 @@ fun WardrobeAndStudioScreen(
                             value = artPrompt,
                             onValueChange = { artPrompt = it },
                             label = { Text(stringResource(R.string.studio_prompt_label)) },
+                            placeholder = { Text(defaultPrompt) },
                             maxLines = 3,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -769,10 +770,11 @@ fun WardrobeAndStudioScreen(
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             listOf(
-                                Triple(9, 0, "9:00 AM"),
-                                Triple(14, 0, "2:00 PM"),
-                                Triple(20, 0, "8:00 PM")
-                            ).forEach { (h, m, label) ->
+                                9 to 0,
+                                14 to 0,
+                                20 to 0
+                            ).forEach { (h, m) ->
+                                val label = ReminderSettings(true, h, m).formattedTime
                                 FilterChip(
                                     selected = reminderSettings.hour == h && reminderSettings.minute == m,
                                     onClick = {

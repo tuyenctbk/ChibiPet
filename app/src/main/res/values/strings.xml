@@ -1,6 +1,7 @@
 <resources>
     <!-- App & Widget Core -->
     <string name="app_name">ChibiPet</string>
+    <string name="default_pet_name" translatable="false">Mochi</string>
     <string name="widget_description">Track your 3D ChibiPet mood, active streak, and daily habits right on your home screen.</string>
     <string name="splash_mascot_cd">ChibiPet mascot</string>
     <string name="splash_subtitle">3D Pocket Buddy &amp; Habit Quests</string>
@@ -346,4 +347,60 @@
     <string name="chat_voice_on">Voice ON</string>
     <string name="chat_voice_off">Voice</string>
     <string name="chat_speak_cd">Read reply aloud</string>
+
+    <!-- ViewModel & Repository Action / Status Messages -->
+    <string name="vm_err_init_profile">Failed to initialize pet profile.</string>
+    <string name="vm_streak_freeze_saved">Streak Freeze saved %1$s!</string>
+    <string name="vm_welcome_ready_quests">Welcome! %1$s is ready for your quests!</string>
+    <string name="vm_eco_lite_on">Eco Lite Mode ON: Using Gemini Flash-Lite to stretch Free-Tier quota 3×!</string>
+    <string name="vm_eco_lite_off">Standard AI Mode restored (auto-cascades to Flash-Lite if rate-limited).</string>
+    <string name="vm_grace_claimed_success">+3 Daily Grace Credits synced to your cloud quota!</string>
+    <string name="vm_grace_already_claimed">Today\'s +3 Grace Credits were already claimed. Resets at midnight!</string>
+    <string name="vm_err_claim_grace">Could not claim grace credits.</string>
+    <string name="vm_snack_still_munching">%1$s is still munching! Wait a few seconds.</string>
+    <string name="vm_snack_already_full">%1$s is already 100%% full and happy!</string>
+    <string name="vm_snack_need_coins">Need %1$d Star Coins for a Berry Treat! Verify a habit first.</string>
+    <string name="vm_snack_munched_success">Yum! %1$s munched a Berry Treat (-%2$d Coins, +Mood &amp; Energy)</string>
+    <string name="vm_err_give_treat">Could not give treat.</string>
+    <string name="vm_bought_streak_freeze">Added 1 Streak Freeze to your pouch!</string>
+    <string name="vm_bought_golden_elixir">%1$s\'s Mood &amp; Energy are 100%%!</string>
+    <string name="vm_err_purchase_failed">Purchase failed.</string>
+    <string name="vm_reward_summary_sweep">+%1$d XP &amp; +%2$d Coins (includes Daily Sweep Chest!)</string>
+    <string name="vm_reward_summary_normal">+%1$d XP &amp; +%2$d Coins</string>
+    <string name="vm_reward_summary_extra">Extra photo check-in for \"%1$s\"!</string>
+    <string name="vm_err_save_habit_progress">Failed to save habit progress.</string>
+    <string name="vm_err_photo_verify_failed">Photo verification failed.</string>
+    <string name="vm_honor_pledge_detected">Honor Pledge Check-In (AI Quota Saver)</string>
+    <string name="vm_honor_pledge_reaction">I trust you 100%%! Thanks for keeping our \"%1$s\" streak alive while my cloud scanner rests!</string>
+    <string name="vm_err_honor_pledge_failed">Failed to record Honor Pledge check-in.</string>
+    <string name="vm_added_quest">Added quest: %1$s</string>
+    <string name="vm_err_create_habit">Could not create habit.</string>
+    <string name="vm_err_quest_plan">Could not generate quest plan.</string>
+    <string name="vm_added_coached_quests">Added %1$d coached quest(s) to your daily list!</string>
+    <string name="vm_err_delete_habit">Could not delete habit.</string>
+    <string name="vm_updated_pet_look">Updated %1$s\'s look!</string>
+    <string name="vm_err_update_pet">Failed to update pet.</string>
+    <string name="vm_equipped_outfit">Equipped %1$s!</string>
+    <string name="vm_err_equip_outfit">Could not equip outfit.</string>
+    <string name="vm_err_send_message">Could not send message.</string>
+    <string name="vm_err_chat_reply">ChibiPet couldn\'t reply right now.</string>
+    <string name="vm_err_clear_chat">Failed to clear chat.</string>
+    <string name="vm_err_image_gen">Image generation failed.</string>
+    <string name="vm_crafted_emblem_banner">Crafted Chibi Collectible Emblem Sticker (0 Cloud Quota used)!</string>
+    <string name="vm_removed_sticker">Removed sticker from vault</string>
+    <string name="vm_added_friend">Added %1$s to Playdates!</string>
+    <string name="vm_err_add_friend">Could not add buddy.</string>
+    <string name="vm_refreshed_friends">Refreshed friends\' streaks!</string>
+    <string name="vm_err_refresh_friends">Refresh failed.</string>
+    <string name="vm_err_remove_friend">Could not remove friend.</string>
+    <string name="vm_sent_cheer">Sent a cheer to %1$s!</string>
+    <string name="vm_err_send_cheer">Could not send cheer.</string>
+    <string name="vm_claimed_cheer">Claimed cheer from %1$s! (+5 Mood)</string>
+    <string name="vm_err_claim_cheer">Could not claim cheer.</string>
+    <string name="vm_reminder_set">Daily pet reminder set for %1$s</string>
+    <string name="vm_reminder_paused">Daily reminders paused</string>
+    <string name="vm_test_notif_sent">Test pet notification sent!</string>
+    <string name="vm_test_notif_perm_needed">Enable notification permission to receive reminders.</string>
+    <string name="repo_welcome_chat_message">Yay, %1$s! I\'m %2$s, your pocket 3D buddy! Snap a proof photo of your water bottle, study desk, or workout gear to help me level up!</string>
+    <string name="repo_streak_freeze_note">Protected by Streak Freeze</string>
 </resources>
