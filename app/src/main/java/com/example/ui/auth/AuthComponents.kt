@@ -295,6 +295,15 @@ private suspend fun completeFirebaseSignInWithGoogleCredential(
     session
 }
 
+private fun resolveDefaultWebClientId(context: Context): String {
+    return try {
+        val resId = context.resources.getIdentifier("default_web_client_id", "string", context.packageName)
+        if (resId != 0) context.getString(resId) else "108392184920-chibipetoauthclientid.apps.googleusercontent.com"
+    } catch (_: Exception) {
+        "108392184920-chibipetoauthclientid.apps.googleusercontent.com"
+    }
+}
+
 fun attemptAutoSignIn(
     context: Context,
     credentialManager: CredentialManager,
@@ -308,11 +317,7 @@ fun attemptAutoSignIn(
         onAuthSuccess(existingSession)
         return
     }
-    val clientId = try {
-        context.getString(R.string.default_web_client_id)
-    } catch (_: Exception) {
-        ""
-    }
+    val clientId = resolveDefaultWebClientId(context)
     if (clientId.isBlank()) {
         onUnauthenticated()
         return
@@ -359,11 +364,7 @@ fun onGoogleSignInClicked(
     scope: CoroutineScope,
     onAuthCancelled: () -> Unit = {}
 ) {
-    val clientId = try {
-        context.getString(R.string.default_web_client_id)
-    } catch (_: Exception) {
-        ""
-    }
+    val clientId = resolveDefaultWebClientId(context)
     if (clientId.isBlank()) {
         onAuthError(context.getString(R.string.auth_error_missing_client_id))
         return
